@@ -2,64 +2,71 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <main className="relative h-screen overflow-hidden bg-black text-white">
+
+      {/* Background */}
+      <Image
+        src="/images/switzerland-hero.jpg"
+        alt="Grindelwald, Switzerland"
+        fill
+        priority
+        className="object-cover"
+      />
+
+      {/* Dark overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/45 to-black/70" />
+
+      {/* Navigation */}
+      <header className="absolute left-0 right-0 top-0 z-20 flex items-center justify-between px-12 py-8">
+
+        <div className="text-sm font-semibold tracking-[0.45em] text-cyan-300">
+          BEAST TRAVEL
+        </div>
+
+        <nav className="hidden gap-10 text-sm text-gray-200 md:flex">
+          <a href="#">Journey</a>
+          <a href="#">Destinations</a>
+          <a href="#">Budget</a>
+          <a href="#">Gallery</a>
+        </nav>
+
+      </header>
+
+      {/* Hero */}
+      <section className="relative z-10 flex h-full items-end pb-32">
+
+        <div className="mx-auto max-w-6xl px-12">
+
+          <p className="mb-6 text-lg uppercase tracking-[0.35em] text-cyan-300">
+            Switzerland • July 22–29, 2026
           </p>
+
+          <h1 className="max-w-4xl text-7xl font-black leading-none md:text-8xl">
+            The Richards Family Adventure
+          </h1>
+
+          <p className="mt-8 max-w-2xl text-xl leading-9 text-gray-200">
+            Seven unforgettable days through alpine villages,
+            glaciers, waterfalls, scenic railways,
+            and some of the most spectacular landscapes on Earth.
+          </p>
+
+          <div className="mt-12 flex gap-6">
+
+            <button className="rounded-full bg-cyan-500 px-8 py-4 text-lg font-semibold transition hover:bg-cyan-400">
+              Begin the Adventure
+            </button>
+
+            <button className="rounded-full border border-white/30 bg-white/10 px-8 py-4 backdrop-blur-md transition hover:bg-white/20">
+              View Itinerary
+            </button>
+
+          </div>
+
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+
+      </section>
+
+    </main>
   );
 }
