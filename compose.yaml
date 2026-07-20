@@ -1,0 +1,21 @@
+services:
+  beast-travel:
+    image: node:22-bookworm
+    container_name: beast-travel
+    working_dir: /app
+
+    command: >
+      bash -c "
+      rm -rf .next &&
+      npm install &&
+      npm run dev -- --hostname 0.0.0.0
+      "
+
+    ports:
+      - "3005:3000"
+
+    volumes:
+      - .:/app
+
+    tty: true
+    stdin_open: true
