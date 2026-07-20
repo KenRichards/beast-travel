@@ -1,3 +1,36 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+
+PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$PROJECT_ROOT"
+
+SERVICE="beast-travel"
+DAY_PAGE='src/app/trips/[tripId]/day/[day]/page.tsx'
+BACKUP_DIR=".backups/bt-018c-$(date +%Y%m%d-%H%M%S)"
+
+echo "=========================================="
+echo " BT-018C — Integrate Day Maps"
+echo "=========================================="
+
+for required in \
+  package.json \
+  compose.yaml \
+  "$DAY_PAGE" \
+  src/components/trip/InteractiveMap.tsx \
+  src/data/trips/switzerland-2026/itinerary.json \
+  src/types/itinerary.ts \
+  src/lib/itinerary.ts
+do
+  if [[ ! -f "$required" ]]; then
+    echo "ERROR: Missing required file: $required"
+    exit 1
+  fi
+done
+
+mkdir -p "$BACKUP_DIR/$(dirname "$DAY_PAGE")"
+cp "$DAY_PAGE" "$BACKUP_DIR/$DAY_PAGE"
+
+cat > "$DAY_PAGE" <<'EOF'
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -451,3 +484,89 @@ export default async function DayPage({ params }: DayPageProps) {
     </main>
   );
 }
+EOF
+
+echo
+echo "Validating TypeScript..."
+docker compose exec -T "$SERVICE" npx tsc --noEmit
+
+echo
+echo "Running production build..."
+docker compose exec -T "$SERVICE" npm run build
+
+echo
+echo "Restarting development runtime..."
+docker compose down
+rm -rf .next
+docker compose up -d --force-recreate
+
+echo
+echo "Waiting for application..."
+
+READY=0
+
+for attempt in $(seq 1 40); do
+  CODE="$(
+    curl -sS -o /dev/null -w '%{http_code}' \
+      http://127.0.0.1:3005/trips/switzerland-2026/day/1 \
+      2>/dev/null || true
+  )"
+
+  if [[ "$CODE" == "200" ]]; then
+    READY=1
+    echo "Application ready."
+    break
+  fi
+
+  printf '.'
+  sleep 2
+done
+
+echo
+
+if [[ "$READY" -ne 1 ]]; then
+  echo "ERROR: Application did not become ready."
+  docker compose logs --tail=160 "$SERVICE"
+  exit 1
+fi
+
+echo
+echo "Checking all itinerary routes..."
+
+FAILED=0
+
+for day in 1 2 3 4; do
+  URL="http://127.0.0.1:3005/trips/switzerland-2026/day/${day}"
+  CODE="$(curl -sS -o /dev/null -w '%{http_code}' "$URL" || true)"
+
+  echo "Day ${day}: HTTP ${CODE}"
+
+  if [[ "$CODE" != "200" ]]; then
+    FAILED=1
+  fi
+done
+
+echo
+echo "Checking recent errors..."
+
+if docker compose logs --since=3m "$SERVICE" 2>&1 |
+  grep -E 'Module not found|TypeError|ReferenceError|SyntaxError|window is not defined|⨯'
+then
+  echo
+  echo "ERROR: Recent application errors detected."
+  exit 1
+else
+  echo "No recent application errors."
+fi
+
+if [[ "$FAILED" -ne 0 ]]; then
+  echo "ERROR: One or more itinerary pages failed."
+  exit 1
+fi
+
+echo
+echo "BT-018C installed successfully."
+echo "Backup: $BACKUP_DIR"
+echo
+echo "Open:"
+echo "  http://192.168.86.61:3005/trips/switzerland-2026/day/1"
