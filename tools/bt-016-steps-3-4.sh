@@ -1,3 +1,36 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+
+PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$PROJECT_ROOT"
+
+echo "========================================="
+echo " BT-016 — Premium Destination Cards"
+echo " Steps 3 and 4"
+echo "========================================="
+
+test -f package.json || {
+  echo "ERROR: package.json was not found."
+  echo "Run this script from the BEAST Travel repository."
+  exit 1
+}
+
+mkdir -p \
+  .backups/bt-016 \
+  src/components \
+  public/images/destinations
+
+TIMESTAMP="$(date +%Y%m%d-%H%M%S)"
+
+if [[ -f src/components/DestinationCard.tsx ]]; then
+  cp \
+    src/components/DestinationCard.tsx \
+    ".backups/bt-016/DestinationCard.tsx.${TIMESTAMP}"
+
+  echo "Backed up DestinationCard.tsx"
+fi
+
+cat > src/components/DestinationCard.tsx <<'EOF'
 import Image from "next/image";
 
 import type { ItineraryDay } from "@/types/itinerary";
@@ -180,3 +213,43 @@ export default function DestinationCard({
     </article>
   );
 }
+EOF
+
+SOURCE_IMAGE=""
+
+if [[ -f public/images/switzerland-hero.jpg ]]; then
+  SOURCE_IMAGE="public/images/switzerland-hero.jpg"
+elif [[ -f switzerland-hero.jpg ]]; then
+  SOURCE_IMAGE="switzerland-hero.jpg"
+else
+  echo "ERROR: Could not find an existing Switzerland hero JPG."
+  echo "Expected one of:"
+  echo "  public/images/switzerland-hero.jpg"
+  echo "  switzerland-hero.jpg"
+  exit 1
+fi
+
+for destination in zurich lucerne grindelwald jungfraujoch; do
+  destination_file="public/images/destinations/${destination}.jpg"
+
+  if [[ ! -f "$destination_file" ]]; then
+    cp "$SOURCE_IMAGE" "$destination_file"
+    echo "Created temporary image: $destination_file"
+  else
+    echo "Keeping existing image: $destination_file"
+  fi
+done
+
+echo
+echo "Files created or updated:"
+echo "  src/components/DestinationCard.tsx"
+echo "  public/images/destinations/zurich.jpg"
+echo "  public/images/destinations/lucerne.jpg"
+echo "  public/images/destinations/grindelwald.jpg"
+echo "  public/images/destinations/jungfraujoch.jpg"
+
+echo
+echo "BT-016 steps 3 and 4 complete."
+echo
+echo "Temporary destination images all use the existing hero image."
+echo "They can be replaced individually later without changing any code."

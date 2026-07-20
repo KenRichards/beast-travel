@@ -11,6 +11,10 @@
       "title": "Arrive in Zürich",
       "icon": "✈️",
       "location": "Zürich",
+      "image": "/images/destinations/zurich.jpg",
+      "transport": "Flight",
+      "travelTime": "Arrival",
+      "budget": 250,
       "description": "Arrive, check into the hotel, explore the Altstadt, and enjoy dinner along the Limmat."
     },
     {
@@ -18,21 +22,11 @@
       "title": "Lucerne",
       "icon": "🚞",
       "location": "Lucerne",
+      "image": "/images/destinations/lucerne.jpg",
+      "transport": "Train",
+      "travelTime": "50 min",
+      "budget": 180,
       "description": "Visit Chapel Bridge, the Lion Monument, and enjoy a lakeside walk."
-    },
-    {
-      "day": 3,
-      "title": "Grindelwald",
-      "icon": "🏔️",
-      "location": "Grindelwald",
-      "description": "Travel into the Bernese Alps and settle into Grindelwald."
-    },
-    {
-      "day": 4,
-      "title": "Jungfraujoch",
-      "icon": "🚠",
-      "location": "Jungfraujoch",
-      "description": "Ride to the Top of Europe and explore the Ice Palace and Sphinx Observatory."
     }
   ]
 }
