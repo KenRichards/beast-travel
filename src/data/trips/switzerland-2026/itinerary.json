@@ -1,0 +1,38 @@
+{
+  "trip": {
+    "id": "switzerland-2026",
+    "title": "Switzerland Family Adventure",
+    "subtitle": "July 22–29, 2026",
+    "heroImage": "/images/switzerland-hero.jpg"
+  },
+  "days": [
+    {
+      "day": 1,
+      "title": "Arrive in Zürich",
+      "icon": "✈️",
+      "location": "Zürich",
+      "description": "Arrive, check into the hotel, explore the Altstadt, and enjoy dinner along the Limmat."
+    },
+    {
+      "day": 2,
+      "title": "Lucerne",
+      "icon": "🚞",
+      "location": "Lucerne",
+      "description": "Visit Chapel Bridge, the Lion Monument, and enjoy a lakeside walk."
+    },
+    {
+      "day": 3,
+      "title": "Grindelwald",
+      "icon": "🏔️",
+      "location": "Grindelwald",
+      "description": "Travel into the Bernese Alps and settle into Grindelwald."
+    },
+    {
+      "day": 4,
+      "title": "Jungfraujoch",
+      "icon": "🚠",
+      "location": "Jungfraujoch",
+      "description": "Ride to the Top of Europe and explore the Ice Palace and Sphinx Observatory."
+    }
+  ]
+}
