@@ -1,3 +1,19 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+
+PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$PROJECT_ROOT"
+
+ITINERARY="src/data/trips/switzerland-2026/itinerary.json"
+BACKUP_DIR=".backups/bt-017-fix-$(date +%Y%m%d-%H%M%S)"
+
+mkdir -p "$BACKUP_DIR"
+
+if [[ -f "$ITINERARY" ]]; then
+  cp "$ITINERARY" "$BACKUP_DIR/itinerary.json"
+fi
+
+cat > "$ITINERARY" <<'EOF'
 {
   "trip": {
     "id": "switzerland-2026",
@@ -52,3 +68,40 @@
     }
   ]
 }
+EOF
+
+echo "Updated: $ITINERARY"
+echo "Backup:  $BACKUP_DIR/itinerary.json"
+
+if command -v python3 >/dev/null 2>&1; then
+  python3 -m json.tool "$ITINERARY" >/dev/null
+  echo "JSON validation passed."
+fi
+
+echo
+echo "Waiting for Next.js to reload..."
+sleep 3
+
+FAILED=0
+
+for day in 1 2 3 4; do
+  URL="http://127.0.0.1:3005/trips/switzerland-2026/day/${day}"
+  CODE="$(curl -sS -o /dev/null -w '%{http_code}' "$URL" || true)"
+
+  echo "Day ${day}: HTTP ${CODE}"
+
+  if [[ "$CODE" != "200" ]]; then
+    FAILED=1
+  fi
+done
+
+echo
+
+if [[ "$FAILED" -ne 0 ]]; then
+  echo "One or more routes failed."
+  echo "Run:"
+  echo "  docker compose logs --tail=100 beast-travel"
+  exit 1
+fi
+
+echo "BT-017 route repair complete."
