@@ -3,22 +3,49 @@
     "id": "switzerland-2026",
     "title": "Switzerland Family Adventure",
     "subtitle": "July 22–29, 2026",
-    "heroImage": "/images/switzerland-hero.jpg"
+    "heroImage": "/images/switzerland-hero.jpg",
+    "startDate": "2026-07-22",
+    "endDate": "2026-07-29",
+    "travelers": 3,
+    "currency": "CHF",
+    "timezone": "Europe/Zurich"
   },
   "days": [
     {
       "day": 1,
+      "date": "2026-07-22",
       "title": "Arrive in Zürich",
       "icon": "✈️",
       "location": "Zürich",
       "image": "/images/destinations/zurich.jpg",
-      "transport": "Flight",
+      "transport": "Flight and local transit",
       "travelTime": "Arrival day",
       "budget": 250,
-      "description": "Arrive in Switzerland, check into the hotel, explore Zürich's Altstadt, and enjoy dinner along the Limmat."
+      "description": "Arrive in Switzerland, check into the hotel, explore Zürich's Altstadt, and enjoy dinner along the Limmat.",
+      "map": {
+        "center": {
+          "latitude": 47.3769,
+          "longitude": 8.5417
+        },
+        "zoom": 13
+      },
+      "locations": [],
+      "schedule": [],
+      "travelSegments": [],
+      "dailyBudget": {
+        "transportation": 40,
+        "attractions": 20,
+        "food": 140,
+        "lodging": 0,
+        "miscellaneous": 50,
+        "total": 250,
+        "currency": "CHF"
+      },
+      "notes": []
     },
     {
       "day": 2,
+      "date": "2026-07-23",
       "title": "Lucerne",
       "icon": "🚞",
       "location": "Lucerne",
@@ -26,10 +53,31 @@
       "transport": "Train",
       "travelTime": "About 50 minutes",
       "budget": 180,
-      "description": "Visit Chapel Bridge, explore the historic old town, see the Lion Monument, and enjoy the Lake Lucerne waterfront."
+      "description": "Visit Chapel Bridge, explore the historic old town, see the Lion Monument, and enjoy the Lake Lucerne waterfront.",
+      "map": {
+        "center": {
+          "latitude": 47.0502,
+          "longitude": 8.3093
+        },
+        "zoom": 13
+      },
+      "locations": [],
+      "schedule": [],
+      "travelSegments": [],
+      "dailyBudget": {
+        "transportation": 50,
+        "attractions": 25,
+        "food": 85,
+        "lodging": 0,
+        "miscellaneous": 20,
+        "total": 180,
+        "currency": "CHF"
+      },
+      "notes": []
     },
     {
       "day": 3,
+      "date": "2026-07-24",
       "title": "Grindelwald",
       "icon": "🏔️",
       "location": "Grindelwald",
@@ -37,10 +85,31 @@
       "transport": "Train",
       "travelTime": "About 2 hours 45 minutes",
       "budget": 260,
-      "description": "Travel into the Bernese Oberland, settle into Grindelwald, and explore the alpine village beneath the Eiger."
+      "description": "Travel into the Bernese Oberland, settle into Grindelwald, and explore the alpine village beneath the Eiger.",
+      "map": {
+        "center": {
+          "latitude": 46.6242,
+          "longitude": 8.0414
+        },
+        "zoom": 13
+      },
+      "locations": [],
+      "schedule": [],
+      "travelSegments": [],
+      "dailyBudget": {
+        "transportation": 90,
+        "attractions": 45,
+        "food": 95,
+        "lodging": 0,
+        "miscellaneous": 30,
+        "total": 260,
+        "currency": "CHF"
+      },
+      "notes": []
     },
     {
       "day": 4,
+      "date": "2026-07-25",
       "title": "Jungfraujoch",
       "icon": "🚠",
       "location": "Jungfraujoch",
@@ -48,7 +117,27 @@
       "transport": "Train and gondola",
       "travelTime": "Full-day excursion",
       "budget": 420,
-      "description": "Journey to the Top of Europe, visit the Sphinx Observatory and Ice Palace, and experience the high-Alpine scenery."
+      "description": "Journey to the Top of Europe, visit the Sphinx Observatory and Ice Palace, and experience the high-Alpine scenery.",
+      "map": {
+        "center": {
+          "latitude": 46.5475,
+          "longitude": 7.9853
+        },
+        "zoom": 12
+      },
+      "locations": [],
+      "schedule": [],
+      "travelSegments": [],
+      "dailyBudget": {
+        "transportation": 250,
+        "attractions": 50,
+        "food": 90,
+        "lodging": 0,
+        "miscellaneous": 30,
+        "total": 420,
+        "currency": "CHF"
+      },
+      "notes": []
     }
   ]
 }
