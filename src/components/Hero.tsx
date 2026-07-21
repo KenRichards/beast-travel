@@ -1,4 +1,7 @@
 import Image from "next/image";
+import Link from "next/link";
+
+import TripNavigation from "@/components/trip/TripNavigation";
 
 export default function Hero() {
   return (
@@ -14,18 +17,13 @@ export default function Hero() {
 
       <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/45 to-black/75" />
 
-      <header className="absolute inset-x-0 top-0 z-20 flex items-center justify-between px-12 py-8">
+      <header className="absolute inset-x-0 top-0 z-20 flex flex-col gap-5 px-6 py-6 sm:px-12 sm:py-8 md:flex-row md:items-center md:justify-between">
 
         <div className="text-sm font-semibold tracking-[0.45em] text-cyan-300">
           BEAST TRAVEL
         </div>
 
-        <nav className="hidden gap-10 text-sm md:flex">
-          <a href="#journey">Journey</a>
-          <a href="#days">Days</a>
-          <a href="#budget">Budget</a>
-          <a href="#gallery">Gallery</a>
-        </nav>
+        <TripNavigation compact />
 
       </header>
 
@@ -42,11 +40,11 @@ export default function Hero() {
           </h1>
 
           <p className="mt-8 max-w-2xl text-xl leading-9 text-gray-200">
-            Seven unforgettable days exploring Switzerland's
+            Seven unforgettable days exploring Switzerland&apos;s
             mountains, villages, glaciers and unforgettable scenery.
           </p>
 
-          <div className="mt-12 flex gap-5">
+          <div className="mt-12 flex flex-wrap gap-4">
 
             <a
               href="#journey"
@@ -55,9 +53,12 @@ export default function Hero() {
               Begin the Adventure
             </a>
 
-            <button className="rounded-full border border-white/30 bg-white/10 px-8 py-4 backdrop-blur">
-              View Itinerary
-            </button>
+            <Link
+              href="/today"
+              className="rounded-full border border-white/30 bg-white/10 px-8 py-4 font-semibold backdrop-blur"
+            >
+              Open Today
+            </Link>
 
           </div>
 
