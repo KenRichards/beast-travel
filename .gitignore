@@ -24,6 +24,9 @@
 .DS_Store
 *.pem
 
+# local reservation source documents accidentally placed at the repository root
+/*.pdf
+
 # debug
 npm-debug.log*
 yarn-debug.log*
