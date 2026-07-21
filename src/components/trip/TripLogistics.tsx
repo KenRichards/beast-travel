@@ -4,7 +4,7 @@ import type {
   LogisticsStatus,
   TripLogistics,
   TripReservation,
-} from "@/types/itinerary";
+} from "@/types/logistics";
 
 interface TripLogisticsProps {
   logistics: TripLogistics;
