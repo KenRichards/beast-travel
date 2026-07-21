@@ -1,36 +1,64 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# BEAST Travel
 
-## Getting Started
+BEAST Travel is a data-driven travel planning application built with Next.js,
+React, TypeScript, and Tailwind CSS. It presents trip itineraries, destination
+details, interactive maps, reservations, and logistics from structured trip
+data.
 
-First, run the development server:
+## Engineering documentation
+
+The [engineering documentation](docs/README.md) is the repository handbook and
+the reference workflow for future BEAST projects. It covers:
+
+- [development workflow](docs/DEVELOPMENT_WORKFLOW.md);
+- [coding standards](docs/CODING_STANDARDS.md);
+- [architecture](docs/ARCHITECTURE.md);
+- [AI-assisted delivery](docs/AI_WORKFLOW.md);
+- [milestone lifecycle](docs/MILESTONE_LIFECYCLE.md);
+- [validation](docs/VALIDATION.md);
+- [release process](docs/RELEASE_PROCESS.md); and
+- [the project roadmap](docs/ROADMAP.md).
+
+Reusable planning, implementation, review, and issue templates are available in
+[`templates/`](templates/).
+
+## Getting started
+
+Install dependencies and run the development server:
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in a browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+The Docker Compose development service is also available on
+[http://localhost:3005](http://localhost:3005):
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+docker compose up -d
+```
 
-## Learn More
+Application source lives under `src/`. See the
+[architecture guide](docs/ARCHITECTURE.md) before changing data or component
+boundaries.
 
-To learn more about Next.js, take a look at the following resources:
+## Validation
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Run the baseline static checks before opening a pull request:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+git diff --check
+npx tsc --noEmit
+npm run build
+```
 
-## Deploy on Vercel
+Use the complete [validation procedure](docs/VALIDATION.md) for runtime, route,
+log, and repository-status checks.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Framework guidance
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This repository may use Next.js APIs and conventions newer than prior projects.
+Read the relevant guide installed under `node_modules/next/dist/docs/` before
+changing framework behavior.
