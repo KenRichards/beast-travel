@@ -22,6 +22,10 @@ the reference workflow for future BEAST projects. It covers:
 Reusable planning, implementation, review, and issue templates are available in
 [`templates/`](templates/).
 
+The local-first [Travel Data structure](travel-data/README.md) defines where
+reservation documents and importer data belong without committing personal
+travel data.
+
 ## Getting started
 
 Install dependencies and run the development server:
