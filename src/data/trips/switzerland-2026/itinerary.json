@@ -7,6 +7,7 @@
     "startDate": "2026-07-22",
     "endDate": "2026-07-29",
     "travelers": 3,
+    "travelerNames": ["Ken", "Lori", "Declan"],
     "currency": "CHF",
     "timezone": "Europe/Zurich"
   },
@@ -14,969 +15,447 @@
     {
       "day": 1,
       "date": "2026-07-22",
-      "title": "Arrive in Zürich",
+      "title": "Arrival and direct transfer to Grindelwald",
       "icon": "✈️",
-      "location": "Zürich",
-      "image": "/images/destinations/zurich.jpg",
-      "transport": "Flight and local transit",
-      "travelTime": "Arrival day",
-      "budget": 250,
-      "description": "Arrive in Switzerland, check into the hotel, explore Zürich's Altstadt, and enjoy dinner along the Limmat.",
-      "map": {
-        "center": {
-          "latitude": 47.37445,
-          "longitude": 8.53975
-        },
-        "zoom": 14
-      },
+      "location": "Zürich Airport → Grindelwald",
+      "image": "/images/destinations/grindelwald.jpg",
+      "transport": "Confirmed rental car",
+      "travelTime": "About 2 hr 20 min–2 hr 45 min driving, plus arrival formalities",
+      "budget": 190,
+      "description": "Land at Zürich Airport, collect the reserved car, and drive directly to Grindelwald. There is no Zürich sightseeing or Zürich hotel stay on arrival day.",
+      "map": { "center": { "latitude": 46.6242, "longitude": 8.0414 }, "zoom": 9 },
       "locations": [
-        {
-          "id": "zurich-hb",
-          "name": "Zürich Hauptbahnhof",
-          "type": "station",
-          "coordinates": {
-            "latitude": 47.37818,
-            "longitude": 8.54019
-          },
-          "description": "Zürich's central railway station and the primary transit hub for the city.",
-          "address": "Bahnhofplatz, 8001 Zürich",
-          "durationMinutes": 20,
-          "reservationStatus": "not-required",
-          "notes": [
-            "Use this station for connections to Lucerne and the airport.",
-            "Confirm the departure platform in the SBB app."
-          ]
-        },
-        {
-          "id": "bahnhofstrasse",
-          "name": "Bahnhofstrasse",
-          "type": "shopping",
-          "coordinates": {
-            "latitude": 47.3717,
-            "longitude": 8.5389
-          },
-          "description": "Central Zürich shopping avenue connecting the main station area with Lake Zürich.",
-          "address": "Bahnhofstrasse, 8001 Zürich",
-          "durationMinutes": 45,
-          "reservationStatus": "not-required"
-        },
-        {
-          "id": "lindenhof",
-          "name": "Lindenhof",
-          "type": "viewpoint",
-          "coordinates": {
-            "latitude": 47.37304,
-            "longitude": 8.54089
-          },
-          "description": "A peaceful historic hilltop with views over the Limmat River and Zürich's Old Town.",
-          "address": "Lindenhof, 8001 Zürich",
-          "durationMinutes": 35,
-          "reservationStatus": "not-required"
-        },
-        {
-          "id": "niederdorf",
-          "name": "Niederdorf and Old Town",
-          "type": "attraction",
-          "coordinates": {
-            "latitude": 47.3741,
-            "longitude": 8.5446
-          },
-          "description": "Pedestrian lanes, historic buildings, cafés, shops, and squares in Zürich's Old Town.",
-          "address": "Niederdorfstrasse, 8001 Zürich",
-          "durationMinutes": 90,
-          "reservationStatus": "not-required"
-        },
-        {
-          "id": "buerkliplatz",
-          "name": "Bürkliplatz and Lake Zürich",
-          "type": "viewpoint",
-          "coordinates": {
-            "latitude": 47.3663,
-            "longitude": 8.54125
-          },
-          "description": "Lakeside promenade and city viewpoint near the southern end of Bahnhofstrasse.",
-          "address": "Bürkliplatz, 8001 Zürich",
-          "durationMinutes": 45,
-          "reservationStatus": "not-required"
-        }
+        { "id": "zrh-airport", "name": "Zürich Airport", "type": "transport", "coordinates": { "latitude": 47.4582, "longitude": 8.5555 }, "description": "Confirmed arrival airport and rental-car pickup point.", "address": "Zurich Airport, 8058 Zürich-Flughafen, Switzerland", "durationMinutes": 150, "reservationStatus": "confirmed", "reservationReference": "reservation-258727499accf8d2c3e2908c", "sourceStatus": "Confirmed reservation", "notes": ["Air Canada AC 880 is scheduled to arrive from Toronto at 10:05 local time.", "Allow 60–90 minutes for immigration, baggage, and customs before the 12:30 car pickup."] },
+        { "id": "budget-zrh", "name": "Budget rental desk", "type": "transport", "coordinates": { "latitude": 47.4582, "longitude": 8.5555 }, "description": "Reserved Budget pickup at the Airport Centre car-rental center.", "address": "Budget, Rondellstrasse, 8060 Zürich, Switzerland", "durationMinutes": 45, "reservationStatus": "confirmed", "reservationReference": "reservation-63ac1b697db02f1fd1b90884", "sourceStatus": "Confirmed reservation", "notes": ["Desk is on level 1 in the Airport Centre.", "Bring the voucher, physical driver license, passport, flight ticket, and a physical credit card in the main driver's name.", "Confirm the actual fuel or battery return rule at pickup."] },
+        { "id": "grindelwald-cottage", "name": "Eigerhome – The Cottage mit Wellness – GRIWA RENT AG", "type": "hotel", "coordinates": { "latitude": 46.6160, "longitude": 8.0099 }, "description": "Confirmed Grindelwald lodging for July 22–25.", "address": "10 Unter Eigerweg, 3818 Grindelwald, Switzerland", "durationMinutes": 60, "reservationStatus": "confirmed", "reservationReference": "reservation-9bf3ff2a78929fc68cb452b3", "sourceStatus": "Confirmed reservation", "notes": ["Check-in window: 16:00–17:00.", "Free private on-site parking is listed; no reservation is needed.", "Contact the property if the airport process delays arrival beyond the check-in window."] },
+        { "id": "grindelwald-village", "name": "Grindelwald village", "type": "shopping", "coordinates": { "latitude": 46.6242, "longitude": 8.0414 }, "description": "Low-effort groceries, dinner, and a short orientation walk near the lodging.", "durationMinutes": 90, "reservationStatus": "not-required", "sourceStatus": "Recommended" }
       ],
       "schedule": [
-        {
-          "id": "zurich-arrival",
-          "time": "Morning",
-          "title": "Arrive and transfer into Zürich",
-          "description": "Clear arrival formalities, activate local connectivity, and travel into central Zürich.",
-          "locationId": "zurich-hb",
-          "transport": "Airport train or local transit",
-          "durationMinutes": 90,
-          "reservationRequired": false
-        },
-        {
-          "id": "zurich-checkin",
-          "time": "Early afternoon",
-          "title": "Hotel check-in and reset",
-          "description": "Drop luggage, eat something light, and allow time to recover from the overnight flight.",
-          "durationMinutes": 90,
-          "reservationRequired": false
-        },
-        {
-          "id": "zurich-old-town",
-          "time": "Afternoon",
-          "title": "Old Town walking loop",
-          "description": "Walk through Bahnhofstrasse, Lindenhof, Niederdorf, and the lanes along the Limmat.",
-          "locationId": "lindenhof",
-          "transport": "Walking",
-          "durationMinutes": 150,
-          "reservationRequired": false
-        },
-        {
-          "id": "zurich-lake",
-          "time": "Evening",
-          "title": "Lake Zürich and dinner",
-          "description": "Finish near Bürkliplatz and choose dinner based on energy level and weather.",
-          "locationId": "buerkliplatz",
-          "transport": "Walking or tram",
-          "durationMinutes": 120,
-          "reservationRequired": false
-        }
+        { "id": "arrive-zrh", "time": "10:05", "title": "Arrive at Zürich Airport on AC 880", "description": "Confirmed arrival from Toronto; follow signs for passport control, baggage claim, and customs.", "locationId": "zrh-airport", "transport": "Air Canada", "durationMinutes": 90, "reservationRequired": true, "sourceStatus": "Confirmed reservation", "reservationReference": "reservation-258727499accf8d2c3e2908c", "operationalNotes": ["Arrival is July 22; the imported OCR record previously assigned the wrong date."] },
+        { "id": "arrival-formalities", "time": "Late morning", "title": "Immigration, baggage, customs, and recovery", "description": "Use airport restrooms, refill water, and have a snack if the group needs it before driving.", "locationId": "zrh-airport", "durationMinutes": 90, "sourceStatus": "Authored itinerary" },
+        { "id": "rental-pickup", "time": "12:30", "title": "Pick up the reserved Budget rental car", "description": "Inspect and photograph the vehicle, verify fuel or charge level, record damage, and confirm return instructions.", "locationId": "budget-zrh", "transport": "Walk within Airport Centre", "durationMinutes": 45, "reservationRequired": true, "sourceStatus": "Confirmed reservation", "reservationReference": "reservation-63ac1b697db02f1fd1b90884" },
+        { "id": "drive-grindelwald", "time": "Early afternoon", "title": "Drive directly to Grindelwald", "description": "Take the practical motorway route toward Bern/Interlaken and Grindelwald; stop only for food, fuel, supplies, restroom, or driver alertness.", "locationId": "grindelwald-cottage", "transport": "Rental car · approximately 2 hr 20 min–2 hr 45 min without a long stop", "durationMinutes": 165, "sourceStatus": "Authored itinerary" },
+        { "id": "cottage-checkin", "time": "16:00–17:00", "title": "Check in at the Grindelwald cottage", "description": "Use the confirmed check-in window and on-site parking; notify the property if arrival is running late.", "locationId": "grindelwald-cottage", "durationMinutes": 45, "reservationRequired": true, "sourceStatus": "Confirmed reservation", "reservationReference": "reservation-9bf3ff2a78929fc68cb452b3" },
+        { "id": "village-recovery", "time": "Evening", "title": "Groceries, easy dinner, and a light village walk", "description": "Keep the remainder of the day close to the lodging and prioritize hydration, food, and sleep.", "locationId": "grindelwald-village", "transport": "Short drive or walk based on energy", "durationMinutes": 120, "sourceStatus": "Recommended" }
       ],
       "travelSegments": [
-        {
-          "id": "airport-to-zurich",
-          "from": "Zürich Airport",
-          "to": "Zürich Hauptbahnhof",
-          "mode": "Train",
-          "durationMinutes": 15,
-          "notes": [
-            "Check the live SBB schedule after landing.",
-            "Keep passports and valuables accessible during the transfer."
-          ]
-        }
+        { "id": "zrh-to-grindelwald", "from": "Zürich Airport", "to": "Eigerhome, Grindelwald", "mode": "Rental car", "departureTime": "Early afternoon", "arrivalTime": "16:00–17:00", "durationMinutes": 165, "sourceStatus": "Authored itinerary", "reservationReference": "reservation-63ac1b697db02f1fd1b90884", "notes": ["Drive directly; Zürich is not the initial base.", "Add a short motorway-service stop only if useful for food, fuel, supplies, restroom, or driver recovery."] }
       ],
-      "dailyBudget": {
-        "transportation": 40,
-        "attractions": 20,
-        "food": 140,
-        "lodging": 0,
-        "miscellaneous": 50,
-        "total": 250,
-        "currency": "CHF"
+      "dailyBudget": { "transportation": 45, "attractions": 0, "food": 110, "lodging": 0, "miscellaneous": 35, "total": 190, "currency": "CHF" },
+      "operations": {
+        "startLocation": "Zürich Airport arrivals",
+        "endLocation": "Eigerhome – The Cottage, Grindelwald",
+        "departureWindow": "Leave the rental center after the confirmed 12:30 pickup, normally around 13:00–13:30.",
+        "parking": ["Rental pickup is in the Airport Centre.", "The cottage lists free private on-site parking without a reservation."],
+        "meals": ["Late-morning airport snack if needed.", "Flexible service-area food or grocery stop en route.", "Easy dinner in Grindelwald around 18:30–20:00; no restaurant is booked."],
+        "restAndRecovery": ["Use airport facilities before starting the drive.", "Stop immediately if the driver is drowsy after the overnight flight."],
+        "weatherSensitivity": "Low; allow extra driving time for heavy rain, roadworks, or mountain traffic.",
+        "reservationsAndTickets": ["Flight, rental car, and Grindelwald lodging are confirmed.", "No sightseeing ticket is needed."],
+        "physicalEffort": "Low; arrival formalities, a long drive, and an optional short walk.",
+        "fallbackPlan": "If arrival or pickup is delayed, contact the cottage, skip the village walk, buy simple food near the route or lodging, and go directly to rest."
       },
-      "notes": [
-        "Keep arrival day intentionally flexible.",
-        "Prioritize hydration, food, and sleep over completing every stop.",
-        "Use public transportation if jet lag makes the full walking loop uncomfortable."
-      ]
+      "notes": ["Day 1 intentionally contains no Zürich sightseeing.", "The rental is an intermediate SUV or similar; the exact vehicle and fuel type are assigned at pickup.", "Phone numbers and confirmation codes remain in the private approved reservation record and Travel Pack."]
     },
     {
       "day": 2,
       "date": "2026-07-23",
-      "title": "Lucerne",
-      "icon": "🚞",
-      "location": "Lucerne",
-      "image": "/images/destinations/lucerne.jpg",
-      "transport": "Train",
-      "travelTime": "About 50 minutes",
-      "budget": 180,
-      "description": "Visit Chapel Bridge, explore the historic old town, see the Lion Monument, and enjoy the Lake Lucerne waterfront.",
-      "map": {
-        "center": {
-          "latitude": 47.05205,
-          "longitude": 8.3077
-        },
-        "zoom": 15
-      },
+      "title": "Jungfraujoch high-mountain day",
+      "icon": "🏔️",
+      "location": "Grindelwald Terminal · Eigergletscher · Jungfraujoch",
+      "image": "/images/destinations/jungfraujoch.jpg",
+      "transport": "Rental car, Eiger Express, and Jungfrau Railway",
+      "travelTime": "About 10 minutes driving each way; about 50 minutes uphill by mountain transport",
+      "budget": 760,
+      "description": "Use a clear-weather window for the Eiger Express and Jungfraujoch. Do not buy costly mountain tickets until visibility and operating status are acceptable.",
+      "map": { "center": { "latitude": 46.5942, "longitude": 7.9079 }, "zoom": 11 },
       "locations": [
-        {
-          "id": "lucerne-station",
-          "name": "Lucerne Railway Station",
-          "type": "station",
-          "coordinates": {
-            "latitude": 47.05015,
-            "longitude": 8.31018
-          },
-          "description": "The arrival point for the Zürich-to-Lucerne train and an easy starting point for the walking itinerary.",
-          "address": "Zentralstrasse 1, 6003 Luzern",
-          "durationMinutes": 15,
-          "reservationStatus": "not-required"
-        },
-        {
-          "id": "chapel-bridge",
-          "name": "Chapel Bridge",
-          "type": "attraction",
-          "coordinates": {
-            "latitude": 47.05165,
-            "longitude": 8.30748
-          },
-          "description": "Lucerne's landmark covered wooden bridge and water tower.",
-          "address": "Kapellbrücke, 6002 Luzern",
-          "durationMinutes": 45,
-          "reservationStatus": "not-required"
-        },
-        {
-          "id": "lucerne-old-town",
-          "name": "Lucerne Old Town",
-          "type": "attraction",
-          "coordinates": {
-            "latitude": 47.0529,
-            "longitude": 8.3056
-          },
-          "description": "Historic squares, decorated façades, pedestrian streets, and shops north of the Reuss River.",
-          "address": "Kornmarkt, 6004 Luzern",
-          "durationMinutes": 90,
-          "reservationStatus": "not-required"
-        },
-        {
-          "id": "lion-monument",
-          "name": "Lion Monument",
-          "type": "attraction",
-          "coordinates": {
-            "latitude": 47.05833,
-            "longitude": 8.31056
-          },
-          "description": "The Lion of Lucerne rock monument in a small park near the historic center.",
-          "address": "Denkmalstrasse 4, 6006 Luzern",
-          "durationMinutes": 35,
-          "reservationStatus": "not-required"
-        },
-        {
-          "id": "musegg-wall",
-          "name": "Musegg Wall",
-          "type": "viewpoint",
-          "coordinates": {
-            "latitude": 47.0559,
-            "longitude": 8.30275
-          },
-          "description": "Historic city fortifications and towers overlooking Lucerne.",
-          "address": "Auf Musegg, 6004 Luzern",
-          "durationMinutes": 75,
-          "reservationStatus": "not-required",
-          "notes": [
-            "Tower access can be seasonal.",
-            "Skip the climb if weather or mobility makes it uncomfortable."
-          ]
-        },
-        {
-          "id": "lucerne-waterfront",
-          "name": "Lake Lucerne Waterfront",
-          "type": "viewpoint",
-          "coordinates": {
-            "latitude": 47.05225,
-            "longitude": 8.31225
-          },
-          "description": "Promenade with lake, mountain, boat, and city views near the station.",
-          "address": "Europaplatz, 6005 Luzern",
-          "durationMinutes": 60,
-          "reservationStatus": "not-required"
-        }
+        { "id": "grindelwald-terminal", "name": "Grindelwald Terminal", "type": "station", "coordinates": { "latitude": 46.6245, "longitude": 8.0184 }, "description": "Eiger Express departure point with paid terminal parking and indoor facilities.", "address": "Grundstrasse 54, 3818 Grindelwald, Switzerland", "website": "https://www.jungfrau.ch/en-gb/arriving/", "durationMinutes": 40, "reservationStatus": "recommended", "sourceStatus": "Recommended", "notes": ["Arrive before the reserved boarding window.", "Check live operating status before leaving the cottage."] },
+        { "id": "eigergletscher", "name": "Eigergletscher", "type": "station", "coordinates": { "latitude": 46.5741, "longitude": 7.9748 }, "description": "Transfer point between the 15-minute Eiger Express and Jungfrau Railway.", "website": "https://www.jungfrau.ch/en-gb/eiger-express/", "durationMinutes": 30, "reservationStatus": "recommended", "sourceStatus": "Weather dependent" },
+        { "id": "jungfraujoch", "name": "Jungfraujoch – Top of Europe", "type": "attraction", "coordinates": { "latitude": 46.5475, "longitude": 7.9856 }, "description": "High-altitude complex with Sphinx views, Ice Palace, and indoor recovery areas.", "website": "https://www.jungfrau.ch/en-gb/jungfraujoch-top-of-europe/", "durationMinutes": 210, "priceEstimate": 240, "reservationStatus": "recommended", "sourceStatus": "Weather dependent", "notes": ["At 3,454 m, move slowly and descend if altitude symptoms worsen.", "A valid ticket and a 2026 peak-season seat reservation are separate requirements."] },
+        { "id": "jungfrau-eiger-walk", "name": "Jungfrau Eiger Walk", "type": "viewpoint", "coordinates": { "latitude": 46.5744, "longitude": 7.9755 }, "description": "Optional short high-alpine walk near Eigergletscher only in safe operating and trail conditions.", "durationMinutes": 45, "reservationStatus": "not-required", "sourceStatus": "Optional" },
+        { "id": "grindelwald-indoor", "name": "Grindelwald indoor recovery plan", "type": "other", "coordinates": { "latitude": 46.6242, "longitude": 8.0414 }, "description": "Village café, sports center/pool, shopping, and cottage downtime without buying summit tickets.", "durationMinutes": 240, "reservationStatus": "not-required", "sourceStatus": "Recommended" }
       ],
       "schedule": [
-        {
-          "id": "lucerne-train",
-          "time": "08:30",
-          "title": "Train from Zürich to Lucerne",
-          "description": "Take a direct morning train and begin the day near Lucerne station.",
-          "locationId": "lucerne-station",
-          "transport": "SBB train",
-          "durationMinutes": 50,
-          "reservationRequired": false
-        },
-        {
-          "id": "lucerne-bridge",
-          "time": "10:00",
-          "title": "Chapel Bridge and Old Town",
-          "description": "Cross Chapel Bridge, explore the riverfront, and continue into Lucerne's historic squares.",
-          "locationId": "chapel-bridge",
-          "transport": "Walking",
-          "durationMinutes": 135,
-          "reservationRequired": false
-        },
-        {
-          "id": "lucerne-lunch",
-          "time": "12:30",
-          "title": "Lunch in the Old Town",
-          "description": "Choose a restaurant based on weather, menu preferences, and wait time.",
-          "locationId": "lucerne-old-town",
-          "durationMinutes": 75,
-          "reservationRequired": false
-        },
-        {
-          "id": "lucerne-lion",
-          "time": "14:00",
-          "title": "Lion Monument and optional Musegg Wall",
-          "description": "Visit the Lion Monument, then continue to the Musegg Wall if energy and weather allow.",
-          "locationId": "lion-monument",
-          "transport": "Walking",
-          "durationMinutes": 120,
-          "reservationRequired": false
-        },
-        {
-          "id": "lucerne-waterfront-evening",
-          "time": "16:30",
-          "title": "Lakefront and return to Zürich",
-          "description": "Relax by the waterfront before returning to Zürich by train.",
-          "locationId": "lucerne-waterfront",
-          "transport": "Walking and train",
-          "durationMinutes": 120,
-          "reservationRequired": false
-        }
+        { "id": "weather-check", "time": "Early morning", "title": "Make the go/no-go decision", "description": "Check summit webcams, visibility, wind, operating notices, and every traveler’s energy before purchasing or activating tickets.", "durationMinutes": 20, "sourceStatus": "Weather dependent", "operationalNotes": ["Bad visibility is a reason to use the valley fallback and preserve the expensive excursion for another viable window."] },
+        { "id": "terminal-arrival", "time": "Morning", "title": "Drive to Grindelwald Terminal and park", "description": "Allow time for parking, restrooms, ticketing, and the required turnstile buffer.", "locationId": "grindelwald-terminal", "transport": "Rental car · about 10 minutes", "durationMinutes": 45, "sourceStatus": "Recommended" },
+        { "id": "eiger-express", "time": "Morning", "title": "Eiger Express to Eigergletscher", "description": "Ride the Eiger Express and transfer to the Jungfrau Railway; follow the booked boarding instructions.", "locationId": "eigergletscher", "transport": "Cableway and cog railway", "durationMinutes": 55, "reservationRequired": true, "ticketRequired": true, "sourceStatus": "Weather dependent", "operationalNotes": ["Official guidance requires a valid ticket plus a separate seat reservation in the July 2026 peak period.", "Pass the relevant turnstile at least 10 minutes before train departure."] },
+        { "id": "summit-visit", "time": "Late morning", "title": "Jungfraujoch summit complex", "description": "Prioritize Sphinx views when clear, then the indoor Alpine Sensation and Ice Palace; take frequent water and seated breaks.", "locationId": "jungfraujoch", "durationMinutes": 210, "reservationRequired": true, "ticketRequired": true, "sourceStatus": "Weather dependent" },
+        { "id": "summit-meal", "time": "Early afternoon", "title": "Lunch and altitude recovery", "description": "Eat indoors at the summit or carry a simple lunch; avoid rushing immediately after arrival.", "locationId": "jungfraujoch", "durationMinutes": 60, "sourceStatus": "Recommended" },
+        { "id": "eiger-walk", "time": "Flexible", "title": "Optional short walk at Eigergletscher", "description": "Only add a signed short walk if trail, visibility, footwear, energy, and return timing are all suitable.", "locationId": "jungfrau-eiger-walk", "transport": "Walking", "durationMinutes": 45, "sourceStatus": "Optional" },
+        { "id": "return-grindelwald", "time": "Late afternoon", "title": "Return to Grindelwald", "description": "Descend via Eigergletscher and the Eiger Express, recover at the cottage, and choose an unhurried dinner.", "locationId": "grindelwald-terminal", "transport": "Rail, cableway, and rental car", "durationMinutes": 90, "sourceStatus": "Authored itinerary" }
       ],
       "travelSegments": [
-        {
-          "id": "zurich-to-lucerne",
-          "from": "Zürich Hauptbahnhof",
-          "to": "Lucerne Railway Station",
-          "mode": "Train",
-          "durationMinutes": 50,
-          "notes": [
-            "Confirm the live departure and platform in the SBB app.",
-            "Return timing can remain flexible unless another reservation requires a specific train."
-          ]
-        }
+        { "id": "cottage-terminal", "from": "Grindelwald cottage", "to": "Grindelwald Terminal", "mode": "Rental car", "durationMinutes": 10, "sourceStatus": "Recommended", "notes": ["Use terminal parking; do not drive farther up the mountain route."] },
+        { "id": "terminal-jungfraujoch", "from": "Grindelwald Terminal", "to": "Jungfraujoch via Eigergletscher", "mode": "Eiger Express and Jungfrau Railway", "durationMinutes": 50, "sourceStatus": "Weather dependent", "notes": ["Use the live timetable and booked seat window."] }
       ],
-      "dailyBudget": {
-        "transportation": 50,
-        "attractions": 25,
-        "food": 85,
-        "lodging": 0,
-        "miscellaneous": 20,
-        "total": 180,
-        "currency": "CHF"
+      "dailyBudget": { "transportation": 700, "attractions": 0, "food": 45, "lodging": 0, "miscellaneous": 15, "total": 760, "currency": "CHF" },
+      "operations": {
+        "startLocation": "Grindelwald cottage",
+        "endLocation": "Grindelwald cottage",
+        "departureWindow": "Target an early clear-weather departure; exact time depends on the purchased rail and seat-reservation window.",
+        "parking": ["Use Grindelwald Terminal parking and retain the ticket or app record."],
+        "meals": ["Breakfast before departure.", "Carry water and snacks.", "Lunch around 12:00–13:30 at the summit or packed; dinner after recovery in Grindelwald."],
+        "restAndRecovery": ["Restrooms are available at the terminal and summit complex.", "Schedule seated breaks at altitude and move slowly."],
+        "weatherSensitivity": "Very high; summit cloud, wind, and visibility determine value and safety.",
+        "reservationsAndTickets": ["Jungfraujoch is not currently shown as booked.", "A valid ticket and a separate timed seat reservation are required for July 2026; purchase only after the weather decision."],
+        "physicalEffort": "Moderate because of altitude, stairs, cold, and prolonged standing even though lifts and trains cover the ascent.",
+        "fallbackPlan": "Bad weather: do not buy or activate Jungfraujoch tickets. Use the Grindelwald village/sports-center plan, a café lunch, groceries, and cottage wellness/rest; reassess whether another day has a safe clear window."
       },
-      "notes": [
-        "Most central Lucerne stops can be connected on foot.",
-        "The Musegg Wall adds elevation and stairs; treat it as optional.",
-        "Leave flexibility for a lake cruise if weather and timing are favorable."
-      ]
+      "notes": ["No mountain ticket is represented as confirmed.", "The fast Grindelwald Terminal route is accessible; ask the operator in advance if mobility assistance is needed."]
     },
     {
       "day": 3,
       "date": "2026-07-24",
-      "title": "Grindelwald",
-      "icon": "🏔️",
-      "location": "Grindelwald",
+      "title": "Lauterbrunnen, Mürren, and waterfall valley",
+      "icon": "💧",
+      "location": "Lauterbrunnen · Mürren · Gimmelwald",
       "image": "/images/destinations/grindelwald.jpg",
-      "transport": "Train",
-      "travelTime": "About 2 hours 45 minutes",
-      "budget": 260,
-      "description": "Travel into the Bernese Oberland, settle into Grindelwald, and explore the alpine village beneath the Eiger.",
-      "map": {
-        "center": {
-          "latitude": 46.62425,
-          "longitude": 8.0414
-        },
-        "zoom": 14
-      },
+      "transport": "Rental car, cableway/rail, and walking",
+      "travelTime": "About 35–45 minutes driving each way, plus mountain transit",
+      "budget": 300,
+      "description": "Explore Lauterbrunnen valley and car-free Mürren/Gimmelwald, with a separate optional via-ferrata track and a complete non-climbing family plan.",
+      "map": { "center": { "latitude": 46.5822, "longitude": 7.9077 }, "zoom": 12 },
       "locations": [
-        {
-          "id": "grindelwald-station",
-          "name": "Grindelwald Railway Station",
-          "type": "station",
-          "coordinates": {
-            "latitude": 46.62427,
-            "longitude": 8.03345
-          },
-          "description": "Central village railway station and arrival point for the traditional rail route.",
-          "address": "Dorfstrasse 75, 3818 Grindelwald",
-          "durationMinutes": 20,
-          "reservationStatus": "not-required"
-        },
-        {
-          "id": "grindelwald-terminal",
-          "name": "Grindelwald Terminal",
-          "type": "transport",
-          "coordinates": {
-            "latitude": 46.62455,
-            "longitude": 8.0183
-          },
-          "description": "Transport hub providing access to the Eiger Express and mountain connections.",
-          "address": "Grundstrasse 54, 3818 Grindelwald",
-          "durationMinutes": 45,
-          "reservationStatus": "not-required"
-        },
-        {
-          "id": "grindelwald-village",
-          "name": "Grindelwald Village Center",
-          "type": "attraction",
-          "coordinates": {
-            "latitude": 46.6244,
-            "longitude": 8.0412
-          },
-          "description": "Alpine village center with shops, restaurants, hotels, and views toward the Eiger.",
-          "address": "Dorfstrasse, 3818 Grindelwald",
-          "durationMinutes": 120,
-          "reservationStatus": "not-required"
-        },
-        {
-          "id": "firstbahn",
-          "name": "Grindelwald-First Gondola Station",
-          "type": "transport",
-          "coordinates": {
-            "latitude": 46.62582,
-            "longitude": 8.04245
-          },
-          "description": "Valley gondola station for Grindelwald-First mountain excursions.",
-          "address": "Dorfstrasse 187, 3818 Grindelwald",
-          "durationMinutes": 30,
-          "reservationStatus": "recommended"
-        },
-        {
-          "id": "first-cliff-walk",
-          "name": "First Cliff Walk",
-          "type": "viewpoint",
-          "coordinates": {
-            "latitude": 46.6602,
-            "longitude": 8.05455
-          },
-          "description": "Mountain walkway and viewing platform reached from Grindelwald-First.",
-          "address": "First, 3818 Grindelwald",
-          "durationMinutes": 75,
-          "reservationStatus": "recommended",
-          "notes": [
-            "Mountain operations are weather-dependent.",
-            "Confirm operating status before leaving the village."
-          ]
-        }
+        { "id": "lauterbrunnen-parking", "name": "Lauterbrunnen station car park", "type": "parking", "coordinates": { "latitude": 46.5980, "longitude": 7.9070 }, "description": "Practical paid parking beside the station and Lauterbrunnen–Mürren valley transport.", "address": "Bahnhofplatz, 3822 Lauterbrunnen, Switzerland", "website": "https://www.jungfrau.ch/en-gb/arrival-at-station-car-parks/valley-stations/blm-valley-station/", "durationMinutes": 20, "reservationStatus": "not-required", "sourceStatus": "Recommended" },
+        { "id": "staubbach", "name": "Staubbach Falls", "type": "attraction", "coordinates": { "latitude": 46.5890, "longitude": 7.9056 }, "description": "Valley waterfall visible from the village, with a short walking approach.", "address": "Losisgräbli 419, 3822 Lauterbrunnen, Switzerland", "durationMinutes": 45, "reservationStatus": "not-required", "sourceStatus": "Recommended" },
+        { "id": "trummelbach", "name": "Trümmelbach Falls", "type": "attraction", "coordinates": { "latitude": 46.5717, "longitude": 7.9139 }, "description": "Ticketed glacial waterfalls inside the mountain; verify seasonal opening and conditions that morning.", "address": "Trümmelbach 236, 3824 Lauterbrunnen, Switzerland", "website": "https://www.truemmelbachfaelle.ch/", "durationMinutes": 90, "reservationStatus": "recommended", "sourceStatus": "Weather dependent", "notes": ["Wet surfaces, stairs, spray, and loud enclosed spaces can be demanding.", "Check age, accessibility, and current operating restrictions before going."] },
+        { "id": "murren", "name": "Mürren", "type": "viewpoint", "coordinates": { "latitude": 46.5594, "longitude": 7.8922 }, "description": "Car-free mountain village for lunch, views, and easy village walking.", "durationMinutes": 150, "reservationStatus": "not-required", "sourceStatus": "Recommended" },
+        { "id": "gimmelwald", "name": "Gimmelwald", "type": "viewpoint", "coordinates": { "latitude": 46.5464, "longitude": 7.8917 }, "description": "Small car-free village reached by cableway, optional if energy and timing allow.", "durationMinutes": 75, "reservationStatus": "not-required", "sourceStatus": "Optional" },
+        { "id": "murren-via-ferrata", "name": "Mürren–Gimmelwald via ferrata", "type": "attraction", "coordinates": { "latitude": 46.5530, "longitude": 7.8910 }, "description": "Exposed one-way climbing route for separately qualified participants only; not a family default.", "durationMinutes": 180, "reservationStatus": "recommended", "sourceStatus": "Optional", "notes": ["Requires suitable ability, equipment, operating conditions, and any required guide or reservation.", "Never assume all three travelers will participate."] }
       ],
       "schedule": [
-        {
-          "id": "grindelwald-departure",
-          "time": "Morning",
-          "title": "Travel into the Bernese Oberland",
-          "description": "Depart Zürich and travel through the Interlaken region toward Grindelwald.",
-          "locationId": "grindelwald-station",
-          "transport": "SBB and regional trains",
-          "durationMinutes": 165,
-          "reservationRequired": false
-        },
-        {
-          "id": "grindelwald-arrival",
-          "time": "Early afternoon",
-          "title": "Arrive and settle in",
-          "description": "Check in or store luggage, then orient around the village and transportation hubs.",
-          "locationId": "grindelwald-village",
-          "transport": "Walking or local bus",
-          "durationMinutes": 90,
-          "reservationRequired": false
-        },
-        {
-          "id": "grindelwald-explore",
-          "time": "Afternoon",
-          "title": "Explore Grindelwald",
-          "description": "Walk through the village, visit viewpoints, and confirm the next day's Jungfraujoch route.",
-          "locationId": "grindelwald-village",
-          "transport": "Walking",
-          "durationMinutes": 150,
-          "reservationRequired": false
-        },
-        {
-          "id": "grindelwald-first-option",
-          "time": "Weather option",
-          "title": "Optional Grindelwald-First excursion",
-          "description": "Use the First gondola and Cliff Walk only if arrival time, visibility, and operating conditions make it practical.",
-          "locationId": "firstbahn",
-          "transport": "Gondola",
-          "durationMinutes": 180,
-          "reservationRequired": true
-        }
+        { "id": "drive-lauterbrunnen", "time": "Morning", "title": "Drive to Lauterbrunnen and park", "description": "Park once near the station, use restrooms, and confirm live mountain-transport operations.", "locationId": "lauterbrunnen-parking", "transport": "Rental car · about 35–45 minutes", "durationMinutes": 60, "sourceStatus": "Recommended" },
+        { "id": "village-staubbach", "time": "Morning", "title": "Lauterbrunnen village and Staubbach Falls", "description": "Follow an easy village loop and view the falls; keep the pace flexible on wet paths.", "locationId": "staubbach", "transport": "Walking", "durationMinutes": 75, "sourceStatus": "Recommended" },
+        { "id": "trummelbach-visit", "time": "Late morning", "title": "Trümmelbach Falls if open and appropriate", "description": "Visit only if operating conditions, footwear, mobility, and the group’s comfort with stairs and spray are suitable.", "locationId": "trummelbach", "transport": "Local bus or short drive if moving the car", "durationMinutes": 90, "ticketRequired": true, "sourceStatus": "Weather dependent" },
+        { "id": "murren-transfer", "time": "Early afternoon", "title": "Ascend to Mürren", "description": "Use the live cableway/rail route from Lauterbrunnen or the Stechelberg cableway based on operations and parking plan.", "locationId": "murren", "transport": "Cableway and mountain rail", "durationMinutes": 60, "ticketRequired": true, "sourceStatus": "Recommended" },
+        { "id": "murren-family", "time": "Afternoon", "title": "Family plan: Mürren lunch, viewpoints, and optional Gimmelwald", "description": "Enjoy the village and waterfront-style terraces, then ride to Gimmelwald only if time and energy remain.", "locationId": "murren", "transport": "Walking and optional cableway", "durationMinutes": 180, "sourceStatus": "Recommended" },
+        { "id": "via-ferrata-separate", "time": "Optional", "title": "Separate via-ferrata track for qualified participants", "description": "Only a prepared subset may do the route; the rest of the family keeps the Mürren/Gimmelwald plan and agrees on a reunion point and deadline.", "locationId": "murren-via-ferrata", "durationMinutes": 180, "reservationRequired": true, "ticketRequired": true, "sourceStatus": "Optional", "operationalNotes": ["Confirm equipment rental/guide availability and current route status in advance.", "Do not attempt in rain, storms, poor visibility, or without appropriate experience."] },
+        { "id": "return-grindelwald", "time": "Late afternoon", "title": "Return to Grindelwald", "description": "Descend with ample margin, collect the car, use station restrooms, and drive back before a relaxed dinner.", "locationId": "lauterbrunnen-parking", "transport": "Mountain transit and rental car", "durationMinutes": 105, "sourceStatus": "Authored itinerary" }
       ],
       "travelSegments": [
-        {
-          "id": "zurich-to-grindelwald",
-          "from": "Zürich Hauptbahnhof",
-          "to": "Grindelwald",
-          "mode": "Train",
-          "durationMinutes": 165,
-          "notes": [
-            "The exact connection may require transfers.",
-            "Check live routing and platform information in the SBB app."
-          ]
-        }
+        { "id": "grindelwald-lauterbrunnen", "from": "Grindelwald cottage", "to": "Lauterbrunnen station car park", "mode": "Rental car", "durationMinutes": 45, "sourceStatus": "Recommended", "notes": ["Allow extra time through Zweilütschinen and for parking queues."] },
+        { "id": "lauterbrunnen-murren", "from": "Lauterbrunnen valley", "to": "Mürren/Gimmelwald", "mode": "Cableway and mountain rail", "durationMinutes": 40, "sourceStatus": "Recommended", "notes": ["Choose the live operating route; Mürren and Gimmelwald are car-free."] }
       ],
-      "dailyBudget": {
-        "transportation": 90,
-        "attractions": 45,
-        "food": 95,
-        "lodging": 0,
-        "miscellaneous": 30,
-        "total": 260,
-        "currency": "CHF"
+      "dailyBudget": { "transportation": 150, "attractions": 60, "food": 75, "lodging": 0, "miscellaneous": 15, "total": 300, "currency": "CHF" },
+      "operations": {
+        "startLocation": "Grindelwald cottage",
+        "endLocation": "Grindelwald cottage",
+        "departureWindow": "Morning, ideally 08:00–09:00, adjusted to live waterfall and cableway operations.",
+        "parking": ["Use Lauterbrunnen station parking for a park-once plan.", "If using Stechelberg instead, confirm live parking and cableway status before moving the car."],
+        "meals": ["Breakfast at the cottage.", "Lunch in Mürren around 12:30–14:00; no restaurant is booked.", "Carry snacks and water; dinner after returning to Grindelwald."],
+        "restAndRecovery": ["Use facilities at Lauterbrunnen station and during the Mürren lunch stop.", "Skip Gimmelwald if stairs, wet surfaces, or transit transfers have used the group’s energy."],
+        "weatherSensitivity": "High for waterfalls, mountain views, cableways, and especially the via ferrata.",
+        "reservationsAndTickets": ["Waterfall and mountain-transit tickets are suggested, not booked.", "Via ferrata is optional and needs separate operating/equipment/reservation confirmation."],
+        "physicalEffort": "Moderate for the family route; strenuous and exposed for the separate via ferrata.",
+        "fallbackPlan": "In poor mountain weather, keep to Lauterbrunnen village, Staubbach viewpoints, a long lunch, and an indoor Interlaken stop; omit Trümmelbach if conditions or accessibility are unsuitable and omit all climbing."
       },
-      "notes": [
-        "Mountain visibility should determine whether Grindelwald-First is attempted.",
-        "Preserve enough energy for the Jungfraujoch excursion the following day.",
-        "Confirm breakfast or early-food options for the next morning."
-      ]
+      "notes": ["The via ferrata is never assumed for the whole family.", "Agree on a communication and reunion plan before anyone separates."]
     },
     {
       "day": 4,
       "date": "2026-07-25",
-      "title": "Jungfraujoch",
-      "icon": "🚠",
-      "location": "Jungfraujoch",
-      "image": "/images/destinations/jungfraujoch.jpg",
-      "transport": "Train and gondola",
-      "travelTime": "Full-day excursion",
-      "budget": 420,
-      "description": "Journey to the Top of Europe, visit the Sphinx Observatory and Ice Palace, and experience the high-Alpine scenery.",
-      "map": {
-        "center": {
-          "latitude": 46.5881,
-          "longitude": 8.0071
-        },
-        "zoom": 11
-      },
+      "title": "Grindelwald checkout, Lucerne, and transfer to Au",
+      "icon": "🚗",
+      "location": "Grindelwald → Lucerne → Au",
+      "image": "/images/destinations/lucerne.jpg",
+      "transport": "Rental car and walking",
+      "travelTime": "About 1 hr 30 min to Lucerne, then about 45–60 min to Au",
+      "budget": 245,
+      "description": "Check out of Grindelwald, make a measured Lucerne city stop, then continue to the confirmed Lake Zürich lodging without adding a mountain excursion.",
+      "map": { "center": { "latitude": 47.0502, "longitude": 8.3093 }, "zoom": 10 },
       "locations": [
-        {
-          "id": "grindelwald-terminal-jungfrau",
-          "name": "Grindelwald Terminal",
-          "type": "station",
-          "coordinates": {
-            "latitude": 46.62455,
-            "longitude": 8.0183
-          },
-          "description": "Starting point for the Eiger Express route toward Jungfraujoch.",
-          "address": "Grundstrasse 54, 3818 Grindelwald",
-          "durationMinutes": 30,
-          "reservationStatus": "confirmed"
-        },
-        {
-          "id": "eiger-express",
-          "name": "Eiger Express",
-          "type": "transport",
-          "coordinates": {
-            "latitude": 46.6094,
-            "longitude": 8.0114
-          },
-          "description": "Gondola connection between Grindelwald Terminal and Eigergletscher.",
-          "durationMinutes": 15,
-          "reservationStatus": "confirmed"
-        },
-        {
-          "id": "eigergletscher",
-          "name": "Eigergletscher Station",
-          "type": "station",
-          "coordinates": {
-            "latitude": 46.57425,
-            "longitude": 7.97435
-          },
-          "description": "Transfer point between the Eiger Express and the Jungfrau Railway.",
-          "durationMinutes": 25,
-          "reservationStatus": "confirmed"
-        },
-        {
-          "id": "jungfraujoch-station",
-          "name": "Jungfraujoch Railway Station",
-          "type": "station",
-          "coordinates": {
-            "latitude": 46.54742,
-            "longitude": 7.9821
-          },
-          "description": "High-altitude rail arrival point for the Jungfraujoch complex.",
-          "durationMinutes": 20,
-          "reservationStatus": "confirmed"
-        },
-        {
-          "id": "sphinx-observatory",
-          "name": "Sphinx Observatory",
-          "type": "viewpoint",
-          "coordinates": {
-            "latitude": 46.5475,
-            "longitude": 7.9853
-          },
-          "description": "High-altitude viewing terraces overlooking glaciers and surrounding peaks.",
-          "durationMinutes": 60,
-          "reservationStatus": "confirmed"
-        },
-        {
-          "id": "ice-palace",
-          "name": "Ice Palace",
-          "type": "attraction",
-          "coordinates": {
-            "latitude": 46.5472,
-            "longitude": 7.98425
-          },
-          "description": "Indoor passage through ice features within the Jungfraujoch visitor complex.",
-          "durationMinutes": 45,
-          "reservationStatus": "confirmed"
-        },
-        {
-          "id": "alpine-sensation",
-          "name": "Alpine Sensation",
-          "type": "attraction",
-          "coordinates": {
-            "latitude": 46.5473,
-            "longitude": 7.9833
-          },
-          "description": "Indoor exhibition connecting the station, Ice Palace, and Sphinx areas.",
-          "durationMinutes": 35,
-          "reservationStatus": "confirmed"
-        }
+        { "id": "lucerne-station-parking", "name": "Lucerne station parking", "type": "parking", "coordinates": { "latitude": 47.0497, "longitude": 8.3103 }, "description": "Central paid parking that supports a compact Chapel Bridge, Old Town, and lakefront loop.", "address": "Bahnhofplatz 1, 6003 Luzern, Switzerland", "durationMinutes": 20, "reservationStatus": "not-required", "sourceStatus": "Recommended", "notes": ["Use live signs and keep luggage concealed in the locked vehicle.", "Choose another signed central garage if full."] },
+        { "id": "chapel-bridge", "name": "Chapel Bridge", "type": "attraction", "coordinates": { "latitude": 47.0517, "longitude": 8.3075 }, "description": "Lucerne’s landmark covered bridge on the compact walking route.", "address": "Kapellbrücke, 6002 Luzern, Switzerland", "durationMinutes": 35, "reservationStatus": "not-required", "sourceStatus": "Recommended" },
+        { "id": "lucerne-old-town", "name": "Lucerne Old Town", "type": "attraction", "coordinates": { "latitude": 47.0529, "longitude": 8.3056 }, "description": "Historic squares and pedestrian lanes for a flexible walk and lunch.", "address": "Kornmarkt, 6004 Luzern, Switzerland", "durationMinutes": 90, "reservationStatus": "not-required", "sourceStatus": "Recommended" },
+        { "id": "lucerne-waterfront", "name": "Lake Lucerne waterfront", "type": "viewpoint", "coordinates": { "latitude": 47.0523, "longitude": 8.3123 }, "description": "Low-effort lakefront pause near the station before continuing to Au.", "address": "Europaplatz, 6005 Luzern, Switzerland", "durationMinutes": 45, "reservationStatus": "not-required", "sourceStatus": "Recommended" },
+        { "id": "no1-art", "name": "No1 Art B&B", "type": "hotel", "coordinates": { "latitude": 47.2466, "longitude": 8.6417 }, "description": "Confirmed Au lodging for July 25–29.", "address": "Seestrasse 319B, 8804 Au, Switzerland", "durationMinutes": 60, "reservationStatus": "confirmed", "reservationReference": "reservation-83c02332654e9392c333cbb2", "sourceStatus": "Confirmed reservation", "notes": ["Check-in window: 14:00–19:00.", "Free private parking is listed; no reservation is needed.", "The reservation records an approximate arrival of 14:00–15:00, which conflicts with the Lucerne stop and needs updating with the property."] }
       ],
       "schedule": [
-        {
-          "id": "jungfrau-terminal",
-          "time": "Early morning",
-          "title": "Arrive at Grindelwald Terminal",
-          "description": "Arrive before the reserved connection, verify tickets, and follow signs for the Eiger Express.",
-          "locationId": "grindelwald-terminal-jungfrau",
-          "transport": "Train, bus, or local connection",
-          "durationMinutes": 45,
-          "reservationRequired": true
-        },
-        {
-          "id": "jungfrau-eiger-express",
-          "time": "Morning",
-          "title": "Eiger Express to Eigergletscher",
-          "description": "Ride the gondola to Eigergletscher and transfer to the Jungfrau Railway.",
-          "locationId": "eiger-express",
-          "transport": "Gondola",
-          "durationMinutes": 40,
-          "reservationRequired": true
-        },
-        {
-          "id": "jungfrau-ascent",
-          "time": "Morning",
-          "title": "Jungfrau Railway ascent",
-          "description": "Continue by cogwheel railway from Eigergletscher to Jungfraujoch.",
-          "locationId": "eigergletscher",
-          "transport": "Cogwheel railway",
-          "durationMinutes": 35,
-          "reservationRequired": true
-        },
-        {
-          "id": "jungfrau-complex",
-          "time": "Late morning",
-          "title": "Explore Jungfraujoch",
-          "description": "Visit the Sphinx terraces, Alpine Sensation, Ice Palace, and indoor visitor areas.",
-          "locationId": "sphinx-observatory",
-          "transport": "Walking and elevators",
-          "durationMinutes": 180,
-          "reservationRequired": true
-        },
-        {
-          "id": "jungfrau-return",
-          "time": "Afternoon",
-          "title": "Return to Grindelwald",
-          "description": "Retrace the railway and Eiger Express route, allowing time for transfers and weather delays.",
-          "locationId": "jungfraujoch-station",
-          "transport": "Railway and gondola",
-          "durationMinutes": 90,
-          "reservationRequired": true
-        }
+        { "id": "grindelwald-checkout", "time": "08:00–10:00", "title": "Check out of the Grindelwald cottage", "description": "Complete the property checkout, load the car, and leave no later than the confirmed 10:00 deadline.", "durationMinutes": 60, "reservationRequired": true, "sourceStatus": "Confirmed reservation", "reservationReference": "reservation-9bf3ff2a78929fc68cb452b3" },
+        { "id": "drive-lucerne", "time": "Morning", "title": "Drive to Lucerne", "description": "Use the practical route, allowing for weekend traffic and a brief restroom stop only if needed.", "locationId": "lucerne-station-parking", "transport": "Rental car · about 1 hr 30 min", "durationMinutes": 105, "sourceStatus": "Authored itinerary" },
+        { "id": "lucerne-loop", "time": "Late morning", "title": "Chapel Bridge and Old Town loop", "description": "Walk Chapel Bridge and the nearby Old Town without adding distant attractions or steep climbs.", "locationId": "chapel-bridge", "transport": "Walking", "durationMinutes": 105, "sourceStatus": "Recommended" },
+        { "id": "lucerne-lunch", "time": "Early afternoon", "title": "Lunch near Old Town or the station", "description": "Choose a convenient restaurant by neighborhood and wait time; no meal reservation is represented.", "locationId": "lucerne-old-town", "durationMinutes": 75, "sourceStatus": "Recommended" },
+        { "id": "lucerne-lakefront", "time": "Flexible", "title": "Short Lake Lucerne waterfront pause", "description": "Use this as the only optional extension and keep enough time for the drive and Au check-in.", "locationId": "lucerne-waterfront", "durationMinutes": 45, "sourceStatus": "Optional" },
+        { "id": "drive-au", "time": "Mid-afternoon", "title": "Continue to Au", "description": "Retrieve the car and drive directly to No1 Art B&B; notify the property of the revised arrival estimate.", "locationId": "no1-art", "transport": "Rental car · about 45–60 minutes", "durationMinutes": 75, "sourceStatus": "Authored itinerary" },
+        { "id": "au-checkin", "time": "14:00–19:00", "title": "Check in at No1 Art B&B", "description": "Use the confirmed check-in window and private parking; the exact arrival within that window needs coordination because the booking notes 14:00–15:00.", "locationId": "no1-art", "durationMinutes": 45, "reservationRequired": true, "sourceStatus": "Confirmed reservation", "reservationReference": "reservation-83c02332654e9392c333cbb2" },
+        { "id": "au-evening", "time": "Evening", "title": "Light Lake Zürich evening", "description": "Take a short local waterfront walk, buy any supplies, eat nearby, and settle into the new base.", "locationId": "no1-art", "durationMinutes": 120, "sourceStatus": "Recommended" }
       ],
       "travelSegments": [
-        {
-          "id": "terminal-to-eigergletscher",
-          "from": "Grindelwald Terminal",
-          "to": "Eigergletscher",
-          "mode": "Eiger Express",
-          "durationMinutes": 15,
-          "notes": [
-            "Follow the live operating information and reservation instructions.",
-            "Board only the connection matching the ticket or seat reservation."
-          ]
-        },
-        {
-          "id": "eigergletscher-to-jungfraujoch",
-          "from": "Eigergletscher",
-          "to": "Jungfraujoch",
-          "mode": "Jungfrau Railway",
-          "durationMinutes": 30,
-          "notes": [
-            "Allow time to find the correct transfer platform.",
-            "Keep tickets accessible throughout the journey."
-          ]
-        }
+        { "id": "grindelwald-lucerne", "from": "Grindelwald cottage", "to": "Central Lucerne parking", "mode": "Rental car", "durationMinutes": 90, "sourceStatus": "Authored itinerary" },
+        { "id": "lucerne-au", "from": "Lucerne", "to": "No1 Art B&B, Au", "mode": "Rental car", "durationMinutes": 60, "sourceStatus": "Authored itinerary", "notes": ["Weekend congestion can extend the drive."] }
       ],
-      "dailyBudget": {
-        "transportation": 250,
-        "attractions": 50,
-        "food": 90,
-        "lodging": 0,
-        "miscellaneous": 30,
-        "total": 420,
-        "currency": "CHF"
+      "dailyBudget": { "transportation": 45, "attractions": 0, "food": 165, "lodging": 0, "miscellaneous": 35, "total": 245, "currency": "CHF" },
+      "operations": {
+        "startLocation": "Eigerhome – The Cottage, Grindelwald",
+        "endLocation": "No1 Art B&B, Au",
+        "departureWindow": "Leave Grindelwald by about 09:00–10:00 after the confirmed checkout; leave Lucerne by roughly 15:30–16:30.",
+        "parking": ["Use a signed central Lucerne garage near the station and note the level/space.", "No1 Art B&B lists free private parking without a reservation."],
+        "meals": ["Breakfast before checkout.", "Lunch in Lucerne around 12:30–14:00.", "Easy dinner near Au after check-in; no restaurant is booked."],
+        "restAndRecovery": ["Station-area facilities in Lucerne provide a practical restroom stop.", "Use the lakefront as a seated recovery break, not another major activity."],
+        "weatherSensitivity": "Low to moderate; use covered Old Town stops and shorten the waterfront in rain.",
+        "reservationsAndTickets": ["Both lodging stays are confirmed.", "Lucerne activities are suggestions and require no represented reservation.", "Tell No1 Art B&B that arrival will likely be later than the 14:00–15:00 note."],
+        "physicalEffort": "Low to moderate walking on mostly compact city streets.",
+        "fallbackPlan": "If traffic, checkout, or weather compresses the day, park once, see Chapel Bridge, eat lunch, and continue to Au; omit the extended Old Town and lakefront portions."
       },
-      "notes": [
-        "Check operating status, mountain weather, and visibility before departure.",
-        "Bring layers, sunglasses, sunscreen, water, and appropriate footwear.",
-        "Move slowly at altitude and take breaks if anyone develops headache, dizziness, nausea, or unusual shortness of breath.",
-        "Do not force outdoor snow activities if visibility or conditions are poor."
-      ]
+      "notes": ["This is a lodging-transfer day, not a mountain-excursion day.", "Keep luggage out of sight and the car locked during the Lucerne stop."]
+    },
+    {
+      "day": 5,
+      "date": "2026-07-26",
+      "title": "Rhine Falls and Stein am Rhein",
+      "icon": "🌊",
+      "location": "Au · Rhine Falls · Stein am Rhein",
+      "image": "/images/destinations/zurich.jpg",
+      "transport": "Rental car and walking",
+      "travelTime": "About 50–65 minutes to Rhine Falls, 25–35 minutes onward, and 55–70 minutes back to Au",
+      "budget": 310,
+      "description": "Arrive at Rhine Falls before the busiest midday window, then continue to Stein am Rhein for lunch and a measured Old Town visit.",
+      "map": { "center": { "latitude": 47.6779, "longitude": 8.6153 }, "zoom": 10 },
+      "locations": [
+        { "id": "schloss-laufen", "name": "Schloss Laufen Rhine Falls", "type": "attraction", "coordinates": { "latitude": 47.6752, "longitude": 8.6151 }, "description": "South-bank paid parking, visitor center, and ticketed viewing-platform access.", "address": "Areal Schloss Laufen, 8447 Dachsen, Switzerland", "website": "https://rheinfall.ch/en/inform/parking/list", "durationMinutes": 150, "reservationStatus": "recommended", "sourceStatus": "Recommended", "notes": ["Rhine Falls itself is accessible around the clock; platform and boat operations have separate conditions.", "Wet platforms and stairs may be slippery."] },
+        { "id": "rhine-boat", "name": "Rhine Falls boat experience", "type": "attraction", "coordinates": { "latitude": 47.6778, "longitude": 8.6095 }, "description": "Optional seasonal boat experience only if operating and the group is comfortable with spray and boarding.", "website": "https://rheinfall.ch/en/experience/boat-trips", "durationMinutes": 45, "reservationStatus": "recommended", "sourceStatus": "Optional" },
+        { "id": "stein-parking", "name": "Stein am Rhein signed visitor parking", "type": "parking", "coordinates": { "latitude": 47.6582, "longitude": 8.8561 }, "description": "Use signed parking outside the pedestrian Old Town and walk into the center.", "durationMinutes": 20, "reservationStatus": "not-required", "sourceStatus": "Recommended" },
+        { "id": "stein-old-town", "name": "Stein am Rhein Old Town", "type": "attraction", "coordinates": { "latitude": 47.6593, "longitude": 8.8590 }, "description": "Painted façades, Rathausplatz, lanes, and Rhine waterfront in a compact visit.", "address": "Rathausplatz, 8260 Stein am Rhein, Switzerland", "durationMinutes": 150, "reservationStatus": "not-required", "sourceStatus": "Recommended" }
+      ],
+      "schedule": [
+        { "id": "drive-rhine", "time": "Morning", "title": "Drive from Au to Rhine Falls", "description": "Aim to reach the Schloss Laufen side around 09:00–10:00, before the busiest midday period.", "locationId": "schloss-laufen", "transport": "Rental car · about 50–65 minutes", "durationMinutes": 75, "sourceStatus": "Recommended" },
+        { "id": "falls-platforms", "time": "Morning", "title": "Viewing platforms and waterfall circuit", "description": "Allow 90–150 minutes for viewpoints, photos, restrooms, and unhurried movement on steps and wet surfaces.", "locationId": "schloss-laufen", "durationMinutes": 150, "ticketRequired": true, "sourceStatus": "Recommended" },
+        { "id": "boat-option", "time": "Flexible", "title": "Optional operating boat experience", "description": "Add only if boats are running, queues are reasonable, and everyone is comfortable; it is not booked.", "locationId": "rhine-boat", "durationMinutes": 45, "ticketRequired": true, "sourceStatus": "Optional" },
+        { "id": "drive-stein", "time": "Early afternoon", "title": "Drive to Stein am Rhein", "description": "Continue east, follow signed visitor parking, and walk into the pedestrian center.", "locationId": "stein-parking", "transport": "Rental car · about 25–35 minutes", "durationMinutes": 50, "sourceStatus": "Recommended" },
+        { "id": "stein-lunch", "time": "Early afternoon", "title": "Lunch in or near the Old Town", "description": "Choose by neighborhood and available seating; no restaurant reservation is represented.", "locationId": "stein-old-town", "durationMinutes": 75, "sourceStatus": "Recommended" },
+        { "id": "stein-walk", "time": "Afternoon", "title": "Old Town and Rhine waterfront", "description": "Explore Rathausplatz and the riverfront for about 90–150 minutes without adding a distant excursion.", "locationId": "stein-old-town", "transport": "Walking", "durationMinutes": 120, "sourceStatus": "Recommended" },
+        { "id": "return-au", "time": "Late afternoon", "title": "Return to Au", "description": "Use a restroom before departure and allow 55–70 minutes for the drive back to No1 Art B&B.", "transport": "Rental car", "durationMinutes": 75, "sourceStatus": "Authored itinerary" }
+      ],
+      "travelSegments": [
+        { "id": "au-rhine", "from": "No1 Art B&B, Au", "to": "Schloss Laufen Rhine Falls", "mode": "Rental car", "durationMinutes": 65, "sourceStatus": "Recommended" },
+        { "id": "rhine-stein", "from": "Rhine Falls", "to": "Stein am Rhein", "mode": "Rental car", "durationMinutes": 35, "sourceStatus": "Recommended" },
+        { "id": "stein-au", "from": "Stein am Rhein", "to": "No1 Art B&B, Au", "mode": "Rental car", "durationMinutes": 70, "sourceStatus": "Recommended" }
+      ],
+      "dailyBudget": { "transportation": 45, "attractions": 105, "food": 130, "lodging": 0, "miscellaneous": 30, "total": 310, "currency": "CHF" },
+      "operations": {
+        "startLocation": "No1 Art B&B, Au",
+        "endLocation": "No1 Art B&B, Au",
+        "departureWindow": "Leave around 08:00–09:00 for a recommended 09:00–10:00 Rhine Falls arrival.",
+        "parking": ["Use the signed Schloss Laufen visitor parking and pay the current posted rate.", "At Stein am Rhein, use signed visitor parking outside the pedestrian core."],
+        "meals": ["Breakfast in Au.", "Snack at Rhine Falls if needed.", "Lunch in Stein am Rhein around 13:00–14:30; dinner back near Au."],
+        "restAndRecovery": ["Use visitor-center restrooms before or after the platform route.", "Take a seated lunch before the Old Town walk."],
+        "weatherSensitivity": "Moderate; rain increases spray and slipperiness and may stop boat service.",
+        "reservationsAndTickets": ["No attraction or boat booking is represented.", "Viewing-platform and optional boat tickets are purchased separately according to current operations."],
+        "physicalEffort": "Moderate due to viewing-platform stairs and several hours of walking; accessible parking/view options exist but should be confirmed for individual needs.",
+        "fallbackPlan": "In heavy rain or poor boat conditions, skip the boat, shorten the platform circuit, have a longer lunch, and use a museum/café-focused Stein am Rhein visit before returning early to Au."
+      },
+      "notes": ["Visit durations are estimates, not reservations.", "Do not leave visible luggage or valuables in the parked car."]
+    },
+    {
+      "day": 6,
+      "date": "2026-07-27",
+      "title": "Zürich city day",
+      "icon": "🏙️",
+      "location": "Au → Zürich",
+      "image": "/images/destinations/zurich.jpg",
+      "transport": "Train preferred; walking and tram in Zürich",
+      "travelTime": "About 30–45 minutes each way depending on the selected Au station connection",
+      "budget": 320,
+      "description": "Leave the rental car at the B&B and use regional rail for a compact Old Town, Bahnhofstrasse, church quarter, and lakefront day without city parking stress.",
+      "map": { "center": { "latitude": 47.3710, "longitude": 8.5417 }, "zoom": 14 },
+      "locations": [
+        { "id": "au-station", "name": "Au ZH station", "type": "station", "coordinates": { "latitude": 47.2418, "longitude": 8.6440 }, "description": "Preferred rail origin for the Zürich city day; verify the live walking/parking connection from the B&B.", "address": "Au ZH railway station, 8804 Au, Switzerland", "website": "https://www.zvv.ch/", "durationMinutes": 20, "reservationStatus": "not-required", "sourceStatus": "Recommended" },
+        { "id": "zurich-hb", "name": "Zürich Hauptbahnhof", "type": "station", "coordinates": { "latitude": 47.3782, "longitude": 8.5402 }, "description": "Start and end point for the city walking route, with restrooms and food options.", "address": "Bahnhofplatz, 8001 Zürich, Switzerland", "durationMinutes": 30, "reservationStatus": "not-required", "sourceStatus": "Recommended" },
+        { "id": "bahnhofstrasse", "name": "Bahnhofstrasse", "type": "shopping", "coordinates": { "latitude": 47.3717, "longitude": 8.5389 }, "description": "Pedestrian-friendly central avenue linking the main station and lake area.", "durationMinutes": 60, "reservationStatus": "not-required", "sourceStatus": "Recommended" },
+        { "id": "zurich-old-town", "name": "Zürich Old Town and Lindenhof", "type": "attraction", "coordinates": { "latitude": 47.3730, "longitude": 8.5409 }, "description": "Historic lanes, river views, and a compact overlook.", "durationMinutes": 120, "reservationStatus": "not-required", "sourceStatus": "Recommended" },
+        { "id": "gross-fraumunster", "name": "Grossmünster and Fraumünster area", "type": "attraction", "coordinates": { "latitude": 47.3697, "longitude": 8.5433 }, "description": "Historic church quarter on both sides of the Limmat; interior access depends on current hours and tickets.", "durationMinutes": 75, "reservationStatus": "recommended", "sourceStatus": "Recommended" },
+        { "id": "burkliplatz", "name": "Bürkliplatz and Lake Zürich", "type": "viewpoint", "coordinates": { "latitude": 47.3663, "longitude": 8.5413 }, "description": "Lakefront recovery stop with tram access back toward the station.", "address": "Bürkliplatz, 8001 Zürich, Switzerland", "durationMinutes": 75, "reservationStatus": "not-required", "sourceStatus": "Recommended" }
+      ],
+      "schedule": [
+        { "id": "train-zurich", "time": "Morning", "title": "Train from Au to Zürich", "description": "Use the live ZVV/SBB connection; rail is operationally preferable to driving and paying for central parking.", "locationId": "au-station", "transport": "Regional train · about 30–45 minutes", "durationMinutes": 55, "ticketRequired": true, "sourceStatus": "Recommended" },
+        { "id": "bahnhof-old-town", "time": "Morning", "title": "Bahnhofstrasse, Lindenhof, and Old Town", "description": "Walk south from Zürich HB, detouring through Lindenhof and the historic lanes at a relaxed pace.", "locationId": "zurich-old-town", "transport": "Walking", "durationMinutes": 150, "sourceStatus": "Recommended" },
+        { "id": "old-town-lunch", "time": "Early afternoon", "title": "Lunch in Old Town or near the Limmat", "description": "Choose a casual option by neighborhood, menu, and wait time; this is a suggestion, not a reservation.", "locationId": "zurich-old-town", "durationMinutes": 75, "sourceStatus": "Recommended" },
+        { "id": "church-quarter", "time": "Afternoon", "title": "Grossmünster/Fraumünster quarter", "description": "Cross the river between the churches; verify same-day public access if anyone wants to enter.", "locationId": "gross-fraumunster", "transport": "Walking", "durationMinutes": 75, "ticketRequired": true, "sourceStatus": "Recommended" },
+        { "id": "lakefront", "time": "Late afternoon", "title": "Lake Zürich waterfront", "description": "Recover near Bürkliplatz, take an optional short tram segment, and keep the evening flexible.", "locationId": "burkliplatz", "transport": "Walking or tram", "durationMinutes": 90, "sourceStatus": "Recommended" },
+        { "id": "return-au-train", "time": "Evening", "title": "Return to Au by train", "description": "Use the live connection from Zürich HB and eat near Au if the group prefers a quieter dinner.", "locationId": "zurich-hb", "transport": "Tram/walk and regional train", "durationMinutes": 60, "ticketRequired": true, "sourceStatus": "Recommended" }
+      ],
+      "travelSegments": [
+        { "id": "au-zurich-rail", "from": "Au ZH", "to": "Zürich HB", "mode": "Regional train", "durationMinutes": 45, "sourceStatus": "Recommended", "notes": ["Check the live ZVV/SBB departure and fare before leaving.", "Driving plus park-and-ride remains a fallback only if the Au station connection is impractical that morning."] }
+      ],
+      "dailyBudget": { "transportation": 90, "attractions": 45, "food": 155, "lodging": 0, "miscellaneous": 30, "total": 320, "currency": "CHF" },
+      "operations": {
+        "startLocation": "No1 Art B&B, Au",
+        "endLocation": "No1 Art B&B, Au",
+        "departureWindow": "Morning, roughly 08:30–09:30; choose the exact live rail connection that day.",
+        "parking": ["Preferred: leave the rental car at No1 Art B&B and reach Au ZH station on foot, by local connection, or by a verified legal parking option.", "Fallback: use an outer park-and-ride only after checking same-day capacity and restrictions."],
+        "meals": ["Breakfast in Au.", "Lunch in Old Town/Limmat area around 12:00–13:30.", "Coffee or snack near the lake; dinner in Zürich or after returning to Au."],
+        "restAndRecovery": ["Zürich HB is a reliable restroom/recovery anchor.", "Use Lindenhof or the lakefront for seated breaks."],
+        "weatherSensitivity": "Moderate; the walking route can be shortened and connected by tram in rain or heat.",
+        "reservationsAndTickets": ["No city attraction or meal is booked.", "Buy the appropriate ZVV fare and verify church opening/ticket rules if entering."],
+        "physicalEffort": "Moderate urban walking; tram segments can reduce distance.",
+        "fallbackPlan": "In sustained rain, use rail/tram between Zürich HB, a museum chosen that morning, covered Old Town arcades/cafés, and Bürkliplatz only if conditions improve."
+      },
+      "notes": ["Rail avoids central driving, parking cost, and end-of-day fatigue.", "All meals are neighborhood recommendations, not reservations."]
+    },
+    {
+      "day": 7,
+      "date": "2026-07-28",
+      "title": "Lake Zürich and flexible final full day",
+      "icon": "⛵",
+      "location": "Au · Rapperswil · Lake Zürich",
+      "image": "/images/destinations/zurich.jpg",
+      "transport": "Short train or drive, walking, and optional boat",
+      "travelTime": "About 20–30 minutes each way to Rapperswil; limited regional travel",
+      "budget": 330,
+      "description": "Keep the final full day near Au with Rapperswil, a Lake Zürich experience, optional pre-ticketed Lindt visit, and protected packing time.",
+      "map": { "center": { "latitude": 47.2569, "longitude": 8.7254 }, "zoom": 11 },
+      "locations": [
+        { "id": "rapperswil", "name": "Rapperswil Old Town and waterfront", "type": "attraction", "coordinates": { "latitude": 47.2266, "longitude": 8.8189 }, "description": "Compact old town, lakeside promenade, and views with easy rail access from the Au area.", "address": "Rapperswil railway station, 8640 Rapperswil-Jona, Switzerland", "durationMinutes": 210, "reservationStatus": "not-required", "sourceStatus": "Recommended" },
+        { "id": "lake-zurich-boat", "name": "Lake Zürich boat ride", "type": "transport", "coordinates": { "latitude": 47.2269, "longitude": 8.8169 }, "description": "Optional scheduled cruise segment chosen from the live ZSG timetable without turning the day into a long transit exercise.", "website": "https://www.zsg.ch/en/", "durationMinutes": 120, "reservationStatus": "recommended", "sourceStatus": "Optional" },
+        { "id": "lindt", "name": "Lindt Home of Chocolate", "type": "attraction", "coordinates": { "latitude": 47.3175, "longitude": 8.5526 }, "description": "Optional timed-entry museum in Kilchberg only if tickets and the day’s route fit comfortably.", "address": "Schokoladenplatz 1, 8802 Kilchberg, Switzerland", "website": "https://www.lindt-home-of-chocolate.com/en/tickets-and-prices/", "durationMinutes": 150, "reservationStatus": "recommended", "sourceStatus": "Optional", "notes": ["Do not travel there without checking timed-ticket availability.", "Skip it if it would eliminate packing/recovery time or add excessive cross-lake driving."] },
+        { "id": "au-lakefront", "name": "Au peninsula and Lake Zürich shoreline", "type": "viewpoint", "coordinates": { "latitude": 47.2517, "longitude": 8.6477 }, "description": "Local low-driving lake walk and recovery option near the B&B.", "durationMinutes": 90, "reservationStatus": "not-required", "sourceStatus": "Recommended" },
+        { "id": "no1-pack", "name": "No1 Art B&B packing block", "type": "hotel", "coordinates": { "latitude": 47.2466, "longitude": 8.6417 }, "description": "Protected time to pack, check flight status, and resolve the rental-return conflict.", "durationMinutes": 150, "reservationStatus": "not-required", "reservationReference": "reservation-83c02332654e9392c333cbb2", "sourceStatus": "Authored itinerary" }
+      ],
+      "schedule": [
+        { "id": "rapperswil-transfer", "time": "Morning", "title": "Travel to Rapperswil", "description": "Prefer a short regional train so the group can avoid parking; use the car only if the live connection is impractical.", "locationId": "rapperswil", "transport": "Train preferred · about 20–30 minutes", "durationMinutes": 45, "ticketRequired": true, "sourceStatus": "Recommended" },
+        { "id": "rapperswil-walk", "time": "Morning", "title": "Rapperswil Old Town and waterfront", "description": "Explore the compact center and promenade with frequent lakefront breaks.", "locationId": "rapperswil", "transport": "Walking", "durationMinutes": 180, "sourceStatus": "Recommended" },
+        { "id": "rapperswil-lunch", "time": "Early afternoon", "title": "Lunch near the Rapperswil waterfront", "description": "Choose a casual venue by availability; no reservation is represented.", "locationId": "rapperswil", "durationMinutes": 75, "sourceStatus": "Recommended" },
+        { "id": "boat-option", "time": "Flexible", "title": "Optional Lake Zürich boat segment", "description": "Choose a practical same-day route from the live timetable; avoid a long cruise that crowds out packing.", "locationId": "lake-zurich-boat", "transport": "Scheduled passenger boat", "durationMinutes": 120, "ticketRequired": true, "sourceStatus": "Optional" },
+        { "id": "lindt-option", "time": "Optional", "title": "Optional Lindt Home of Chocolate", "description": "Use only with a secured timed ticket and a simple rail/boat connection; it is not currently booked.", "locationId": "lindt", "durationMinutes": 150, "reservationRequired": true, "ticketRequired": true, "sourceStatus": "Optional" },
+        { "id": "au-local", "time": "Late afternoon", "title": "Return to Au for lake time and recovery", "description": "Use the local shoreline instead of more driving and begin departure preparation.", "locationId": "au-lakefront", "transport": "Train/short drive and walking", "durationMinutes": 90, "sourceStatus": "Recommended" },
+        { "id": "pack-departure", "time": "Evening", "title": "Pack and prepare for departure", "description": "Check AC 881 status, baggage, passports, fuel/charge instructions, rental paperwork, and the unresolved car-return-time change.", "locationId": "no1-pack", "durationMinutes": 150, "sourceStatus": "Authored itinerary", "operationalNotes": ["The booked 12:00 rental return is too late for the 13:25 international flight; secure an earlier return time before departure day."] }
+      ],
+      "travelSegments": [
+        { "id": "au-rapperswil", "from": "Au", "to": "Rapperswil", "mode": "Regional train preferred", "durationMinutes": 30, "sourceStatus": "Recommended" },
+        { "id": "lake-boat", "from": "Rapperswil", "to": "A practical Lake Zürich stop", "mode": "Passenger boat", "durationMinutes": 120, "sourceStatus": "Optional", "notes": ["Use the live 2026 timetable and preserve a straightforward return to Au."] }
+      ],
+      "dailyBudget": { "transportation": 110, "attractions": 80, "food": 120, "lodging": 0, "miscellaneous": 20, "total": 330, "currency": "CHF" },
+      "operations": {
+        "startLocation": "No1 Art B&B, Au",
+        "endLocation": "No1 Art B&B, Au",
+        "departureWindow": "Flexible morning, roughly 09:00–10:00; protect the late afternoon and evening for departure preparation.",
+        "parking": ["Train is preferred for Rapperswil.", "If driving, use signed public parking and verify limits; do not combine driving across the lake with a long boat route."],
+        "meals": ["Breakfast in Au.", "Lunch near Rapperswil waterfront around 12:00–13:30.", "Simple dinner near Au while packing."],
+        "restAndRecovery": ["Use the Rapperswil station/waterfront as a restroom and seated-break anchor.", "Return early enough for at least two hours of calm packing."],
+        "weatherSensitivity": "Moderate; boat operations and lake enjoyment depend on wind/rain, while Rapperswil and packing remain flexible.",
+        "reservationsAndTickets": ["No boat or Lindt booking is represented.", "Lindt requires a timed ticket if selected; use the live ZSG timetable for any boat."],
+        "physicalEffort": "Low to moderate walking with multiple opportunities to sit; optional activities can be omitted.",
+        "fallbackPlan": "Wet-weather plan: skip the boat, use a pre-ticketed Lindt visit only if transit is simple, otherwise choose a nearby indoor café/museum stop and return to No1 Art B&B early for packing."
+      },
+      "notes": ["Choose either the boat or Lindt unless timing is unusually favorable; do not force both.", "Resolve the rental-return timing before going to bed."]
+    },
+    {
+      "day": 8,
+      "date": "2026-07-29",
+      "title": "Departure from Zürich Airport",
+      "icon": "🛫",
+      "location": "Au → Zürich Airport → Toronto → Raleigh-Durham",
+      "image": "/images/destinations/zurich.jpg",
+      "transport": "Rental car and confirmed Air Canada flights",
+      "travelTime": "About 30–45 minutes driving to the airport before return and terminal processing",
+      "budget": 150,
+      "description": "Check out, drive to Zürich Airport, return the rental car, and depart on confirmed Air Canada flight AC 881 at 13:25. The booked 12:00 car return must be changed or completed early to create a safe international-flight buffer.",
+      "map": { "center": { "latitude": 47.3980, "longitude": 8.6000 }, "zoom": 10 },
+      "locations": [
+        { "id": "no1-checkout", "name": "No1 Art B&B", "type": "hotel", "coordinates": { "latitude": 47.2466, "longitude": 8.6417 }, "description": "Confirmed final lodging with checkout allowed between 08:00 and 12:00.", "address": "Seestrasse 319B, 8804 Au, Switzerland", "durationMinutes": 45, "reservationStatus": "confirmed", "reservationReference": "reservation-83c02332654e9392c333cbb2", "sourceStatus": "Confirmed reservation" },
+        { "id": "airport-fuel", "name": "Airport-area fuel or charging stop", "type": "transport", "coordinates": { "latitude": 47.4500, "longitude": 8.5700 }, "description": "Use only after confirming the assigned vehicle’s fuel/charge rule; exact stop depends on vehicle type and live availability.", "durationMinutes": 25, "reservationStatus": "not-required", "sourceStatus": "Needs confirmation" },
+        { "id": "budget-return", "name": "Budget return at Zürich Airport", "type": "transport", "coordinates": { "latitude": 47.4582, "longitude": 8.5555 }, "description": "Reserved return location at the airport car-rental center; the 12:00 booked time is operationally unsafe for the flight.", "address": "Budget, Rondellstrasse, 8060 Zürich, Switzerland", "durationMinutes": 45, "reservationStatus": "confirmed", "reservationReference": "reservation-63ac1b697db02f1fd1b90884", "sourceStatus": "Confirmed reservation" },
+        { "id": "zrh-departure", "name": "Zürich Airport departures", "type": "transport", "coordinates": { "latitude": 47.4582, "longitude": 8.5555 }, "description": "Confirmed Air Canada departure airport for AC 881 to Toronto; terminal is not present in the approved record.", "address": "Zurich Airport, 8058 Zürich-Flughafen, Switzerland", "durationMinutes": 180, "reservationStatus": "confirmed", "reservationReference": "reservation-258727499accf8d2c3e2908c", "sourceStatus": "Confirmed reservation" }
+      ],
+      "schedule": [
+        { "id": "flight-status", "time": "Early morning", "title": "Check flight, terminal, and rental-return change", "description": "Confirm AC 881 status and terminal in the Air Canada/airport channels and verify the earlier Budget return arrangement.", "durationMinutes": 20, "sourceStatus": "Needs confirmation", "reservationReference": "reservation-258727499accf8d2c3e2908c" },
+        { "id": "no1-checkout", "time": "Early morning", "title": "Check out of No1 Art B&B", "description": "The property allows checkout until 12:00, but this itinerary requires a much earlier departure for the flight.", "locationId": "no1-checkout", "durationMinutes": 45, "reservationRequired": true, "sourceStatus": "Confirmed reservation", "reservationReference": "reservation-83c02332654e9392c333cbb2" },
+        { "id": "depart-au", "time": "Recommended 08:30–09:00", "title": "Leave Au for Zürich Airport", "description": "This recommended window derives from a 13:25 international departure, a target three-hour airport buffer, the drive, and vehicle return processing; it is not a booked time.", "locationId": "budget-return", "transport": "Rental car · about 30–45 minutes plus fuel/charge stop", "durationMinutes": 70, "sourceStatus": "Recommended" },
+        { "id": "fuel-charge", "time": "Needs confirmation", "title": "Restore required fuel or charge level", "description": "For a combustion/hybrid vehicle, replace used fuel under the like-for-like policy; for an EV, return at the required charge level stated at pickup. Do not guess the assigned vehicle type.", "locationId": "airport-fuel", "durationMinutes": 25, "sourceStatus": "Needs confirmation", "reservationReference": "reservation-63ac1b697db02f1fd1b90884" },
+        { "id": "return-car-recommended", "time": "Recommended 09:45–10:00", "title": "Complete rental-car return", "description": "Photograph the vehicle, record fuel/charge, collect the receipt, and walk to departures. This earlier operational target requires Budget confirmation because the voucher currently says 12:00.", "locationId": "budget-return", "durationMinutes": 45, "reservationRequired": true, "sourceStatus": "Needs confirmation", "reservationReference": "reservation-63ac1b697db02f1fd1b90884" },
+        { "id": "reserved-car-return", "time": "12:00", "title": "Current reserved car-return time — unsafe conflict", "description": "The approved voucher says 12:00 at Zürich Airport. Do not use this time for a 13:25 international flight; change the booking or obtain explicit early-return instructions.", "locationId": "budget-return", "reservationRequired": true, "sourceStatus": "Confirmed reservation", "reservationReference": "reservation-63ac1b697db02f1fd1b90884" },
+        { "id": "airport-processing", "time": "Recommended by 10:25", "title": "Airline check-in, baggage, passport control, and security", "description": "Aim to be in the terminal about three hours before departure; use any remaining buffer for food, restrooms, and gate changes.", "locationId": "zrh-departure", "durationMinutes": 165, "sourceStatus": "Recommended" },
+        { "id": "depart-zrh", "time": "13:25", "title": "Depart Zürich on Air Canada AC 881", "description": "Confirmed nonstop segment to Toronto, scheduled to arrive at 16:10 local time; terminal is not recorded and must be checked.", "locationId": "zrh-departure", "transport": "Air Canada", "reservationRequired": true, "sourceStatus": "Confirmed reservation", "reservationReference": "reservation-258727499accf8d2c3e2908c" },
+        { "id": "connect-rdu", "time": "20:05", "title": "Connect Toronto to Raleigh-Durham on AC 8838", "description": "Confirmed onward flight scheduled to arrive RDU at 22:00 local time; follow Air Canada and YYZ connection instructions.", "locationId": "zrh-departure", "transport": "Air Canada Express – Jazz", "reservationRequired": true, "sourceStatus": "Confirmed reservation", "reservationReference": "reservation-258727499accf8d2c3e2908c" }
+      ],
+      "travelSegments": [
+        { "id": "au-zrh-airport", "from": "No1 Art B&B, Au", "to": "Zürich Airport rental return", "mode": "Rental car", "departureTime": "Recommended 08:30–09:00", "arrivalTime": "Recommended 09:45–10:00", "durationMinutes": 70, "sourceStatus": "Recommended", "reservationReference": "reservation-63ac1b697db02f1fd1b90884", "notes": ["Includes a conservative fuel/charge and traffic allowance.", "Secure permission/booking confirmation for an earlier return than 12:00."] },
+        { "id": "zrh-yyz", "from": "Zürich Airport (ZRH)", "to": "Toronto Pearson (YYZ)", "mode": "Air Canada AC 881", "departureTime": "13:25", "arrivalTime": "16:10", "durationMinutes": 525, "sourceStatus": "Confirmed reservation", "reservationReference": "reservation-258727499accf8d2c3e2908c", "notes": ["Times are local to their respective airports."] },
+        { "id": "yyz-rdu", "from": "Toronto Pearson (YYZ)", "to": "Raleigh-Durham (RDU)", "mode": "Air Canada Express – Jazz AC 8838", "departureTime": "20:05", "arrivalTime": "22:00", "durationMinutes": 115, "sourceStatus": "Confirmed reservation", "reservationReference": "reservation-258727499accf8d2c3e2908c", "notes": ["Times are local to their respective airports."] }
+      ],
+      "dailyBudget": { "transportation": 25, "attractions": 0, "food": 95, "lodging": 0, "miscellaneous": 30, "total": 150, "currency": "CHF" },
+      "operations": {
+        "startLocation": "No1 Art B&B, Au",
+        "endLocation": "Air Canada AC 881 departing Zürich Airport",
+        "departureWindow": "Recommended 08:30–09:00 from Au, derived from the confirmed 13:25 departure; the window is operational guidance, not a reservation.",
+        "parking": ["Follow airport rental-return signs and Budget instructions obtained at pickup.", "Do not plan any airport-area sightseeing or long stop."],
+        "meals": ["Eat breakfast before leaving or carry it.", "Use the post-security airport buffer for an early lunch.", "Carry snacks for the Toronto connection."],
+        "restAndRecovery": ["Use B&B facilities before departure and airport restrooms after return.", "Preserve a calm terminal buffer for baggage/security delays."],
+        "weatherSensitivity": "Low, but heavy rain and traffic justify the conservative drive buffer.",
+        "reservationsAndTickets": ["No1 Art B&B checkout, rental return, AC 881, and AC 8838 are confirmed.", "The ZRH terminal is unresolved.", "An earlier car return must be confirmed because 12:00 conflicts with the 13:25 flight."],
+        "physicalEffort": "Low to moderate with luggage handling and airport walking.",
+        "fallbackPlan": "If the earlier return cannot be confirmed, contact Budget and Air Canada immediately and use the safest authorized early-drop procedure; if road delays develop, skip the fuel stop only after obtaining supplier instructions and proceed directly to return."
+      },
+      "notes": ["Departure timing is derived from approved flight and rental records.", "Do not invent a terminal; verify it on July 28 and again on departure morning.", "The reserved noon car return is an unresolved contradiction, not a recommended plan."]
     }
   ],
   "logistics": {
     "accommodations": [
       {
-        "id": "zurich-lodging",
-        "name": "Zürich lodging",
-        "city": "Zürich",
-        "status": "planned",
-        "checkInDate": "2026-07-22",
-        "checkOutDate": "2026-07-24",
-        "currency": "CHF",
-        "amenities": [
-          "Family sleeping arrangement",
-          "Wi-Fi",
-          "Convenient public-transit access"
-        ],
-        "notes": [
-          "Enter the final property name, address, and confirmation reference.",
-          "Confirm luggage-storage and check-in procedures before departure."
-        ]
-      },
-      {
-        "id": "grindelwald-lodging",
-        "name": "Grindelwald lodging",
+        "id": "reservation-9bf3ff2a78929fc68cb452b3",
+        "name": "Eigerhome - The Cottage mit Wellness - GRIWA RENT AG",
         "city": "Grindelwald",
-        "status": "planned",
-        "checkInDate": "2026-07-24",
+        "status": "confirmed",
+        "checkInDate": "2026-07-22",
         "checkOutDate": "2026-07-25",
+        "checkInTime": "16:00",
+        "checkOutTime": "10:00",
+        "address": "10 Unter Eigerweg, 3818 Grindelwald, Switzerland",
         "currency": "CHF",
-        "amenities": [
-          "Family sleeping arrangement",
-          "Wi-Fi",
-          "Access to Grindelwald transportation"
-        ],
-        "notes": [
-          "Enter the final property name, address, and confirmation reference.",
-          "Confirm the route from the station or terminal to the property."
-        ]
+        "amenities": ["Free private parking", "Kitchen", "Wi-Fi", "Sauna", "Hot tub"],
+        "notes": ["Confirmed for three adults and three nights.", "Check-in window is 16:00–17:00; checkout window is 08:00–10:00.", "Confirmation and property phone remain in the private approved reservation record."],
+        "source": "imported",
+        "reservationDetailHref": "/reservations/reservation-9bf3ff2a78929fc68cb452b3"
       },
       {
-        "id": "final-lodging",
-        "name": "Final Switzerland lodging",
-        "city": "To be confirmed",
-        "status": "planned",
+        "id": "reservation-83c02332654e9392c333cbb2",
+        "name": "No1 Art B&B",
+        "city": "Au",
+        "status": "confirmed",
         "checkInDate": "2026-07-25",
         "checkOutDate": "2026-07-29",
+        "checkInTime": "14:00",
+        "checkOutTime": "12:00",
+        "address": "Seestrasse 319B, 8804 Au, Switzerland",
         "currency": "CHF",
-        "amenities": [
-          "Family sleeping arrangement",
-          "Wi-Fi"
-        ],
-        "notes": [
-          "Replace this placeholder with the final July 25–29 reservation.",
-          "Record cancellation rules and check-in instructions."
-        ]
+        "amenities": ["Free private parking", "Wi-Fi", "Family room", "Elevator access", "Air conditioning"],
+        "notes": ["Confirmed for three adults and four nights.", "Check-in window is 14:00–19:00; checkout window is 08:00–12:00.", "Update the property because the reservation's 14:00–15:00 arrival note conflicts with the Lucerne stop."],
+        "source": "imported",
+        "reservationDetailHref": "/reservations/reservation-83c02332654e9392c333cbb2"
       }
     ],
     "reservations": [
-      {
-        "id": "switzerland-arrival-flight",
-        "type": "flight",
-        "title": "Arrival flight to Zürich",
-        "status": "planned",
-        "date": "2026-07-22",
-        "location": "Zürich Airport",
-        "travelers": 3,
-        "notes": [
-          "Add airline, flight number, departure airport, and confirmation reference.",
-          "Store boarding passes in the airline application and offline."
-        ]
-      },
-      {
-        "id": "switzerland-departure-flight",
-        "type": "flight",
-        "title": "Return flight from Switzerland",
-        "status": "planned",
-        "date": "2026-07-29",
-        "travelers": 3,
-        "notes": [
-          "Add airline, flight number, airport, and confirmation reference.",
-          "Confirm airport transfer timing at least one day before departure."
-        ]
-      },
-      {
-        "id": "jungfraujoch-tickets",
-        "type": "attraction",
-        "title": "Jungfraujoch excursion",
-        "provider": "Jungfrau Railways",
-        "status": "planned",
-        "date": "2026-07-25",
-        "location": "Grindelwald Terminal / Jungfraujoch",
-        "currency": "CHF",
-        "travelers": 3,
-        "notes": [
-          "Enter ticket and seat-reservation information after purchase.",
-          "Verify weather, operating status, and departure time before travel."
-        ]
-      },
-      {
-        "id": "switzerland-rail",
-        "type": "train",
-        "title": "Swiss rail transportation",
-        "status": "researching",
-        "date": "2026-07-22",
-        "travelers": 3,
-        "notes": [
-          "Record the selected rail pass or point-to-point ticket strategy.",
-          "Keep digital tickets available offline."
-        ]
-      },
-      {
-        "id": "swisscom-connectivity",
-        "type": "other",
-        "title": "Swisscom tourist mobile service",
-        "provider": "Swisscom",
-        "status": "reserved",
-        "date": "2026-07-22",
-        "travelers": 1,
-        "notes": [
-          "Install and activate the tourist eSIM.",
-          "Configure the Swisscom line for mobile data.",
-          "Prevent unintended Visible international usage."
-        ]
-      }
+      { "id": "jungfraujoch-tickets", "type": "attraction", "title": "Jungfraujoch ticket and 2026 seat reservation", "provider": "Jungfrau Railways", "status": "planned", "date": "2026-07-23", "location": "Grindelwald Terminal / Jungfraujoch", "currency": "CHF", "travelers": 3, "notes": ["Not booked; buy only after a good-weather decision.", "A ticket and separate timed seat reservation are required."], "source": "manual" },
+      { "id": "murren-transport", "type": "train", "title": "Lauterbrunnen–Mürren/Gimmelwald mountain transport", "status": "researching", "date": "2026-07-24", "location": "Lauterbrunnen valley", "travelers": 3, "notes": ["Not booked; choose the live operating route."], "source": "manual" },
+      { "id": "rhine-falls-tickets", "type": "attraction", "title": "Rhine Falls platforms and optional boat", "status": "researching", "date": "2026-07-26", "location": "Schloss Laufen", "travelers": 3, "notes": ["Not booked; boat is optional and weather/operations dependent."], "source": "manual" },
+      { "id": "lindt-option", "type": "attraction", "title": "Optional Lindt Home of Chocolate", "status": "researching", "date": "2026-07-28", "location": "Kilchberg", "travelers": 3, "notes": ["Not booked; use only with a timed ticket and a simple transit plan."], "source": "manual" },
+      { "id": "rental-return-conflict", "type": "rental-car", "title": "Move Zürich Airport car return earlier", "provider": "Budget via Booking.com", "status": "not-started", "date": "2026-07-28", "location": "Zürich Airport", "travelers": 3, "notes": ["The confirmed 12:00 return on July 29 is too late for AC 881 at 13:25.", "Obtain a confirmed earlier return time or explicit early-drop instructions."], "source": "manual" }
     ],
     "documents": [
-      {
-        "id": "ken-passport",
-        "title": "Ken passport",
-        "type": "passport",
-        "status": "confirmed",
-        "traveler": "Ken",
-        "storageLocation": "Physical passport and encrypted offline copy",
-        "notes": [
-          "Verify validity and pack in personal item."
-        ]
-      },
-      {
-        "id": "spouse-passport",
-        "title": "Spouse passport",
-        "type": "passport",
-        "status": "confirmed",
-        "traveler": "Spouse",
-        "storageLocation": "Physical passport and encrypted offline copy",
-        "notes": [
-          "Verify validity and pack in personal item."
-        ]
-      },
-      {
-        "id": "son-passport",
-        "title": "Son passport",
-        "type": "passport",
-        "status": "confirmed",
-        "traveler": "Son",
-        "storageLocation": "Physical passport and encrypted offline copy",
-        "notes": [
-          "Verify validity and pack in personal item."
-        ]
-      },
-      {
-        "id": "travel-insurance",
-        "title": "Travel insurance documentation",
-        "type": "insurance",
-        "status": "not-started",
-        "storageLocation": "BEAST Travel and offline device storage",
-        "notes": [
-          "Record insurer, policy number, emergency phone number, and coverage dates."
-        ]
-      },
-      {
-        "id": "reservation-copies",
-        "title": "Offline reservation copies",
-        "type": "reservation",
-        "status": "not-started",
-        "storageLocation": "Phones and encrypted cloud storage",
-        "notes": [
-          "Save lodging, flight, rail, and attraction confirmations as PDFs or screenshots."
-        ]
-      }
+      { "id": "ken-passport", "title": "Ken passport", "type": "passport", "status": "confirmed", "traveler": "Ken", "storageLocation": "Physical passport and encrypted offline copy", "notes": ["Verify validity and pack in personal item."] },
+      { "id": "lori-passport", "title": "Lori passport", "type": "passport", "status": "confirmed", "traveler": "Lori", "storageLocation": "Physical passport and encrypted offline copy", "notes": ["Verify validity and pack in personal item."] },
+      { "id": "declan-passport", "title": "Declan passport", "type": "passport", "status": "confirmed", "traveler": "Declan", "storageLocation": "Physical passport and encrypted offline copy", "notes": ["Verify validity and pack in personal item."] },
+      { "id": "travel-insurance", "title": "Travel insurance documentation", "type": "insurance", "status": "planned", "storageLocation": "BEAST Travel and encrypted offline device storage", "notes": ["Approved flight source shows Allianz coverage, but policy contacts and coverage details need confirmation."] },
+      { "id": "reservation-copies", "title": "Offline reservation copies", "type": "reservation", "status": "planned", "storageLocation": "Phones and encrypted cloud storage", "notes": ["Save lodging, flight, rental, and ticket confirmations as PDFs or screenshots."] }
     ],
     "checklist": [
-      {
-        "id": "verify-passports",
-        "title": "Verify all passports and expiration dates",
-        "category": "documents",
-        "status": "confirmed",
-        "dueDate": "2026-07-20"
-      },
-      {
-        "id": "save-confirmations",
-        "title": "Save all confirmations for offline access",
-        "category": "documents",
-        "status": "not-started",
-        "dueDate": "2026-07-21"
-      },
-      {
-        "id": "activate-esim",
-        "title": "Install and test Swisscom eSIM",
-        "category": "connectivity",
-        "status": "planned",
-        "dueDate": "2026-07-21"
-      },
-      {
-        "id": "visible-settings",
-        "title": "Disable unintended Visible roaming usage",
-        "category": "connectivity",
-        "status": "not-started",
-        "dueDate": "2026-07-21"
-      },
-      {
-        "id": "download-sbb",
-        "title": "Install SBB Mobile and download trip information",
-        "category": "transportation",
-        "status": "not-started",
-        "dueDate": "2026-07-21"
-      },
-      {
-        "id": "confirm-jungfrau",
-        "title": "Confirm Jungfraujoch tickets and operating status",
-        "category": "transportation",
-        "status": "planned",
-        "dueDate": "2026-07-24"
-      },
-      {
-        "id": "lodging-checkin",
-        "title": "Record lodging addresses and check-in instructions",
-        "category": "lodging",
-        "status": "not-started",
-        "dueDate": "2026-07-21"
-      },
-      {
-        "id": "notify-banks",
-        "title": "Review cards, PINs, and international transaction settings",
-        "category": "money",
-        "status": "not-started",
-        "dueDate": "2026-07-21"
-      },
-      {
-        "id": "pack-layers",
-        "title": "Pack rain protection and mountain layers",
-        "category": "packing",
-        "status": "not-started",
-        "dueDate": "2026-07-21"
-      },
-      {
-        "id": "medications",
-        "title": "Pack medications in carry-on luggage",
-        "category": "health",
-        "status": "not-started",
-        "dueDate": "2026-07-21"
-      },
-      {
-        "id": "remote-access",
-        "title": "Verify Tailscale remote access before departure",
-        "category": "home",
-        "status": "planned",
-        "dueDate": "2026-07-21"
-      },
-      {
-        "id": "home-check",
-        "title": "Complete home, server, printer, and security check",
-        "category": "home",
-        "status": "not-started",
-        "dueDate": "2026-07-21"
-      }
+      { "id": "verify-passports", "title": "Verify all passports and expiration dates", "category": "documents", "status": "confirmed", "dueDate": "2026-07-20" },
+      { "id": "save-confirmations", "title": "Save all confirmations for offline access", "category": "documents", "status": "planned", "dueDate": "2026-07-21" },
+      { "id": "activate-esim", "title": "Install and test Swisscom eSIM", "category": "connectivity", "status": "planned", "dueDate": "2026-07-21" },
+      { "id": "rental-documents", "title": "Pack rental voucher, driver license, physical credit card, and coverage letter", "category": "transportation", "status": "not-started", "dueDate": "2026-07-21" },
+      { "id": "confirm-jungfrau", "title": "Check weather before buying Jungfraujoch ticket and seat reservation", "category": "transportation", "status": "planned", "dueDate": "2026-07-23" },
+      { "id": "notify-no1", "title": "Update No1 Art B&B arrival estimate after Lucerne", "category": "lodging", "status": "not-started", "dueDate": "2026-07-24" },
+      { "id": "fix-rental-return", "title": "Confirm earlier rental return for July 29 flight", "category": "transportation", "status": "not-started", "dueDate": "2026-07-28" },
+      { "id": "check-terminal", "title": "Confirm AC 881 terminal and flight status", "category": "transportation", "status": "not-started", "dueDate": "2026-07-28" },
+      { "id": "pack-layers", "title": "Pack rain protection and mountain layers", "category": "packing", "status": "not-started", "dueDate": "2026-07-21" },
+      { "id": "medications", "title": "Pack medications in carry-on luggage", "category": "health", "status": "not-started", "dueDate": "2026-07-21" }
     ],
     "emergencyNotes": [
       "Keep passports, medications, payment cards, and phones in carry-on luggage.",
       "Store emergency contacts and insurance details offline.",
       "Use 112 for the general European emergency number.",
       "At high altitude, descend and seek help if severe symptoms develop.",
-      "Do not place real passport numbers or full payment-card information in the repository."
+      "Do not place real passport numbers, PINs, or full payment-card information in the repository."
     ]
   }
 }

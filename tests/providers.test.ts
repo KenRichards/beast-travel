@@ -88,6 +88,27 @@ Wednesday Saturday
   assert.equal(parsed.evidence["hotel.checkInDate"].confidence, "low");
 });
 
+test("Booking.com hotel extraction reconstructs split July calendar dates using nights and weekdays", async () => {
+  const text = `
+Booking.com Booking Confirmation
+No1 Art B&B CHECK-IN CHECK-OUT ROOMS NIGHTS
+Address: Seestrasse 319B, 8804 Au, Switzerland 2 5 29 1 4
+JULY JULY
+Saturday Wednesday
+14:00 - 19:00 08:00 - 12:00
+`;
+  const analysis = syntheticAnalysis(text, "local-ocr");
+  analysis.metadata.pdf.creationDate = "2026-06-01T00:00:00.000Z";
+  const parsed = await genericHotelParser.parse(
+    analysis,
+    classification("hotel", "booking-com"),
+  );
+
+  assert.equal(parsed.type, "hotel");
+  assert.equal(parsed.hotel.checkInDate, "2026-07-25");
+  assert.equal(parsed.hotel.checkOutDate, "2026-07-29");
+});
+
 test("Booking.com rental-car extraction reads synthetic pickup and drop-off", async () => {
   const text = `
 Booking.com
@@ -119,6 +140,72 @@ Collision Damage Waiver
   assert.deepEqual(parsed.rentalCar.includedCoverage, [
     "Unlimited mileage",
     "Collision Damage Waiver",
+  ]);
+});
+
+test("Booking.com rental extraction prefers the supplied-by vendor and excludes explicitly absent coverage", async () => {
+  const text = `
+Booking.com
+Wed, July 22, 2026 - 12:30 PM
+Zurich Airport
+Wed, July 29, 2026 - 12:00 PM
+Zurich Airport
+Supplied by Budget
+Main driver Ken Richards
+Unlimited mileage
+This rental doesn't include Collision Damage Waiver.
+This rental doesn't include Theft Protection.
+`;
+  const parsed = await genericRentalCarParser.parse(
+    syntheticAnalysis(text, "local-ocr"),
+    classification("rental-car", "booking-com"),
+  );
+
+  assert.equal(parsed.type, "rental-car");
+  assert.equal(parsed.rentalCar.rentalProvider, "Budget");
+  assert.equal(parsed.rentalCar.primaryDriver, "Ken Richards");
+  assert.deepEqual(parsed.rentalCar.includedCoverage, ["Unlimited mileage"]);
+});
+
+test("Air Canada extraction handles OCR overnight markers and all ticketed travelers", async () => {
+  const text = `
+Air Canada
+Booking reference: ABC123
+Departure Tue 21 Jul, 2026
+Raleigh Durham RDU Toronto YYZ
+16:45 18:38
+AC 8839 Operated by Air Canada Express - Jazz
+Cabin: Economy Class (B)
+Toronto YYZ Zurich ZRH
+20:05 10:05 *1 day
+AC 880 Operated by Air Canada
+Cabin: Premium Economy (A)
+Return Wed 29 Jul, 2026
+Zurich ZRH Toronto YYZ
+13:25 16:10
+AC 881 Operated by Air Canada
+Cabin: Premium Economy (A)
+Passengers
+Sample Traveler One
+Ticket #: 0001
+Sample Traveler Two
+Ticket #: 0002
+Sample Traveler Three
+Ticket #: 0003
+Purchase Summary
+`;
+  const parsed = await genericFlightParser.parse(
+    syntheticAnalysis(text, "local-ocr"),
+    classification("flight", "air-canada"),
+  );
+
+  assert.equal(parsed.type, "flight");
+  assert.equal(parsed.flight.segments.length, 3);
+  assert.equal(parsed.flight.segments[1].arrivalLocalDateTime, "2026-07-22T10:05");
+  assert.deepEqual(parsed.travelers, [
+    "Sample Traveler One",
+    "Sample Traveler Two",
+    "Sample Traveler Three",
   ]);
 });
 

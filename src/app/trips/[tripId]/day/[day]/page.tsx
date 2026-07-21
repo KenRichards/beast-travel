@@ -163,6 +163,9 @@ export default async function DayPage({ params }: DayPageProps) {
                       </div>
 
                       <div>
+                        <p className="mb-2 text-xs font-bold uppercase tracking-[0.16em] text-violet-300">
+                          {item.sourceStatus}
+                        </p>
                         <p className="font-semibold text-white">
                           {item.title}
                         </p>
@@ -175,6 +178,21 @@ export default async function DayPage({ params }: DayPageProps) {
                           <p className="mt-2 text-sm text-cyan-300">
                             {item.transport}
                           </p>
+                        ) : null}
+
+                        {item.ticketRequired || item.reservationRequired ? (
+                          <p className="mt-2 text-xs font-bold uppercase tracking-wider text-amber-200">
+                            {[
+                              item.ticketRequired ? "Ticket required" : null,
+                              item.reservationRequired ? "Reservation required" : null,
+                            ].filter(Boolean).join(" · ")}
+                          </p>
+                        ) : null}
+
+                        {item.operationalNotes?.length ? (
+                          <ul className="mt-3 space-y-1 text-sm leading-6 text-gray-400">
+                            {item.operationalNotes.map((note) => <li key={note}>• {note}</li>)}
+                          </ul>
                         ) : null}
                       </div>
                     </li>
@@ -326,7 +344,7 @@ export default async function DayPage({ params }: DayPageProps) {
                   "
                 >
                   <p className="text-xs font-bold uppercase tracking-[0.16em] text-cyan-300">
-                    {location.type}
+                    {location.type} · {location.sourceStatus}
                   </p>
 
                   <h3 className="mt-2 text-lg font-bold">
@@ -360,6 +378,42 @@ export default async function DayPage({ params }: DayPageProps) {
         </div>
       </section>
 
+      <section className="border-y border-white/10 bg-amber-300/[0.035]">
+        <div className="mx-auto max-w-7xl px-6 py-16 sm:px-10 lg:px-12">
+          <p className="text-sm font-bold uppercase tracking-[0.24em] text-amber-200">Operational plan</p>
+          <h2 className="mt-4 text-4xl font-black tracking-tight">Start, finish, and fallback</h2>
+          <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {[
+              ["Start", itineraryDay.operations.startLocation],
+              ["End", itineraryDay.operations.endLocation],
+              ["Departure window", itineraryDay.operations.departureWindow],
+              ["Weather sensitivity", itineraryDay.operations.weatherSensitivity],
+              ["Physical effort", itineraryDay.operations.physicalEffort],
+              ["Fallback plan", itineraryDay.operations.fallbackPlan],
+            ].map(([label, value]) => (
+              <article key={label} className="rounded-2xl border border-white/10 bg-black/20 p-5">
+                <p className="text-xs font-bold uppercase tracking-wider text-amber-200">{label}</p>
+                <p className="mt-2 text-sm leading-6 text-gray-300">{value}</p>
+              </article>
+            ))}
+          </div>
+          <div className="mt-6 grid gap-6 lg:grid-cols-4">
+            {[
+              ["Parking", itineraryDay.operations.parking],
+              ["Meals", itineraryDay.operations.meals],
+              ["Rest and recovery", itineraryDay.operations.restAndRecovery],
+              ["Reservations and tickets", itineraryDay.operations.reservationsAndTickets],
+            ].map(([label, values]) => (
+              <div key={label as string} className="rounded-2xl border border-white/10 bg-white/[0.035] p-5">
+                <h3 className="font-bold">{label as string}</h3>
+                <ul className="mt-3 space-y-2 text-sm leading-6 text-gray-400">
+                  {(values as string[]).map((value) => <li key={value}>• {value}</li>)}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       <TripLogisticsPanel
         logistics={logistics}

@@ -262,6 +262,39 @@ export function inferBookingStayDates(
   const splitCalendarDays = /\b(\d{1,2})\s+(\d)\s+(\d)\s+\d+\s+\d+\b/.exec(
     countryTail,
   );
+  const bookingCalendarFields = /\b(\d{1,2})\s+(\d{1,2})\s+(\d{1,2})\s+(\d+)\s+(\d+)\b/.exec(
+    countryTail,
+  );
+
+  if (referenceYear && repeatedMonth && weekdays.length >= 2 && bookingCalendarFields) {
+    const month = MONTHS[repeatedMonth];
+    const [, first, second, third, , nightsText] = bookingCalendarFields;
+    const nights = Number(nightsText);
+    const candidates = [
+      [Number(first), Number(second)],
+      [Number(first), Number(`${second}${third}`)],
+      [Number(`${first}${second}`), Number(third)],
+    ];
+    const weekdayName = new Intl.DateTimeFormat("en-US", {
+      weekday: "long",
+      timeZone: "UTC",
+    });
+
+    for (const [checkInDay, checkOutDay] of candidates) {
+      const checkInDate = toIsoDate(referenceYear, month, checkInDay);
+      const checkOutDate = toIsoDate(referenceYear, month, checkOutDay);
+      if (
+        checkInDate &&
+        checkOutDate &&
+        checkOutDate > checkInDate &&
+        Math.round((utcTime(checkOutDate) - utcTime(checkInDate)) / 86_400_000) === nights &&
+        weekdayName.format(new Date(`${checkInDate}T12:00:00Z`)).toLowerCase() === weekdays[0] &&
+        weekdayName.format(new Date(`${checkOutDate}T12:00:00Z`)).toLowerCase() === weekdays[1]
+      ) {
+        return { checkInDate, checkOutDate, inferred: true };
+      }
+    }
+  }
 
   if (
     referenceYear &&
@@ -357,6 +390,10 @@ export function inferBookingStayDates(
     checkOutDate: matchingDates[1] ?? explicit[1]?.date ?? null,
     inferred: true,
   };
+}
+
+function utcTime(date: string): number {
+  return Date.parse(`${date}T12:00:00Z`);
 }
 
 export function parseMonthDayYear(value: string): string | null {

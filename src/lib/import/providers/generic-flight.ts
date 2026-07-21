@@ -50,7 +50,7 @@ function extractSegments(text: string): FlightSegment[] {
     }
 
     const following = lines.slice(lineIndex + 1, lineIndex + 8).join("\n");
-    const times = /(\d{1,2}:\d{2})(?:\s*[AP]M)?\s+(\d{1,2}:\d{2})(?:\s*[AP]M)?(?:\s*\+\s*(\d)\s*day)?/i.exec(
+    const times = /(\d{1,2}:\d{2})(?:\s*[AP]M)?\s+(\d{1,2}:\d{2})(?:\s*[AP]M)?(?:\s*[+*]\s*(\d)\s*day)?/i.exec(
       following,
     );
     const flightNumberMatch = /\b([A-Z]{2})\s*(\d{2,4})\b/.exec(following);
@@ -71,7 +71,7 @@ function extractSegments(text: string): FlightSegment[] {
       /Operated by\s+([^\n]+)/i,
     ]);
     const cabinClass = firstCapture(
-      lines.slice(Math.max(0, lineIndex - 5), lineIndex + 10).join("\n"),
+      following,
       [/Cabin:\s*([^\n]+)/i, /\b(Premium Economy|Economy Class|Business Class)\b/i],
     );
 
@@ -107,20 +107,16 @@ function extractSegments(text: string): FlightSegment[] {
 }
 
 function extractTravelers(text: string): string[] {
-  const passengerSection = /\bPassengers\b\s*\n([\s\S]{1,600}?)(?:\nTicket\s*#|\nSeats\b|\nPrice\b)/i.exec(
+  const passengerSection = /\bPassengers\b\s*\n([\s\S]{1,2400}?)(?:\nPurchase Summary\b|\nPrice\b)/i.exec(
     text,
   )?.[1];
   if (!passengerSection) return [];
 
-  return passengerSection
-    .split("\n")
-    .map((line) => cleanExtractedValue(line))
+  return Array.from(
+    passengerSection.matchAll(/^([\p{L}][\p{L}' -]{3,80})\s*\n\s*Ticket\s*#:/gimu),
+    (match) => cleanExtractedValue(match[1]),
+  )
     .filter((line): line is string => Boolean(line))
-    .filter(
-      (line) =>
-        /^[\p{L}][\p{L}' -]{3,80}$/u.test(line) &&
-        !/ticket|aeroplan|seat|cabin|economy/i.test(line),
-    )
     .filter((line, index, names) => names.indexOf(line) === index);
 }
 

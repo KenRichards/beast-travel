@@ -5,6 +5,12 @@ React, TypeScript, and Tailwind CSS. It presents trip itineraries, destination
 details, interactive maps, reservations, and logistics from structured trip
 data.
 
+The Switzerland itinerary is complete for July 22–29, 2026. Day 1 begins at
+Zürich Airport and drives directly to the confirmed Grindelwald stay; the base
+moves to No1 Art B&B in Au on July 25. Each itinerary item is labeled as a
+confirmed reservation, authored plan, recommendation, weather-dependent item,
+needs-confirmation item, or optional item.
+
 ## Engineering documentation
 
 The [engineering documentation](docs/README.md) is the repository handbook and
@@ -78,10 +84,23 @@ Run the baseline static checks before opening a pull request:
 ```bash
 git diff --check
 npm test
+npm run validate:trip-data
 npx tsc --noEmit
 npm run lint
 npm run build
 ```
+
+`validate:trip-data` checks itinerary continuity, lodging coverage, event and
+reservation chronology, operational references, provenance labels, traveler
+and trip consistency, and manual/imported contradictions. Errors identify the
+data path and required action.
+
+Booked facts come from reviewed approved reservation records and their source
+documents. Demonstrably damaged low-confidence OCR must be reconciled against
+the source and recorded in
+[`src/data/trips/switzerland-2026/audit.json`](src/data/trips/switzerland-2026/audit.json).
+Do not guess missing terminals, contact details, confirmation numbers, or
+times; leave them as `Needs confirmation`.
 
 PWA behavior requires a production build and a secure context. `localhost` is
 accepted as a secure context; remote-device installation should use HTTPS. Set

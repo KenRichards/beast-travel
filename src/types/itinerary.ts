@@ -19,6 +19,14 @@ export type ReservationStatus =
   | "reserved"
   | "confirmed";
 
+export type ItinerarySourceStatus =
+  | "Confirmed reservation"
+  | "Authored itinerary"
+  | "Recommended"
+  | "Weather dependent"
+  | "Needs confirmation"
+  | "Optional";
+
 export interface GeographicPoint {
   latitude: number;
   longitude: number;
@@ -41,6 +49,7 @@ export interface TripLocation {
   priceEstimate?: number;
   reservationStatus?: ReservationStatus;
   reservationReference?: string;
+  sourceStatus?: ItinerarySourceStatus;
   notes?: string[];
 }
 
@@ -53,6 +62,10 @@ export interface ScheduleItem {
   transport?: string;
   durationMinutes?: number;
   reservationRequired?: boolean;
+  ticketRequired?: boolean;
+  sourceStatus: ItinerarySourceStatus;
+  reservationReference?: string;
+  operationalNotes?: string[];
 }
 
 export interface TravelSegment {
@@ -64,6 +77,21 @@ export interface TravelSegment {
   arrivalTime?: string;
   durationMinutes?: number;
   notes?: string[];
+  sourceStatus: ItinerarySourceStatus;
+  reservationReference?: string;
+}
+
+export interface DailyOperations {
+  startLocation: string;
+  endLocation: string;
+  departureWindow: string;
+  parking: string[];
+  meals: string[];
+  restAndRecovery: string[];
+  weatherSensitivity: string;
+  reservationsAndTickets: string[];
+  physicalEffort: string;
+  fallbackPlan: string;
 }
 
 export interface DailyBudget {
@@ -92,6 +120,7 @@ export interface ItineraryDay {
   schedule: ScheduleItem[];
   travelSegments: TravelSegment[];
   dailyBudget: DailyBudget;
+  operations: DailyOperations;
   notes: string[];
 }
 
@@ -103,6 +132,7 @@ export interface TripDetails {
   startDate?: string;
   endDate?: string;
   travelers?: number;
+  travelerNames?: string[];
   currency?: string;
   timezone?: string;
 }

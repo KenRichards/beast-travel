@@ -64,6 +64,18 @@ function itinerary(): Itinerary {
       schedule: [],
       travelSegments: [],
       dailyBudget: { transportation: 0, attractions: 0, food: 0, lodging: 0, miscellaneous: 0, total: 0, currency: "CHF" },
+      operations: {
+        startLocation: "Zurich station",
+        endLocation: "Zurich station",
+        departureWindow: "Morning",
+        parking: [],
+        meals: [],
+        restAndRecovery: [],
+        weatherSensitivity: "Low",
+        reservationsAndTickets: [],
+        physicalEffort: "Low",
+        fallbackPlan: "Remain near the station.",
+      },
       notes: [],
     }],
     logistics: {

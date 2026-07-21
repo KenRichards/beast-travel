@@ -64,6 +64,15 @@ export interface TravelPack {
   tripId: string;
   tripTitle: string;
   currentHotel: Accommodation | null;
+  lodgings: Accommodation[];
+  itineraryDays: Array<{
+    day: number;
+    date: string | null;
+    title: string;
+    startLocation: string;
+    endLocation: string;
+    fallbackPlan: string;
+  }>;
   confirmations: TravelPackConfirmation[];
   flights: TravelPackFlight[];
   rentalCars: TravelPackRentalCar[];
@@ -71,6 +80,7 @@ export interface TravelPack {
   addresses: TravelPackAddress[];
   reminders: TravelPackReminder[];
   swissEmergencyNotes: string[];
+  unresolvedFields: Array<{ field: string; status: string; action: string }>;
   approvedReservations: ApprovedReservation[];
 }
 
@@ -240,6 +250,17 @@ export function generateTravelPack(
     tripId: itinerary.trip.id,
     tripTitle: itinerary.trip.title,
     currentHotel: currentOrNextHotel(logistics.accommodations, operationalDate),
+    lodgings: [...logistics.accommodations].sort((left, right) =>
+      left.checkInDate.localeCompare(right.checkInDate),
+    ),
+    itineraryDays: itinerary.days.map((day) => ({
+      day: day.day,
+      date: day.date ?? null,
+      title: day.title,
+      startLocation: day.operations?.startLocation ?? day.location,
+      endLocation: day.operations?.endLocation ?? day.location,
+      fallbackPlan: day.operations?.fallbackPlan ?? day.notes.at(-1) ?? "Keep the day flexible.",
+    })),
     confirmations: approvedReservations.map(confirmationFromReservation),
     flights: approvedReservations.flatMap((reservation) =>
       reservation.type === "flight"
@@ -277,6 +298,23 @@ export function generateTravelPack(
       "In mountain terrain, call Rega on 1414 when urgent air rescue is appropriate.",
       ...itinerary.logistics.emergencyNotes,
     ],
+    unresolvedFields: [
+      {
+        field: "Earlier rental-car return",
+        status: "Needs confirmation",
+        detail: "Move the 12:00 return earlier for the 13:25 international departure.",
+      },
+      {
+        field: "Rental fuel or charge rule",
+        status: "Needs confirmation",
+        detail: "Record the assigned vehicle type and applicable return level at pickup.",
+      },
+      {
+        field: "AC 881 Zürich terminal",
+        status: "Needs confirmation",
+        detail: "Check the airline and airport before departure.",
+      },
+    ].map(({ field, status, detail }) => ({ field, status, action: detail })),
     approvedReservations,
   };
 }

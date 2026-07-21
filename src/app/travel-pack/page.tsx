@@ -84,6 +84,47 @@ export default async function TravelPackPage() {
           </div>
         </section>
 
+        <section aria-labelledby="lodging-plan-heading">
+          <SectionHeading eyebrow="Lodging transitions" title="Where you sleep each night" id="lodging-plan-heading" />
+          <div className="mt-6 grid gap-4 md:grid-cols-2">
+            {pack.lodgings.map((lodging) => (
+              <article key={lodging.id} className="rounded-3xl border border-white/10 bg-white/[0.04] p-6 print:border-black print:bg-white">
+                <p className="text-xs font-black uppercase tracking-[0.18em] text-violet-300 print:text-black">Confirmed stay</p>
+                <h3 className="mt-2 text-xl font-black">{lodging.name}</h3>
+                <p className="mt-2 text-sm text-neutral-300 print:text-black">{lodging.checkInDate} → {lodging.checkOutDate}</p>
+                <p className="mt-2 text-sm text-neutral-400 print:text-black">{lodging.address ?? lodging.city}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section aria-labelledby="itinerary-heading">
+          <SectionHeading eyebrow="July 22–29" title="Day-by-day operating plan" id="itinerary-heading" />
+          <ol className="mt-6 grid gap-4 md:grid-cols-2">
+            {pack.itineraryDays.map((day) => (
+              <li key={day.day} className="rounded-3xl border border-white/10 bg-white/[0.04] p-6 print:border-black print:bg-white">
+                <p className="text-xs font-black uppercase tracking-[0.18em] text-cyan-300 print:text-black">Day {day.day} · {day.date}</p>
+                <h3 className="mt-2 text-xl font-black">{day.title}</h3>
+                <p className="mt-3 text-sm text-neutral-300 print:text-black">{day.startLocation} → {day.endLocation}</p>
+                <p className="mt-3 text-sm leading-6 text-neutral-400 print:text-black"><strong>Fallback:</strong> {day.fallbackPlan}</p>
+              </li>
+            ))}
+          </ol>
+        </section>
+
+        <section aria-labelledby="unresolved-heading">
+          <SectionHeading eyebrow="Act before departure" title="Needs confirmation" id="unresolved-heading" />
+          <div className="mt-6 grid gap-4 md:grid-cols-3">
+            {pack.unresolvedFields.map((item) => (
+              <article key={item.field} className="rounded-3xl border border-amber-300/20 bg-amber-300/[0.06] p-6 print:border-black print:bg-white">
+                <p className="text-xs font-black uppercase tracking-wider text-amber-200 print:text-black">{item.status}</p>
+                <h3 className="mt-2 font-black">{item.field}</h3>
+                <p className="mt-3 text-sm leading-6 text-neutral-400 print:text-black">{item.action}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
         <section aria-labelledby="confirmation-heading">
           <SectionHeading eyebrow="Keep these ready" title="Reservation confirmations" id="confirmation-heading" />
           {pack.confirmations.length ? (

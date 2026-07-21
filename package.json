@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test": "tsx --test tests/*.test.ts"
+    "test": "tsx --test tests/*.test.ts",
+    "validate:trip-data": "tsx tools/validate-trip-data.ts"
   },
   "dependencies": {
     "leaflet": "^1.9.4",

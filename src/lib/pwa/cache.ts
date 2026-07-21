@@ -1,4 +1,4 @@
-export const PWA_SCHEMA_VERSION = "bt-025-v1";
+export const PWA_SCHEMA_VERSION = "bt-026-v1";
 export const PWA_CACHE_PREFIX = "beast-travel";
 
 export const CORE_OFFLINE_ROUTES = [
@@ -9,7 +9,7 @@ export const CORE_OFFLINE_ROUTES = [
   "/reservations",
   "/trips/switzerland-2026/logistics",
   ...Array.from(
-    { length: 4 },
+    { length: 8 },
     (_, index) => `/trips/switzerland-2026/day/${index + 1}`,
   ),
   "/offline",
