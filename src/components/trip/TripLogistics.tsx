@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import type {
   Accommodation,
   LogisticsChecklistItem,
@@ -61,11 +63,18 @@ function ReservationCard({
   reservation: TripReservation;
 }) {
   return (
-    <article className="rounded-2xl border border-white/10 bg-white/5 p-6">
+    <article
+      className={`rounded-2xl border p-6 ${
+        reservation.source === "imported"
+          ? "border-cyan-300/25 bg-cyan-300/[0.06]"
+          : "border-white/10 bg-white/5"
+      }`}
+    >
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div>
           <p className="text-xs font-bold uppercase tracking-[0.18em] text-cyan-300">
-            {reservation.type}
+            {reservation.type} ·{" "}
+            {reservation.source === "imported" ? "Imported" : "Manual"}
           </p>
 
           <h3 className="mt-2 text-lg font-bold">{reservation.title}</h3>
@@ -109,6 +118,15 @@ function ReservationCard({
         ) : null}
       </dl>
 
+      {reservation.reservationDetailHref ? (
+        <Link
+          href={reservation.reservationDetailHref}
+          className="mt-5 inline-flex text-sm font-bold text-cyan-200 hover:text-cyan-100"
+        >
+          View imported reservation →
+        </Link>
+      ) : null}
+
       {reservation.notes?.length ? (
         <ul className="mt-5 space-y-2 border-t border-white/10 pt-4 text-sm leading-6 text-gray-400">
           {reservation.notes.map((note) => (
@@ -126,11 +144,18 @@ function AccommodationCard({
   accommodation: Accommodation;
 }) {
   return (
-    <article className="rounded-2xl border border-white/10 bg-white/5 p-6">
+    <article
+      className={`rounded-2xl border p-6 ${
+        accommodation.source === "imported"
+          ? "border-violet-300/30 bg-violet-300/[0.07]"
+          : "border-white/10 bg-white/5"
+      }`}
+    >
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div>
           <p className="text-xs font-bold uppercase tracking-[0.18em] text-violet-300">
-            Lodging
+            Lodging ·{" "}
+            {accommodation.source === "imported" ? "Imported" : "Manual"}
           </p>
           <h3 className="mt-2 text-lg font-bold">
             {accommodation.name}
@@ -161,6 +186,15 @@ function AccommodationCard({
           </div>
         ) : null}
       </dl>
+
+      {accommodation.reservationDetailHref ? (
+        <Link
+          href={accommodation.reservationDetailHref}
+          className="mt-5 inline-flex text-sm font-bold text-violet-200 hover:text-violet-100"
+        >
+          View imported reservation →
+        </Link>
+      ) : null}
 
       {accommodation.notes?.length ? (
         <ul className="mt-5 space-y-2 border-t border-white/10 pt-4 text-sm leading-6 text-gray-400">

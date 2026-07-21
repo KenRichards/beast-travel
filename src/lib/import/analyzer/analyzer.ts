@@ -15,7 +15,11 @@ import {
   resolveIncomingDocumentPath,
 } from "../documents";
 import { createSha256Fingerprint } from "./fingerprint";
-import { createTextSample, extractPdfMetadata } from "./metadata";
+import {
+  extractPdfMetadata,
+} from "./metadata";
+import { runLocalOcr } from "../extraction/ocr";
+import { resolveExtractedText } from "../extraction/text";
 import {
   DocumentAnalysisError,
   MAX_PDF_FILE_SIZE_BYTES,
@@ -51,6 +55,8 @@ export function toPublicDocumentAnalysis(
     metadata: analysis.metadata,
     textExtraction: {
       status: analysis.text.status,
+      method: analysis.text.method,
+      failure: analysis.text.failure,
       characterCount: analysis.text.characterCount,
       truncated: analysis.text.truncated,
       pageLimit: analysis.text.pageLimit,
@@ -118,14 +124,22 @@ export async function analyzeIncomingDocument(
   }
 
   const sha256 = createSha256Fingerprint(contents);
-  const parser = new PDFParse({ data: contents });
+  // PDF.js may transfer and detach its input buffer. Keep the securely read
+  // source bytes available for the local OCR fallback.
+  const parser = new PDFParse({ data: Uint8Array.from(contents) });
 
   try {
     const pdfInfo = await parser.getInfo();
     const extractedText = await parser.getText({
       first: TEXT_SAMPLE_MAX_PAGES,
     });
-    const text = createTextSample(extractedText.text);
+    const nativeText = extractedText.pages
+      .map((page) => page.text)
+      .filter(Boolean)
+      .join("\n\n");
+    const text = await resolveExtractedText(nativeText, () =>
+      runLocalOcr(contents, sha256, pdfInfo.total),
+    );
 
     return {
       document: {

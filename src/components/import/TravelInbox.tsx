@@ -7,6 +7,7 @@ export interface InboxDocument {
   document: ImportDocument;
   analysis?: PublicDocumentAnalysis;
   analysisError?: string;
+  approvedReservationId?: string;
 }
 
 interface TravelInboxProps {
@@ -67,7 +68,7 @@ export default function TravelInbox({ documents }: TravelInboxProps) {
               </tr>
             </thead>
             <tbody className="divide-y divide-white/10">
-              {documents.map(({ document, analysis, analysisError }) => (
+              {documents.map(({ document, analysis, analysisError, approvedReservationId }) => (
                 <tr
                   key={document.filename}
                   className="transition-colors hover:bg-white/[0.04]"
@@ -124,8 +125,16 @@ export default function TravelInbox({ documents }: TravelInboxProps) {
                       prefetch={false}
                       className="inline-flex rounded-full bg-cyan-400 px-5 py-2.5 text-sm font-bold text-neutral-950 transition hover:bg-cyan-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-300"
                     >
-                      Import &amp; preview
+                      {approvedReservationId ? "Review update" : "Extract & review"}
                     </Link>
+                    {approvedReservationId ? (
+                      <Link
+                        href={`/reservations/${approvedReservationId}`}
+                        className="mt-2 block text-xs font-bold text-violet-200 hover:text-violet-100"
+                      >
+                        Approved record
+                      </Link>
+                    ) : null}
                   </td>
                 </tr>
               ))}

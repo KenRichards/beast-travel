@@ -11,6 +11,7 @@ import {
 } from "@/lib/import/analyzer/analyzer";
 import { DocumentAnalysisError } from "@/lib/import/analyzer/types";
 import { listIncomingDocuments } from "@/lib/import/documents";
+import { loadApprovedReservations } from "@/lib/import/persistence/reservations";
 
 export const metadata: Metadata = {
   title: "Travel Inbox | BEAST Travel",
@@ -20,6 +21,7 @@ export const metadata: Metadata = {
 export default async function TravelInboxPage() {
   await connection();
   const documents = await listIncomingDocuments();
+  const approved = await loadApprovedReservations();
   const analyzedDocuments: InboxDocument[] = await Promise.all(
     documents.map(async (document) => {
       try {
@@ -28,6 +30,10 @@ export default async function TravelInboxPage() {
         return {
           document,
           analysis: toPublicDocumentAnalysis(analysis),
+          approvedReservationId: approved.reservations.find(
+            (reservation) =>
+              reservation.documentFingerprint === analysis.metadata.sha256,
+          )?.id,
         };
       } catch (error) {
         return {
@@ -53,7 +59,7 @@ export default async function TravelInboxPage() {
               BEAST Travel
             </Link>
             <span className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-semibold text-neutral-300">
-              Phase 1
+              OCR-backed imports
             </span>
           </div>
 
@@ -66,8 +72,8 @@ export default async function TravelInboxPage() {
             </h1>
             <p className="mt-6 text-lg leading-8 text-neutral-300">
               Select a local reservation PDF to classify it, run the matching
-              provider parser, and preview normalized JSON. Imports are
-              read-only in this milestone.
+              provider parser, review extracted fields, and approve normalized
+              private reservation data.
             </p>
           </div>
         </div>
@@ -82,12 +88,12 @@ export default async function TravelInboxPage() {
             OCR and image imports are outside Phase 1.
           </p>
           <p className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-            <strong className="block text-neutral-200">Preview only</strong>
-            Parsed reservations are not persisted yet.
+            <strong className="block text-neutral-200">Explicit approval</strong>
+            Extraction remains editable and unsaved until you approve it.
           </p>
           <p className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-            <strong className="block text-neutral-200">Itinerary safe</strong>
-            The existing journey is never updated by this flow.
+            <strong className="block text-neutral-200">Manual data preserved</strong>
+            Approved imports are layered beside existing trip logistics.
           </p>
         </div>
       </section>

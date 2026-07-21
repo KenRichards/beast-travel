@@ -2,10 +2,13 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { connection } from "next/server";
 
 import InteractiveMap from "@/components/trip/InteractiveMap";
 import TripLogisticsPanel from "@/components/trip/TripLogistics";
 import { getItinerary, getItineraryDay } from "@/lib/itinerary";
+import { mergeImportedLogistics } from "@/lib/import/logistics";
+import { loadApprovedReservations } from "@/lib/import/persistence/reservations";
 
 interface DayPageProps {
   params: Promise<{
@@ -50,10 +53,16 @@ function formatBudget(value: number, currency: string) {
 }
 
 export default async function DayPage({ params }: DayPageProps) {
+  await connection();
   const { tripId, day } = await params;
   const dayNumber = Number(day);
   const itinerary = getItinerary();
   const itineraryDay = getItineraryDay(tripId, dayNumber);
+  const approvedReservations = await loadApprovedReservations();
+  const logistics = mergeImportedLogistics(
+    itinerary.logistics,
+    approvedReservations.reservations,
+  );
 
   if (!Number.isInteger(dayNumber) || !itineraryDay) {
     notFound();
@@ -353,7 +362,7 @@ export default async function DayPage({ params }: DayPageProps) {
 
 
       <TripLogisticsPanel
-        logistics={itinerary.logistics}
+        logistics={logistics}
         dayDate={itineraryDay.date}
         currency={currency}
       />

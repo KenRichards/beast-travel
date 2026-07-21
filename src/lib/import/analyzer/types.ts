@@ -1,10 +1,12 @@
 import type { ImportDocument } from "../parser";
+import type { ExtractionMethod } from "../reservation";
 
-export const TEXT_SAMPLE_MAX_CHARACTERS = 12_000;
-export const TEXT_SAMPLE_MAX_PAGES = 10;
+export const TEXT_SAMPLE_MAX_CHARACTERS = 64_000;
+export const TEXT_SAMPLE_MAX_PAGES = 20;
 export const MAX_PDF_FILE_SIZE_BYTES = 25 * 1024 * 1024;
 
-export type TextExtractionStatus = "extracted" | "image-only";
+export type TextExtractionStatus = "extracted" | "image-only" | "unavailable";
+export type TextExtractionFailure = "tool-unavailable" | "timeout" | "failed";
 
 export interface PdfDocumentMetadata {
   title?: string;
@@ -30,6 +32,8 @@ export interface DocumentMetadata {
 
 export interface ExtractedTextSample {
   status: TextExtractionStatus;
+  method: ExtractionMethod;
+  failure?: TextExtractionFailure;
   sample: string;
   characterCount: number;
   truncated: boolean;
@@ -54,6 +58,7 @@ export type DocumentAnalysisErrorCode =
   | "too-large"
   | "malformed-pdf"
   | "encrypted-pdf"
+  | "ocr-failed"
   | "unreadable";
 
 const ERROR_MESSAGES: Record<DocumentAnalysisErrorCode, string> = {
@@ -63,6 +68,7 @@ const ERROR_MESSAGES: Record<DocumentAnalysisErrorCode, string> = {
   "too-large": "This PDF is too large to analyze safely.",
   "malformed-pdf": "This PDF is damaged or could not be read.",
   "encrypted-pdf": "Encrypted or password-protected PDFs are not supported.",
+  "ocr-failed": "Local OCR could not process this image-only PDF.",
   unreadable: "This document could not be read safely.",
 };
 

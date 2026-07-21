@@ -43,6 +43,8 @@ export interface TripReservation {
   cancellationDeadline?: string;
   contact?: ReservationContact;
   notes?: string[];
+  source?: "manual" | "imported";
+  reservationDetailHref?: string;
 }
 
 export interface Accommodation {
@@ -61,6 +63,8 @@ export interface Accommodation {
   contact?: ReservationContact;
   amenities?: string[];
   notes?: string[];
+  source?: "manual" | "imported";
+  reservationDetailHref?: string;
 }
 
 export interface TravelDocument {
