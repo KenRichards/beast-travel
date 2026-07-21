@@ -6,6 +6,7 @@ cd "$PROJECT_ROOT"
 
 SERVICE="beast-travel"
 TYPE_FILE="src/types/itinerary.ts"
+LOGISTICS_TYPE_FILE="src/types/logistics.ts"
 ITINERARY_FILE="src/data/trips/switzerland-2026/itinerary.json"
 DAY_PAGE='src/app/trips/[tripId]/day/[day]/page.tsx'
 LOGISTICS_COMPONENT="src/components/trip/TripLogistics.tsx"
@@ -30,6 +31,7 @@ done
 
 mkdir -p \
   "$BACKUP_DIR/$(dirname "$TYPE_FILE")" \
+  "$BACKUP_DIR/$(dirname "$LOGISTICS_TYPE_FILE")" \
   "$BACKUP_DIR/$(dirname "$ITINERARY_FILE")" \
   "$BACKUP_DIR/$(dirname "$DAY_PAGE")" \
   "$BACKUP_DIR/$(dirname "$LOGISTICS_COMPONENT")" \
@@ -37,6 +39,7 @@ mkdir -p \
 
 for file in \
   "$TYPE_FILE" \
+  "$LOGISTICS_TYPE_FILE" \
   "$ITINERARY_FILE" \
   "$DAY_PAGE" \
   "$LOGISTICS_COMPONENT"
@@ -46,8 +49,7 @@ do
   fi
 done
 
-cat >> "$TYPE_FILE" <<'EOF'
-
+cat > "$LOGISTICS_TYPE_FILE" <<'EOF'
 export type LogisticsStatus =
   | "not-started"
   | "researching"
@@ -160,33 +162,64 @@ export interface TripLogistics {
 EOF
 
 python3 - <<'PY'
+import re
 from pathlib import Path
 
 path = Path("src/types/itinerary.ts")
 text = path.read_text()
 
-old = """export interface Itinerary {
-  trip: TripDetails;
-  days: ItineraryDay[];
-}
-"""
+legacy_types = re.compile(
+    r"\nexport type LogisticsStatus =.*?"
+    r"export interface TripLogistics \{\n"
+    r"  accommodations: Accommodation\[\];\n"
+    r"  reservations: TripReservation\[\];\n"
+    r"  documents: TravelDocument\[\];\n"
+    r"  checklist: LogisticsChecklistItem\[\];\n"
+    r"  emergencyNotes: string\[\];\n"
+    r"\}\n?",
+    re.DOTALL,
+)
+text, removed_type_blocks = legacy_types.subn("\n", text)
 
-new = """export interface Itinerary {
-  trip: TripDetails;
-  days: ItineraryDay[];
-  logistics: TripLogistics;
-}
-"""
+import_line = 'import type { TripLogistics } from "@/types/logistics";'
+text = text.replace(f"{import_line}\n", "").lstrip()
+text = f"{import_line}\n\n{text}"
 
-if new in text:
-    print("Itinerary logistics type already connected.")
-elif old in text:
-    path.write_text(text.replace(old, new))
-    print("Connected TripLogistics to Itinerary.")
-else:
+interface_pattern = re.compile(
+    r"export interface Itinerary \{\n(?P<body>.*?)\n\}",
+    re.DOTALL,
+)
+match = interface_pattern.search(text)
+
+if not match:
     raise SystemExit(
         "Could not locate the Itinerary interface in src/types/itinerary.ts"
     )
+
+body_lines = [
+    line
+    for line in match.group("body").splitlines()
+    if line.strip() != "logistics: TripLogistics;"
+]
+
+try:
+    days_index = next(
+        index
+        for index, line in enumerate(body_lines)
+        if line.strip() == "days: ItineraryDay[];"
+    )
+except StopIteration as error:
+    raise SystemExit("Could not locate Itinerary.days") from error
+
+body_lines.insert(days_index + 1, "  logistics: TripLogistics;")
+replacement = "export interface Itinerary {\n" + "\n".join(body_lines) + "\n}"
+text = text[: match.start()] + replacement + text[match.end() :]
+
+path.write_text(text.rstrip() + "\n")
+print(
+    "Connected TripLogistics to Itinerary and removed "
+    f"{removed_type_blocks} legacy type block(s)."
+)
 PY
 
 python3 - <<'PY'
@@ -195,6 +228,10 @@ from pathlib import Path
 
 path = Path("src/data/trips/switzerland-2026/itinerary.json")
 data = json.loads(path.read_text())
+
+if "logistics" in data:
+    print("Trip logistics data already present; preserving existing data.")
+    raise SystemExit(0)
 
 data["logistics"] = {
     "accommodations": [
@@ -481,7 +518,7 @@ import type {
   LogisticsStatus,
   TripLogistics,
   TripReservation,
-} from "@/types/itinerary";
+} from "@/types/logistics";
 
 interface TripLogisticsProps {
   logistics: TripLogistics;
@@ -845,16 +882,16 @@ import_line = (
     '"@/components/trip/TripLogistics";'
 )
 
-if import_line not in text:
-    anchor = (
-        'import InteractiveMap from '
-        '"@/components/trip/InteractiveMap";'
-    )
+anchor = (
+    'import InteractiveMap from '
+    '"@/components/trip/InteractiveMap";'
+)
 
-    if anchor not in text:
-        raise SystemExit("InteractiveMap import anchor not found")
+if anchor not in text:
+    raise SystemExit("InteractiveMap import anchor not found")
 
-    text = text.replace(anchor, f"{anchor}\n{import_line}")
+text = text.replace(f"{import_line}\n", "")
+text = text.replace(anchor, f"{anchor}\n{import_line}", 1)
 
 section = """
       <TripLogisticsPanel
@@ -865,7 +902,9 @@ section = """
 
 """
 
-if "<TripLogisticsPanel" not in text:
+panel_count = text.count("<TripLogisticsPanel")
+
+if panel_count == 0:
     anchor = """      <section className="mx-auto max-w-7xl px-6 py-20 sm:px-10 lg:px-12">
         <div>
           <p className="text-sm font-bold uppercase tracking-[0.24em] text-emerald-300">
@@ -874,7 +913,11 @@ if "<TripLogisticsPanel" not in text:
     if anchor not in text:
         raise SystemExit("Budget-section anchor not found")
 
-    text = text.replace(anchor, section + anchor)
+    text = text.replace(anchor, section + anchor, 1)
+elif panel_count > 1:
+    raise SystemExit(
+        "Multiple TripLogisticsPanel integrations found; refusing to add another"
+    )
 
 path.write_text(text)
 print("Integrated TripLogisticsPanel into day pages.")
