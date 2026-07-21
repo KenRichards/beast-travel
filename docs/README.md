@@ -11,6 +11,7 @@ the document that matches the work being planned, implemented, or released.
 | [Development workflow](DEVELOPMENT_WORKFLOW.md) | Defines branches, milestones, team responsibilities, reviews, commits, merges, and deployment. |
 | [Coding standards](CODING_STANDARDS.md) | Establishes implementation conventions for every language and format used by the repository. |
 | [Architecture](ARCHITECTURE.md) | Explains the repository structure, application boundaries, data flow, and intended extension points. |
+| [Reservation imports](RESERVATION_IMPORT.md) | Documents the Phase 1 reservation pipeline, normalized model, provider extension point, and safety boundaries. |
 | [AI workflow](AI_WORKFLOW.md) | Describes how ChatGPT, Codex, and a human owner collaborate safely and predictably. |
 | [Milestone lifecycle](MILESTONE_LIFECYCLE.md) | Provides the stage gates from an initial idea through release. |
 | [Validation](VALIDATION.md) | Lists the static, build, runtime, route, log, and repository checks required before handoff. |
