@@ -705,5 +705,278 @@
         "Do not force outdoor snow activities if visibility or conditions are poor."
       ]
     }
-  ]
+  ],
+  "logistics": {
+    "accommodations": [
+      {
+        "id": "zurich-lodging",
+        "name": "Zürich lodging",
+        "city": "Zürich",
+        "status": "planned",
+        "checkInDate": "2026-07-22",
+        "checkOutDate": "2026-07-24",
+        "currency": "CHF",
+        "amenities": [
+          "Family sleeping arrangement",
+          "Wi-Fi",
+          "Convenient public-transit access"
+        ],
+        "notes": [
+          "Enter the final property name, address, and confirmation reference.",
+          "Confirm luggage-storage and check-in procedures before departure."
+        ]
+      },
+      {
+        "id": "grindelwald-lodging",
+        "name": "Grindelwald lodging",
+        "city": "Grindelwald",
+        "status": "planned",
+        "checkInDate": "2026-07-24",
+        "checkOutDate": "2026-07-25",
+        "currency": "CHF",
+        "amenities": [
+          "Family sleeping arrangement",
+          "Wi-Fi",
+          "Access to Grindelwald transportation"
+        ],
+        "notes": [
+          "Enter the final property name, address, and confirmation reference.",
+          "Confirm the route from the station or terminal to the property."
+        ]
+      },
+      {
+        "id": "final-lodging",
+        "name": "Final Switzerland lodging",
+        "city": "To be confirmed",
+        "status": "planned",
+        "checkInDate": "2026-07-25",
+        "checkOutDate": "2026-07-29",
+        "currency": "CHF",
+        "amenities": [
+          "Family sleeping arrangement",
+          "Wi-Fi"
+        ],
+        "notes": [
+          "Replace this placeholder with the final July 25–29 reservation.",
+          "Record cancellation rules and check-in instructions."
+        ]
+      }
+    ],
+    "reservations": [
+      {
+        "id": "switzerland-arrival-flight",
+        "type": "flight",
+        "title": "Arrival flight to Zürich",
+        "status": "planned",
+        "date": "2026-07-22",
+        "location": "Zürich Airport",
+        "travelers": 3,
+        "notes": [
+          "Add airline, flight number, departure airport, and confirmation reference.",
+          "Store boarding passes in the airline application and offline."
+        ]
+      },
+      {
+        "id": "switzerland-departure-flight",
+        "type": "flight",
+        "title": "Return flight from Switzerland",
+        "status": "planned",
+        "date": "2026-07-29",
+        "travelers": 3,
+        "notes": [
+          "Add airline, flight number, airport, and confirmation reference.",
+          "Confirm airport transfer timing at least one day before departure."
+        ]
+      },
+      {
+        "id": "jungfraujoch-tickets",
+        "type": "attraction",
+        "title": "Jungfraujoch excursion",
+        "provider": "Jungfrau Railways",
+        "status": "planned",
+        "date": "2026-07-25",
+        "location": "Grindelwald Terminal / Jungfraujoch",
+        "currency": "CHF",
+        "travelers": 3,
+        "notes": [
+          "Enter ticket and seat-reservation information after purchase.",
+          "Verify weather, operating status, and departure time before travel."
+        ]
+      },
+      {
+        "id": "switzerland-rail",
+        "type": "train",
+        "title": "Swiss rail transportation",
+        "status": "researching",
+        "date": "2026-07-22",
+        "travelers": 3,
+        "notes": [
+          "Record the selected rail pass or point-to-point ticket strategy.",
+          "Keep digital tickets available offline."
+        ]
+      },
+      {
+        "id": "swisscom-connectivity",
+        "type": "other",
+        "title": "Swisscom tourist mobile service",
+        "provider": "Swisscom",
+        "status": "reserved",
+        "date": "2026-07-22",
+        "travelers": 1,
+        "notes": [
+          "Install and activate the tourist eSIM.",
+          "Configure the Swisscom line for mobile data.",
+          "Prevent unintended Visible international usage."
+        ]
+      }
+    ],
+    "documents": [
+      {
+        "id": "ken-passport",
+        "title": "Ken passport",
+        "type": "passport",
+        "status": "confirmed",
+        "traveler": "Ken",
+        "storageLocation": "Physical passport and encrypted offline copy",
+        "notes": [
+          "Verify validity and pack in personal item."
+        ]
+      },
+      {
+        "id": "spouse-passport",
+        "title": "Spouse passport",
+        "type": "passport",
+        "status": "confirmed",
+        "traveler": "Spouse",
+        "storageLocation": "Physical passport and encrypted offline copy",
+        "notes": [
+          "Verify validity and pack in personal item."
+        ]
+      },
+      {
+        "id": "son-passport",
+        "title": "Son passport",
+        "type": "passport",
+        "status": "confirmed",
+        "traveler": "Son",
+        "storageLocation": "Physical passport and encrypted offline copy",
+        "notes": [
+          "Verify validity and pack in personal item."
+        ]
+      },
+      {
+        "id": "travel-insurance",
+        "title": "Travel insurance documentation",
+        "type": "insurance",
+        "status": "not-started",
+        "storageLocation": "BEAST Travel and offline device storage",
+        "notes": [
+          "Record insurer, policy number, emergency phone number, and coverage dates."
+        ]
+      },
+      {
+        "id": "reservation-copies",
+        "title": "Offline reservation copies",
+        "type": "reservation",
+        "status": "not-started",
+        "storageLocation": "Phones and encrypted cloud storage",
+        "notes": [
+          "Save lodging, flight, rail, and attraction confirmations as PDFs or screenshots."
+        ]
+      }
+    ],
+    "checklist": [
+      {
+        "id": "verify-passports",
+        "title": "Verify all passports and expiration dates",
+        "category": "documents",
+        "status": "confirmed",
+        "dueDate": "2026-07-20"
+      },
+      {
+        "id": "save-confirmations",
+        "title": "Save all confirmations for offline access",
+        "category": "documents",
+        "status": "not-started",
+        "dueDate": "2026-07-21"
+      },
+      {
+        "id": "activate-esim",
+        "title": "Install and test Swisscom eSIM",
+        "category": "connectivity",
+        "status": "planned",
+        "dueDate": "2026-07-21"
+      },
+      {
+        "id": "visible-settings",
+        "title": "Disable unintended Visible roaming usage",
+        "category": "connectivity",
+        "status": "not-started",
+        "dueDate": "2026-07-21"
+      },
+      {
+        "id": "download-sbb",
+        "title": "Install SBB Mobile and download trip information",
+        "category": "transportation",
+        "status": "not-started",
+        "dueDate": "2026-07-21"
+      },
+      {
+        "id": "confirm-jungfrau",
+        "title": "Confirm Jungfraujoch tickets and operating status",
+        "category": "transportation",
+        "status": "planned",
+        "dueDate": "2026-07-24"
+      },
+      {
+        "id": "lodging-checkin",
+        "title": "Record lodging addresses and check-in instructions",
+        "category": "lodging",
+        "status": "not-started",
+        "dueDate": "2026-07-21"
+      },
+      {
+        "id": "notify-banks",
+        "title": "Review cards, PINs, and international transaction settings",
+        "category": "money",
+        "status": "not-started",
+        "dueDate": "2026-07-21"
+      },
+      {
+        "id": "pack-layers",
+        "title": "Pack rain protection and mountain layers",
+        "category": "packing",
+        "status": "not-started",
+        "dueDate": "2026-07-21"
+      },
+      {
+        "id": "medications",
+        "title": "Pack medications in carry-on luggage",
+        "category": "health",
+        "status": "not-started",
+        "dueDate": "2026-07-21"
+      },
+      {
+        "id": "remote-access",
+        "title": "Verify Tailscale remote access before departure",
+        "category": "home",
+        "status": "planned",
+        "dueDate": "2026-07-21"
+      },
+      {
+        "id": "home-check",
+        "title": "Complete home, server, printer, and security check",
+        "category": "home",
+        "status": "not-started",
+        "dueDate": "2026-07-21"
+      }
+    ],
+    "emergencyNotes": [
+      "Keep passports, medications, payment cards, and phones in carry-on luggage.",
+      "Store emergency contacts and insurance details offline.",
+      "Use 112 for the general European emergency number.",
+      "At high altitude, descend and seek help if severe symptoms develop.",
+      "Do not place real passport numbers or full payment-card information in the repository."
+    ]
+  }
 }

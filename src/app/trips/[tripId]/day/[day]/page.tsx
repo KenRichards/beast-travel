@@ -4,6 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import InteractiveMap from "@/components/trip/InteractiveMap";
+import TripLogisticsPanel from "@/components/trip/TripLogistics";
 import { getItinerary, getItineraryDay } from "@/lib/itinerary";
 
 interface DayPageProps {
@@ -349,6 +350,13 @@ export default async function DayPage({ params }: DayPageProps) {
           )}
         </div>
       </section>
+
+
+      <TripLogisticsPanel
+        logistics={itinerary.logistics}
+        dayDate={itineraryDay.date}
+        currency={currency}
+      />
 
       <section className="mx-auto max-w-7xl px-6 py-20 sm:px-10 lg:px-12">
         <div>
