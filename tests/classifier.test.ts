@@ -29,6 +29,7 @@ function syntheticAnalysis(
     },
     text: {
       status: text ? "extracted" : "image-only",
+      method: text ? "native-text" : "unavailable",
       sample: text,
       characterCount: text.length,
       truncated: false,

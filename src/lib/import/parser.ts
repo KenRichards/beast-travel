@@ -2,7 +2,10 @@ import {
   analyzeIncomingDocument,
   toPublicDocumentAnalysis,
 } from "./analyzer/analyzer";
-import type { PublicDocumentAnalysis } from "./analyzer/types";
+import type {
+  AnalyzedDocument,
+  PublicDocumentAnalysis,
+} from "./analyzer/types";
 import { classifyDocument, type DocumentClassification } from "./classifier";
 import { providerParsers } from "./providers";
 import type { NormalizedReservation } from "./reservation";
@@ -22,7 +25,7 @@ export interface ReservationProviderParser {
     document: ImportDocument,
   ): boolean;
   parse(
-    document: ImportDocument,
+    analysis: AnalyzedDocument,
     classification: DocumentClassification,
   ): Promise<NormalizedReservation>;
 }
@@ -105,7 +108,7 @@ export function createReservationParser(
     }
 
     const reservation = await parser.parse(
-      analyzedDocument.document,
+      analyzedDocument,
       classification,
     );
 

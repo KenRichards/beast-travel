@@ -6,6 +6,7 @@ import {
   type ExtractedTextSample,
   type PdfDocumentMetadata,
 } from "./types";
+import type { ExtractionMethod } from "../reservation";
 
 type PdfInfoDictionary = Record<string, unknown>;
 
@@ -47,11 +48,31 @@ export function normalizeText(value: string): string {
   return value.replace(/\s+/g, " ").trim();
 }
 
+export function normalizeTextLines(value: string): string {
+  return value
+    .normalize("NFKC")
+    .replace(/\r\n?/g, "\n")
+    .split("\n")
+    .map((line) => line.replace(/[\t ]+/g, " ").trim())
+    .filter((line, index, lines) => line || (index > 0 && lines[index - 1]))
+    .join("\n")
+    .replace(/\n{3,}/g, "\n\n")
+    .trim();
+}
+
+export function hasAdequateNativeText(value: string): boolean {
+  const normalized = normalizeText(value);
+  const lettersAndNumbers = normalized.match(/[\p{L}\p{N}]/gu)?.length ?? 0;
+
+  return normalized.length >= 120 && lettersAndNumbers >= 80;
+}
+
 export function createTextSample(
   text: string,
   maximumCharacters = TEXT_SAMPLE_MAX_CHARACTERS,
+  method: ExtractionMethod = "native-text",
 ): ExtractedTextSample {
-  const normalized = normalizeText(text);
+  const normalized = normalizeTextLines(text);
   const truncated = normalized.length > maximumCharacters;
   const sample = truncated
     ? normalized.slice(0, maximumCharacters).trimEnd()
@@ -59,6 +80,7 @@ export function createTextSample(
 
   return {
     status: sample ? "extracted" : "image-only",
+    method: sample ? method : "unavailable",
     sample,
     characterCount: sample.length,
     truncated,

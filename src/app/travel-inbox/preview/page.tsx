@@ -8,6 +8,7 @@ import {
   parseReservationDocument,
   type ReservationImportResult,
 } from "@/lib/import/parser";
+import { loadReservationByFingerprint } from "@/lib/import/persistence/reservations";
 
 export const metadata: Metadata = {
   title: "Reservation Preview | BEAST Travel",
@@ -55,7 +56,12 @@ export default async function ReservationPreviewPage({
     );
   }
 
-  return <ReservationPreview result={result} />;
+  const existing =
+    result.status === "parsed"
+      ? await loadReservationByFingerprint(result.reservation.documentFingerprint)
+      : null;
+
+  return <ReservationPreview result={result} existing={existing} />;
 }
 
 function ImportMessage({ title, message }: { title: string; message: string }) {

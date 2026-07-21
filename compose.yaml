@@ -1,6 +1,9 @@
 services:
   beast-travel:
-    image: node:22-bookworm
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: beast-travel:bt-023
     container_name: beast-travel
     working_dir: /app
 
