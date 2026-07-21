@@ -19,6 +19,9 @@ the reference workflow for future BEAST projects. It covers:
 - [release process](docs/RELEASE_PROCESS.md); and
 - [the project roadmap](docs/ROADMAP.md).
 
+Current product scope and delivery state are summarized in
+[PROJECT.md](PROJECT.md), [BACKLOG.md](BACKLOG.md), and [SPRINT.md](SPRINT.md).
+
 Reusable planning, implementation, review, and issue templates are available in
 [`templates/`](templates/).
 

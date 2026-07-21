@@ -1,50 +1,34 @@
 # Roadmap
 
-This roadmap captures the planned sequence after the BT-019 travel logistics
-work. Scope and order may change through milestone planning; identifiers remain
-stable for traceability.
+This roadmap captures delivered and upcoming work after the BT-019 travel
+logistics milestone. Scope and order may change through milestone planning;
+identifiers remain stable for traceability.
 
-## Upcoming milestones
+## Milestones
 
 | Milestone | Title | Intended outcome | Status |
 | --- | --- | --- | --- |
-| BT-020 | Weather | Add destination and itinerary-day forecasts with provider failure, freshness, units, and time-zone behavior defined. | Planned |
-| BT-021 | Reservation Import | Import reservation details into the trip logistics model through a validated, privacy-conscious workflow. | Planned |
-| BT-022 | Offline Travel Pack | Make essential itinerary, reservation, contact, and map-reference information available with unreliable connectivity. | Planned |
-| BT-023 | Maps | Expand mapping beyond the current marker view with route-aware navigation and provider abstractions. | Planned |
-| BT-024 | Expense Tracking | Record, categorize, total, and reconcile trip expenses across supported currencies and travelers. | Planned |
+| BT-020 | Travel Inbox Foundation | Establish private document intake and safe filesystem boundaries. | Complete |
+| BT-021 | Reservation Import Pipeline | Add normalized reservation contracts, provider parsing, validation, and review. | Complete |
+| BT-022 | Reservation Document Analysis | Analyze uploaded documents and prepare reviewable extracted data. | Complete |
+| BT-023 | Real Reservation Extraction | Add OCR, approval persistence, canonical detail routes, and imported logistics. | Complete |
+| BT-024 | Unified Timeline and Today | Turn itinerary and imported records into a Zurich-time operational dashboard. | Implemented on feature branch |
 | BT-025 | AI Travel Assistant | Add a bounded assistant grounded in trip data with privacy, safety, provider, and cost controls. | Planned |
 
 ## Planning notes
 
-### BT-020 — Weather
+### BT-020 through BT-023 — Reservation import foundation
 
-Define provider ownership, server-only credentials, forecast caching and
-freshness, unit preferences, time zones, attribution, unavailable states, and
-rate-limit behavior before implementation.
+Delivered the Travel Inbox, normalized extraction pipeline, native-text and
+local-OCR analysis, human review, approval persistence, canonical reservation
+details, and runtime logistics projection.
 
-### BT-021 — Reservation Import
+### BT-024 — Unified Timeline and Today
 
-Define supported source formats, duplicate handling, runtime schema validation,
-user confirmation, sensitive-data boundaries, retention, and redaction. Avoid
-placing real traveler documents in repository fixtures.
-
-### BT-022 — Offline Travel Pack
-
-Identify the minimum safe offline dataset, update strategy, conflict behavior,
-storage limits, device privacy, stale-data indicators, and how a traveler
-removes cached information.
-
-### BT-023 — Maps
-
-Define whether the milestone covers routing, downloadable tiles, directions,
-transit, geolocation, or only richer trip visualization. Preserve provider
-attribution and isolate vendor-specific APIs behind typed adapters.
-
-### BT-024 — Expense Tracking
-
-Define ownership, split rules, base and transaction currencies, exchange-rate
-sources, rounding, receipt privacy, edit history, export, and offline behavior.
+Derives a normalized timeline from itinerary and approved reservation data,
+groups it by Zurich calendar day, and exposes an operational Today dashboard
+for before, during, and after the trip. Imported data remains in its existing
+private persistence boundary.
 
 ### BT-025 — AI Travel Assistant
 
