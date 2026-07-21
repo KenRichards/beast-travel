@@ -25,6 +25,20 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+@media print {
+  body {
+    background: white;
+    color: black;
+  }
+}
+
+@media (display-mode: standalone) {
+  body {
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
 .field-control {
   width: 100%;
   border: 1px solid rgb(255 255 255 / 0.12);

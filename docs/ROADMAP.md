@@ -13,7 +13,7 @@ identifiers remain stable for traceability.
 | BT-022 | Reservation Document Analysis | Analyze uploaded documents and prepare reviewable extracted data. | Complete |
 | BT-023 | Real Reservation Extraction | Add OCR, approval persistence, canonical detail routes, and imported logistics. | Complete |
 | BT-024 | Unified Timeline and Today | Turn itinerary and imported records into a Zurich-time operational dashboard. | Implemented on feature branch |
-| BT-025 | AI Travel Assistant | Add a bounded assistant grounded in trip data with privacy, safety, provider, and cost controls. | Planned |
+| BT-025 | PWA and Offline Travel Pack | Make essential trip pages, confirmations, and safety information installable and resilient without connectivity. | Implemented on feature branch |
 
 ## Planning notes
 
@@ -30,11 +30,14 @@ groups it by Zurich calendar day, and exposes an operational Today dashboard
 for before, during, and after the trip. Imported data remains in its existing
 private persistence boundary.
 
-### BT-025 — AI Travel Assistant
+### BT-025 — PWA and Offline Travel Pack
 
-Define supported tasks and explicit non-goals, retrieval boundaries, prompt
-injection defenses, sensitive-data rules, human confirmation for actions,
-provider failover, cost budgets, evaluation, and auditability.
+Adds a native web manifest and service worker, standalone installation UX,
+accessible connectivity and synchronization state, and a generated Travel Pack.
+The service worker precaches the core trip routes and canonical read-only JSON,
+stores viewed pages and images, and refreshes data with a network-first policy.
+Deployment-versioned cache names prevent old route snapshots and assets from
+being mixed with a new release.
 
 ## Future milestones
 
@@ -44,6 +47,7 @@ its place in the sequence.
 
 | Milestone | Title | Intended outcome | Dependencies | Status |
 | --- | --- | --- | --- | --- |
+| TBD | AI Travel Assistant | Add a bounded assistant grounded in trip data with privacy, safety, provider, and cost controls. | Stable offline and reservation read models | Idea |
 | TBD | _Reserved for future work_ | _Describe the observable outcome._ | _List prerequisites._ | Idea |
 | TBD | _Reserved for future work_ | _Describe the observable outcome._ | _List prerequisites._ | Idea |
 | TBD | _Reserved for future work_ | _Describe the observable outcome._ | _List prerequisites._ | Idea |

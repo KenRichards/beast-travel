@@ -7,6 +7,10 @@ day routes, logistics panels, a unified timeline, a timezone-aware Today
 dashboard, and interactive Leaflet maps. Approved reservation records are read
 from a separate private runtime-data boundary.
 
+BT-025 adds a browser-managed offline boundary. It does not change either
+canonical data source: the service worker stores replaceable read snapshots in
+Cache Storage, and the Travel Pack is a generated projection.
+
 ## System context
 
 The browser requests an App Router route. Next.js loads typed itinerary data on
@@ -28,6 +32,20 @@ Approved reservation JSON -+--> Timeline normalization --> App Router pages
                                                               |
                                                               v
                                                   Client-only map island
+```
+
+Offline requests add one layer in front of that flow:
+
+```text
+Browser navigation
+       |
+       v
+Service worker -- online --> Next.js route --> canonical itinerary/reservations
+       |                           |
+       |                           v
+       +<---- refresh HTML/JSON/cache snapshots
+       |
+       +-- offline --> versioned Cache Storage --> saved HTML/assets/JSON
 ```
 
 There is currently no application database or authentication service.
@@ -75,6 +93,83 @@ page. App Router folders map to URL segments:
 | `src/app/trips/[tripId]/day/[day]/page.tsx` | `/trips/:tripId/day/:day` | A generated itinerary day view |
 | `src/app/trips/[tripId]/logistics/page.tsx` | `/trips/:tripId/logistics` | Manual and imported logistics |
 | `src/app/reservations/[id]/page.tsx` | `/reservations/:id` | Canonical imported reservation detail |
+| `src/app/travel-pack/page.tsx` | `/travel-pack` | Generated offline operational essentials |
+| `src/app/api/offline/*` | `/api/offline/*` | Read-only itinerary, reservation, inbox, and pack snapshots |
+| `src/app/sw.js/route.ts` | `/sw.js` | Deployment-versioned service-worker program |
+
+## PWA and offline architecture
+
+`src/app/manifest.ts` generates `/manifest.webmanifest` using the Next.js 16
+metadata convention. Standard 192px and 512px icons and a padded 512px maskable
+icon reuse the BEAST brand mark. The root metadata declares standalone/iOS
+capability, theme and background colors, viewport safe areas, and shortcuts to
+Today and the Travel Pack.
+
+`PwaShell` is the narrow client boundary for browser-only APIs. In production it
+registers `/sw.js` at root scope with `updateViaCache: "none"`, captures the
+Chromium install event, supplies manual Safari instructions, detects standalone
+mode, and announces connection/sync state through an ARIA live region. While
+offline, same-origin client links are promoted to full document navigations so
+the worker can return cached HTML instead of depending on an uncached App Router
+RSC transition.
+
+The worker has four cache classes. Every name includes the BT-025 schema and
+the deployment identifier:
+
+| Cache | Strategy | Boundary |
+| --- | --- | --- |
+| pages | Network first, cached-document fallback | Core routes and subsequently viewed HTML pages |
+| data | Network first, cached-response fallback | Read-only `/api/offline/*` JSON only |
+| assets | Cache first | Versioned Next.js JS/CSS/font files and core brand assets |
+| images | Cache first after first view | Same-origin images and external image responses such as viewed map tiles |
+
+The install phase fetches the home page, Today, Timeline, all four day pages,
+Logistics, Reservations, Travel Pack, and the offline fallback. It extracts
+same-origin asset references from those HTML responses so JavaScript bundles,
+CSS, and fonts are ready for offline startup; declared core trip images are
+cached separately. It also caches the four read-only JSON snapshots and
+discovered reservation-detail routes.
+Individual precache failures are isolated so one temporarily unavailable page
+does not prevent worker installation.
+
+Mutating requests, Travel Inbox preview queries, source PDFs, credentials, and
+non-image cross-origin traffic are outside the cache boundary. External map
+links are preserved but map applications and tiles not previously viewed still
+need connectivity. Browser Cache Storage is device-local convenience storage,
+not encrypted archival storage; do not add passport numbers, payment data, or
+other new secrets to the Travel Pack.
+
+### Update and synchronization flow
+
+On an online event after disconnection, `PwaShell` changes from `offline` to
+`reconnecting` and asks the active worker to refresh itinerary, reservations,
+inbox metadata, Travel Pack JSON, and affected page snapshots. Successful sync
+stores a timestamp in localStorage, announces `online`, and calls App Router
+refresh so server-rendered data can update without a hard reload. This flow is
+GET-only: it never invokes reservation approval and does not write to itinerary
+or reservation persistence, so unsaved local form state is not unexpectedly
+replaced.
+
+`NEXT_DEPLOYMENT_ID` should be an immutable release or Git identifier in
+production. Next.js appends it to assets and navigation metadata, while the
+service worker embeds it in cache names. Activation deletes older BEAST cache
+names but leaves unrelated origin caches untouched. Page/data requests remain
+network first and request `no-store` during explicit sync, preventing stale
+reservation snapshots from winning while connected.
+
+### Travel Pack generation
+
+`generateTravelPack()` receives the typed tracked itinerary, approved
+reservation values, and a clock. It merges imported logistics in memory,
+selects the confirmed current or next accommodation in Zurich time, and emits
+confirmation, flight, rental-car, address/map, contact, reminder, emergency,
+and approved-JSON views. `/travel-pack` renders that model as accessible HTML;
+`/api/offline/travel-pack` makes the same model available as cached JSON.
+
+Swiss general, police, fire, ambulance, poison, and Rega numbers are maintained
+as a small reviewed safety constant. Verify them against the Swiss Federal
+Office of Communications and Rega before future international trips or safety
+content changes.
 
 Route pages and layouts are Server Components unless a file explicitly defines
 a client boundary. Dynamic day routes use `generateStaticParams` from the
@@ -194,8 +289,8 @@ and an AI assistant. Preserve these extension seams:
   formats.
 - **Security:** keep provider credentials server-side; define authentication,
   authorization, encryption, and retention before storing traveler data.
-- **Offline support:** create a deliberate cache manifest and synchronization
-  model instead of assuming every server-rendered route is offline capable.
+- **Offline support:** extend the explicit cache manifest and synchronization
+  model; never assume a new server-rendered route or mutation is offline-safe.
 - **Observability:** add structured logs, request correlation, health checks,
   error reporting, and provider latency metrics.
 - **Testing:** add unit tests for domain helpers, component tests for states and

@@ -15,8 +15,14 @@ The principal traveler-facing routes are:
 | `/trips/switzerland-2026/logistics` | Reservations and operational logistics |
 | `/reservations` | Approved imported reservation records |
 | `/travel-inbox` | Document intake, review, and approval |
+| `/travel-pack` | Offline lodging, confirmations, transport, contacts, addresses, and reminders |
 
-BT-024 derives timeline views at request time. It does not copy imported
-reservations into tracked itinerary JSON or create another persistence format.
-See [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) for boundaries and
-[`SPRINT.md`](SPRINT.md) for current delivery status.
+BT-025 makes these read models installable and available offline. A native
+service worker caches server-rendered route snapshots and read-only JSON, while
+network-first refresh keeps reservation and itinerary data current whenever a
+connection exists. The Travel Pack is generated at request time from the
+canonical itinerary plus approved reservation records; it is not another
+persistence format and never writes back to either source.
+
+See [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) for cache and update
+boundaries and [`SPRINT.md`](SPRINT.md) for current delivery status.
