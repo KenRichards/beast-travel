@@ -11,7 +11,10 @@ export const genericHotelParser: ReservationProviderParser = {
   id: parserId,
   displayName: "Generic Hotel PDF",
   canParse(classification) {
-    return classification.providerHint === parserId;
+    return (
+      classification.probableType === "hotel" &&
+      classification.probableProvider?.id === "booking-com"
+    );
   },
   async parse(document, classification) {
     return {

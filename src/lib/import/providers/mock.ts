@@ -25,6 +25,6 @@ export function createReservationSource(
     size: document.size,
     lastModified: document.lastModified,
     parserId,
-    classificationConfidence: classification.confidence,
+    classificationConfidence: classification.confidenceScore,
   };
 }

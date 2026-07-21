@@ -11,7 +11,10 @@ export const genericRentalCarParser: ReservationProviderParser = {
   id: parserId,
   displayName: "Generic Rental Car PDF",
   canParse(classification) {
-    return classification.providerHint === parserId;
+    return (
+      classification.probableType === "rental-car" &&
+      classification.probableProvider?.id === "booking-com"
+    );
   },
   async parse(document, classification) {
     return {

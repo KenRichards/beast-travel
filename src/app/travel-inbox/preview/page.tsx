@@ -3,7 +3,7 @@ import Link from "next/link";
 import { connection } from "next/server";
 
 import ReservationPreview from "@/components/import/ReservationPreview";
-import { getIncomingDocument } from "@/lib/import/documents";
+import { DocumentAnalysisError } from "@/lib/import/analyzer/types";
 import {
   parseReservationDocument,
   type ReservationImportResult,
@@ -38,29 +38,18 @@ export default async function ReservationPreviewPage({
     );
   }
 
-  const document = await getIncomingDocument(filename);
-
-  if (!document) {
-    return (
-      <ImportMessage
-        title="Document not found"
-        message="This document is no longer available in travel-data/incoming/."
-      />
-    );
-  }
-
   let result: ReservationImportResult;
 
   try {
-    result = await parseReservationDocument(document);
+    result = await parseReservationDocument(filename);
   } catch (error) {
     return (
       <ImportMessage
         title="This document cannot be imported"
         message={
-          error instanceof Error
+          error instanceof DocumentAnalysisError
             ? error.message
-            : "The reservation parser could not process this document."
+            : "The document analysis service could not process this PDF."
         }
       />
     );

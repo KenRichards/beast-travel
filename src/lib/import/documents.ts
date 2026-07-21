@@ -1,9 +1,41 @@
 import { lstat, readdir } from "node:fs/promises";
-import { basename, extname, resolve } from "node:path";
+import { basename, extname, relative, resolve, sep } from "node:path";
 
 import type { ImportDocument } from "./parser";
 
-const incomingDirectory = resolve(process.cwd(), "travel-data", "incoming");
+export const incomingDirectory = resolve(
+  process.cwd(),
+  "travel-data",
+  "incoming",
+);
+
+export function isSafeIncomingFilename(filename: string): boolean {
+  if (
+    !filename ||
+    filename.includes("\0") ||
+    filename.includes("/") ||
+    filename.includes("\\") ||
+    basename(filename) !== filename ||
+    filename.startsWith(".")
+  ) {
+    return false;
+  }
+
+  const candidate = resolve(incomingDirectory, filename);
+  const pathFromIncoming = relative(incomingDirectory, candidate);
+
+  return (
+    pathFromIncoming.length > 0 &&
+    pathFromIncoming !== ".." &&
+    !pathFromIncoming.startsWith(`..${sep}`)
+  );
+}
+
+export function resolveIncomingDocumentPath(filename: string): string | null {
+  return isSafeIncomingFilename(filename)
+    ? resolve(incomingDirectory, filename)
+    : null;
+}
 
 function toImportDocument(
   filename: string,
@@ -39,12 +71,14 @@ export async function listIncomingDocuments(): Promise<ImportDocument[]> {
 export async function getIncomingDocument(
   filename: string,
 ): Promise<ImportDocument | null> {
-  if (!filename || basename(filename) !== filename || filename.startsWith(".")) {
+  const documentPath = resolveIncomingDocumentPath(filename);
+
+  if (!documentPath) {
     return null;
   }
 
   try {
-    const file = await lstat(resolve(incomingDirectory, filename));
+    const file = await lstat(documentPath);
 
     if (!file.isFile()) {
       return null;

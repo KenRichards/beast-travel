@@ -1,9 +1,16 @@
 import Link from "next/link";
 
+import type { PublicDocumentAnalysis } from "@/lib/import/analyzer/types";
 import type { ImportDocument } from "@/lib/import/parser";
 
+export interface InboxDocument {
+  document: ImportDocument;
+  analysis?: PublicDocumentAnalysis;
+  analysisError?: string;
+}
+
 interface TravelInboxProps {
-  documents: ImportDocument[];
+  documents: InboxDocument[];
 }
 
 function formatFileSize(bytes: number): string {
@@ -60,7 +67,7 @@ export default function TravelInbox({ documents }: TravelInboxProps) {
               </tr>
             </thead>
             <tbody className="divide-y divide-white/10">
-              {documents.map((document) => (
+              {documents.map(({ document, analysis, analysisError }) => (
                 <tr
                   key={document.filename}
                   className="transition-colors hover:bg-white/[0.04]"
@@ -77,6 +84,30 @@ export default function TravelInbox({ documents }: TravelInboxProps) {
                         {document.filename}
                       </span>
                     </div>
+                    {analysis ? (
+                      <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1 pl-14 text-xs text-neutral-500">
+                        <span>
+                          {analysis.metadata.pdf.pageCount}{" "}
+                          {analysis.metadata.pdf.pageCount === 1
+                            ? "page"
+                            : "pages"}
+                        </span>
+                        <span>
+                          SHA-256:{" "}
+                          <abbr
+                            title={analysis.metadata.sha256}
+                            aria-label={`SHA-256 fingerprint ${analysis.metadata.sha256}`}
+                            className="font-mono no-underline"
+                          >
+                            {analysis.metadata.sha256.slice(0, 12)}…
+                          </abbr>
+                        </span>
+                      </div>
+                    ) : (
+                      <p className="mt-3 pl-14 text-xs text-amber-300">
+                        {analysisError ?? "Analysis unavailable"}
+                      </p>
+                    )}
                   </td>
                   <td className="px-6 py-5 text-sm text-neutral-300">
                     {formatFileSize(document.size)}

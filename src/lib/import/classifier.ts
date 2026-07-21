@@ -1,77 +1,244 @@
-import type { ImportDocument } from "./parser";
+import type { AnalyzedDocument } from "./analyzer/types";
 import type { ReservationType } from "./reservation";
 
-export type ProviderHint =
-  | "generic-hotel-pdf"
-  | "generic-rental-car-pdf"
-  | "generic-flight-pdf";
+export type ProbableReservationType = ReservationType | "unknown";
+export type ClassificationConfidence =
+  | "high"
+  | "medium"
+  | "low"
+  | "unknown";
+export type RecognitionStatus =
+  | "recognized-supported"
+  | "recognized-unsupported"
+  | "unknown";
+
+export interface ProbableProvider {
+  id: string;
+  name: string;
+}
 
 export interface DocumentClassification {
-  type: ReservationType;
-  providerHint: ProviderHint;
-  confidence: number;
+  probableType: ProbableReservationType;
+  probableProvider: ProbableProvider | null;
+  confidence: ClassificationConfidence;
+  confidenceScore: number;
+  recognitionStatus: RecognitionStatus;
   signals: string[];
 }
 
+type ClassifiableDocument = Pick<AnalyzedDocument, "document" | "metadata" | "text">;
+type ProviderSupportResolver = (
+  classification: Omit<DocumentClassification, "recognitionStatus">,
+) => boolean;
+
 const TYPE_SIGNALS: ReadonlyArray<{
   type: ReservationType;
-  providerHint: ProviderHint;
   terms: readonly string[];
 }> = [
   {
     type: "rental-car",
-    providerHint: "generic-rental-car-pdf",
-    terms: ["rental", "rent-a-car", "car-hire", "vehicle", "hertz", "avis"],
+    terms: [
+      "rental car",
+      "car rental",
+      "rent a car",
+      "vehicle rental",
+      "rental vehicle",
+      "pick up",
+      "pickup",
+      "drop off",
+      "dropoff",
+      "car hire",
+      "driver",
+    ],
   },
   {
     type: "flight",
-    providerHint: "generic-flight-pdf",
-    terms: ["flight", "airline", "airways", "boarding", "delta", "united"],
+    terms: [
+      "flight",
+      "airline",
+      "boarding pass",
+      "e ticket",
+      "itinerary receipt",
+      "departure airport",
+      "arrival airport",
+      "passenger",
+      "baggage",
+    ],
   },
   {
     type: "hotel",
-    providerHint: "generic-hotel-pdf",
-    terms: ["hotel", "lodging", "cottage", "resort", "inn", "suite"],
+    terms: [
+      "hotel",
+      "lodging",
+      "accommodation",
+      "check in",
+      "check out",
+      "room",
+      "guest",
+      "property",
+      "cottage",
+      "resort",
+      "inn",
+    ],
   },
 ];
 
-export class UnsupportedImportDocumentError extends Error {
-  constructor(message: string) {
-    super(message);
-    this.name = "UnsupportedImportDocumentError";
+const PROVIDER_SIGNALS: ReadonlyArray<{
+  provider: ProbableProvider;
+  patterns: readonly RegExp[];
+}> = [
+  {
+    provider: { id: "booking-com", name: "Booking.com" },
+    patterns: [/\bbooking\.com/i],
+  },
+  {
+    provider: { id: "air-canada", name: "Air Canada" },
+    patterns: [/\bair\s+canada\b/i, /\baircanada\.com\b/i],
+  },
+  {
+    provider: { id: "expedia", name: "Expedia" },
+    patterns: [/\bexpedia\b/i],
+  },
+  {
+    provider: { id: "airbnb", name: "Airbnb" },
+    patterns: [/\bairbnb\b/i],
+  },
+  {
+    provider: { id: "vrbo", name: "Vrbo" },
+    patterns: [/\bvrbo\b/i],
+  },
+  {
+    provider: { id: "delta", name: "Delta Air Lines" },
+    patterns: [/\bdelta\s+air\s+lines\b/i, /\bdelta\.com\b/i],
+  },
+  {
+    provider: { id: "united", name: "United Airlines" },
+    patterns: [/\bunited\s+airlines\b/i, /\bunited\.com\b/i],
+  },
+  {
+    provider: { id: "hertz", name: "Hertz" },
+    patterns: [/\bhertz\b/i],
+  },
+  {
+    provider: { id: "avis", name: "Avis" },
+    patterns: [/\bavis\b/i],
+  },
+  {
+    provider: { id: "enterprise", name: "Enterprise" },
+    patterns: [/\benterprise\s+rent(?:al)?[ -]a[ -]car\b/i],
+  },
+];
+
+function normalizeForClassification(value: string): string {
+  return value
+    .normalize("NFKC")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function countTerms(value: string, terms: readonly string[]): number {
+  return terms.reduce(
+    (count, term) => count + (value.includes(term) ? 1 : 0),
+    0,
+  );
+}
+
+function confidenceFromScore(score: number): ClassificationConfidence {
+  if (score >= 0.8) return "high";
+  if (score >= 0.55) return "medium";
+  if (score > 0) return "low";
+  return "unknown";
+}
+
+export function mapRecognitionStatus(
+  probableType: ProbableReservationType,
+  hasProvider: boolean,
+  hasSupportingParser: boolean,
+): RecognitionStatus {
+  if (probableType === "unknown" || !hasProvider) {
+    return "unknown";
   }
+
+  return hasSupportingParser
+    ? "recognized-supported"
+    : "recognized-unsupported";
 }
 
 export function classifyDocument(
-  document: ImportDocument,
+  analysis: ClassifiableDocument,
+  isProviderSupported: ProviderSupportResolver = () => false,
 ): DocumentClassification {
-  if (document.extension.toLowerCase() !== ".pdf") {
-    throw new UnsupportedImportDocumentError(
-      "Phase 1 supports PDF reservation documents only.",
-    );
-  }
+  const filename = normalizeForClassification(analysis.document.filename);
+  const rawMetadata = [
+    analysis.metadata.pdf.title,
+    analysis.metadata.pdf.subject,
+    analysis.metadata.pdf.author,
+    analysis.metadata.pdf.creator,
+    analysis.metadata.pdf.producer,
+  ]
+    .filter(Boolean)
+    .join(" ");
+  const metadata = normalizeForClassification(rawMetadata);
+  const text = normalizeForClassification(analysis.text.sample);
+  const scores = TYPE_SIGNALS.map((candidate) => {
+    const filenameMatches = countTerms(filename, candidate.terms);
+    const metadataMatches = countTerms(metadata, candidate.terms);
+    const textMatches = countTerms(text, candidate.terms);
 
-  const normalizedName = document.filename.toLowerCase().replaceAll("_", "-");
+    return {
+      type: candidate.type,
+      score: filenameMatches * 4 + metadataMatches * 3 + textMatches,
+      filenameMatches,
+      metadataMatches,
+      textMatches,
+    };
+  }).sort((left, right) => right.score - left.score);
 
-  for (const candidate of TYPE_SIGNALS) {
-    const matches = candidate.terms.filter((term) =>
-      normalizedName.includes(term),
-    );
-
-    if (matches.length > 0) {
-      return {
-        type: candidate.type,
-        providerHint: candidate.providerHint,
-        confidence: Math.min(0.95, 0.72 + matches.length * 0.08),
-        signals: matches.map((match) => `filename:${match}`),
-      };
-    }
-  }
+  const strongest = scores[0];
+  const runnerUp = scores[1];
+  const probableType: ProbableReservationType =
+    strongest.score >= 3 && strongest.score > runnerUp.score
+      ? strongest.type
+      : "unknown";
+  const providerEvidence = [
+    analysis.document.filename,
+    rawMetadata,
+    analysis.text.sample,
+  ].join(" ");
+  const probableProvider =
+    PROVIDER_SIGNALS.find((candidate) =>
+      candidate.patterns.some((pattern) => pattern.test(providerEvidence)),
+    )?.provider ?? null;
+  const confidenceScore =
+    probableType === "unknown"
+      ? 0
+      : Math.min(
+          0.98,
+          0.35 + strongest.score * 0.04 + (probableProvider ? 0.15 : 0),
+        );
+  const signals = [
+    strongest.filenameMatches > 0 ? "filename:reservation-type" : null,
+    strongest.metadataMatches > 0 ? "metadata:reservation-type" : null,
+    strongest.textMatches > 0 ? "text:reservation-type" : null,
+    probableProvider ? "document:provider-name" : null,
+  ].filter((signal): signal is string => signal !== null);
+  const preliminary = {
+    probableType,
+    probableProvider,
+    confidence: confidenceFromScore(confidenceScore),
+    confidenceScore,
+    signals,
+  };
+  const recognitionStatus = mapRecognitionStatus(
+    probableType,
+    probableProvider !== null,
+    isProviderSupported(preliminary),
+  );
 
   return {
-    type: "hotel",
-    providerHint: "generic-hotel-pdf",
-    confidence: 0.25,
-    signals: ["phase-1:generic-pdf-fallback"],
+    ...preliminary,
+    recognitionStatus,
   };
 }
