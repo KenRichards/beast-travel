@@ -39,3 +39,33 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# travel data inbox (local and potentially sensitive)
+/travel-data/incoming/**
+!/travel-data/incoming/.gitkeep
+/travel-data/attachments/**
+!/travel-data/attachments/.gitkeep
+/travel-data/processed/**
+!/travel-data/processed/.gitkeep
+/travel-data/reservations/**
+!/travel-data/reservations/.gitkeep
+/travel-data/cache/**
+!/travel-data/cache/.gitkeep
+
+# prevent imported documents, screenshots, and email exports anywhere in travel-data
+/travel-data/**/*.[pP][dD][fF]
+/travel-data/**/*.[pP][nN][gG]
+/travel-data/**/*.[jJ][pP][gG]
+/travel-data/**/*.[jJ][pP][eE][gG]
+/travel-data/**/*.[gG][iI][fF]
+/travel-data/**/*.[wW][eE][bB][pP]
+/travel-data/**/*.[hH][eE][iI][cC]
+/travel-data/**/*.[aA][vV][iI][fF]
+/travel-data/**/*.[bB][mM][pP]
+/travel-data/**/*.[sS][vV][gG]
+/travel-data/**/*.[tT][iI][fF]
+/travel-data/**/*.[tT][iI][fF][fF]
+/travel-data/**/*.[eE][mM][lL]
+/travel-data/**/*.[mM][sS][gG]
+/travel-data/**/*.[mM][bB][oO][xX]
+/travel-data/**/*.[iI][cC][sS]
