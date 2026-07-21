@@ -11,7 +11,10 @@ export const genericFlightParser: ReservationProviderParser = {
   id: parserId,
   displayName: "Generic Flight PDF",
   canParse(classification) {
-    return classification.providerHint === parserId;
+    return (
+      classification.probableType === "flight" &&
+      classification.probableProvider?.id === "air-canada"
+    );
   },
   async parse(document, classification) {
     return {

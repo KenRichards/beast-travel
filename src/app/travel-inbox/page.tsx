@@ -2,7 +2,14 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { connection } from "next/server";
 
-import TravelInbox from "@/components/import/TravelInbox";
+import TravelInbox, {
+  type InboxDocument,
+} from "@/components/import/TravelInbox";
+import {
+  analyzeIncomingDocument,
+  toPublicDocumentAnalysis,
+} from "@/lib/import/analyzer/analyzer";
+import { DocumentAnalysisError } from "@/lib/import/analyzer/types";
 import { listIncomingDocuments } from "@/lib/import/documents";
 
 export const metadata: Metadata = {
@@ -13,6 +20,26 @@ export const metadata: Metadata = {
 export default async function TravelInboxPage() {
   await connection();
   const documents = await listIncomingDocuments();
+  const analyzedDocuments: InboxDocument[] = await Promise.all(
+    documents.map(async (document) => {
+      try {
+        const analysis = await analyzeIncomingDocument(document.filename);
+
+        return {
+          document,
+          analysis: toPublicDocumentAnalysis(analysis),
+        };
+      } catch (error) {
+        return {
+          document,
+          analysisError:
+            error instanceof DocumentAnalysisError
+              ? error.message
+              : "This document could not be analyzed.",
+        };
+      }
+    }),
+  );
 
   return (
     <main className="min-h-screen bg-neutral-950 text-white">
@@ -47,7 +74,7 @@ export default async function TravelInboxPage() {
       </section>
 
       <section className="mx-auto max-w-6xl px-6 py-12 sm:px-10 lg:px-12 lg:py-16">
-        <TravelInbox documents={documents} />
+        <TravelInbox documents={analyzedDocuments} />
 
         <div className="mt-8 grid gap-4 text-sm text-neutral-400 sm:grid-cols-3">
           <p className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
