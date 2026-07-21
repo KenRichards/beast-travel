@@ -14,6 +14,7 @@ identifiers remain stable for traceability.
 | BT-023 | Real Reservation Extraction | Add OCR, approval persistence, canonical detail routes, and imported logistics. | Complete |
 | BT-024 | Unified Timeline and Today | Turn itinerary and imported records into a Zurich-time operational dashboard. | Implemented on feature branch |
 | BT-025 | PWA and Offline Travel Pack | Make essential trip pages, confirmations, and safety information installable and resilient without connectivity. | Implemented on feature branch |
+| BT-026 | Trip Data Audit and Complete Switzerland Itinerary | Reconcile every booked fact and deliver a realistic eight-day operational plan with automated data-quality checks. | Implemented on feature branch |
 
 ## Planning notes
 
@@ -38,6 +39,22 @@ The service worker precaches the core trip routes and canonical read-only JSON,
 stores viewed pages and images, and refreshes data with a network-first policy.
 Deployment-versioned cache names prevent old route snapshots and assets from
 being mixed with a new release.
+
+### BT-026 — Trip data completion and reconciliation
+
+Replaces the four-day placeholder journey with the complete July 22–29 plan:
+direct airport-to-Grindelwald transfer, Jungfraujoch, Lauterbrunnen/Mürren,
+Lucerne-to-Au transfer, Rhine Falls/Stein am Rhein, Zürich, Lake Zürich, and
+departure. Approved source documents were audited to recover the missing
+feeder flight and travelers, correct overnight and split-calendar OCR dates,
+identify Budget as the supplier, and verify both stays.
+
+Every itinerary item states whether it is confirmed, authored, recommended,
+weather dependent, unresolved, or optional. The reusable validator prevents
+day/date gaps, lodging gaps or overlaps, broken references, chronology
+failures, unsupported confirmation claims, and manual/imported
+contradictions. The reconciliation matrix is the durable audit trail for
+source-backed exceptions without committing private documents.
 
 ## Future milestones
 

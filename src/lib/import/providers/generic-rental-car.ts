@@ -82,12 +82,16 @@ function parseCarEndpoints(text: string): CarEndpoint[] {
 }
 
 function extractCoverage(text: string): string[] {
-  return [
+  const terms = [
     "Unlimited mileage",
     "Collision Damage Waiver",
     "Theft Protection",
     "Third-Party Liability",
   ].filter((term) => new RegExp(term, "i").test(text));
+  return terms.filter(
+    (term) =>
+      !new RegExp(`(?:doesn['’]t|does not) include[^.]{0,80}${term}`, "i").test(text),
+  );
 }
 
 export const genericRentalCarParser: ReservationProviderParser = {
@@ -119,6 +123,7 @@ export const genericRentalCarParser: ReservationProviderParser = {
       text.matchAll(/\bAddress\s*\n\s*([^,\n]{2,40}),/gi),
     );
     const rentalProvider = firstCapture(text, [
+      /Supplied by\s+([^\n]{2,80})/i,
       /(?:Rental company|Rental provider|Supplier|Provided by)\s*[:\n]\s*([^\n]{2,80})/i,
     ]) ?? cleanExtractedValue(providerMatches.at(-1)?.[1]);
     const vehicleCategory = firstCapture(text, [
@@ -126,7 +131,7 @@ export const genericRentalCarParser: ReservationProviderParser = {
       /Vehicle(?: category| class)?\s*[:\n]\s*([^\n]{3,100})/i,
     ]);
     const primaryDriver = firstCapture(text, [
-      /(?:Main|Primary) driver\s*[:\n]\s*([^\n]{3,100})/i,
+      /(?:Main|Primary) driver\s*(?:[:\n]\s*)?([^\n]{3,100})/i,
       /Driver['’]?s name\s*[:\n]\s*([^\n]{3,100})/i,
     ]);
     const includedCoverage = extractCoverage(text);

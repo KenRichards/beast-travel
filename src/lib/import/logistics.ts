@@ -62,6 +62,8 @@ function importedHotelEntries(
             status: "confirmed",
             checkInDate: hotel.checkInDate,
             checkOutDate: hotel.checkOutDate,
+            checkInTime: hotel.checkInTime ?? undefined,
+            checkOutTime: hotel.checkOutTime ?? undefined,
             address: hotel.address ?? undefined,
             confirmationReference: reservation.confirmationNumber ?? undefined,
             notes: hotel.accommodationType
@@ -177,9 +179,13 @@ export function mergeImportedLogistics(
   approved: ApprovedReservation[],
 ): TripLogistics {
   const imported = mapApprovedReservationsToLogistics(approved);
+  const accommodations = new Map(manual.accommodations.map((entry) => [entry.id, entry]));
+  const reservations = new Map(manual.reservations.map((entry) => [entry.id, entry]));
+  imported.accommodations.forEach((entry) => accommodations.set(entry.id, entry));
+  imported.reservations.forEach((entry) => reservations.set(entry.id, entry));
   return {
     ...manual,
-    accommodations: [...manual.accommodations, ...imported.accommodations],
-    reservations: [...manual.reservations, ...imported.reservations],
+    accommodations: [...accommodations.values()],
+    reservations: [...reservations.values()],
   };
 }

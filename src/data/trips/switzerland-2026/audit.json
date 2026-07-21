@@ -1,0 +1,142 @@
+{
+  "schemaVersion": 1,
+  "tripId": "switzerland-2026",
+  "auditedOn": "2026-07-21",
+  "authorityOrder": [
+    "Human-reviewed approved reservation record and its source document for booked facts",
+    "Explicit reconciliation correction for demonstrably damaged or low-confidence OCR",
+    "Tracked authored itinerary for trip structure and operational planning",
+    "Operator guidance for recommendations, tickets, access, and fallbacks"
+  ],
+  "reservationReferences": [
+    "reservation-258727499accf8d2c3e2908c",
+    "reservation-63ac1b697db02f1fd1b90884",
+    "reservation-83c02332654e9392c333cbb2",
+    "reservation-9bf3ff2a78929fc68cb452b3"
+  ],
+  "matrix": [
+    {
+      "field": "Traveler names",
+      "authoritativeValue": "Ken, Lori, Declan for display; three corresponding legal names in the private flight record",
+      "source": "Travel context and Air Canada itinerary",
+      "status": "corrected",
+      "finding": "OCR initially captured only Lori; the source document contains all three travelers. Generic role labels were also present in tracked logistics."
+    },
+    {
+      "field": "Trip dates",
+      "authoritativeValue": "2026-07-22 through 2026-07-29; inbound air travel begins 2026-07-21",
+      "source": "Trip brief and Air Canada itinerary",
+      "status": "reconciled",
+      "finding": "The itinerary has eight Switzerland calendar days. The preceding RDU/YYZ departure remains a valid inbound flight segment, not an extra itinerary day."
+    },
+    {
+      "field": "Flight numbers",
+      "authoritativeValue": "AC 8839, AC 880, AC 881, AC 8838",
+      "source": "Approved Air Canada source document",
+      "status": "corrected",
+      "finding": "The importer omitted AC 8839 and assigned the wrong cabin to AC 880."
+    },
+    {
+      "field": "Departure and arrival airports",
+      "authoritativeValue": "RDU → YYZ → ZRH; ZRH → YYZ → RDU",
+      "source": "Approved Air Canada source document",
+      "status": "verified",
+      "finding": "Zürich Airport is the Day 1 start and Day 8 Swiss departure point."
+    },
+    {
+      "field": "Local flight times",
+      "authoritativeValue": "RDU 2026-07-21 16:45 → YYZ 18:38; YYZ 20:05 → ZRH 2026-07-22 10:05; ZRH 2026-07-29 13:25 → YYZ 16:10; YYZ 20:05 → RDU 22:00",
+      "source": "Approved Air Canada source document",
+      "status": "corrected",
+      "finding": "Inbound ZRH arrival was incorrectly normalized to July 21. Times remain local to the named airport; the unified timeline projects instants to Europe/Zurich for grouping."
+    },
+    {
+      "field": "Confirmation numbers",
+      "authoritativeValue": "One verified Air Canada booking reference, one Booking.com rental number plus one Budget supplier number, and one verified number for each lodging; values stay in private approved records",
+      "source": "Four approved reservation source documents",
+      "status": "verified-private",
+      "finding": "No confirmation number is guessed or duplicated into tracked trip JSON."
+    },
+    {
+      "field": "Rental-car pickup and return",
+      "authoritativeValue": "Budget at Zürich Airport; pickup 2026-07-22 12:30; return 2026-07-29 12:00; Europe/Zurich",
+      "source": "Approved Booking.com/Budget voucher",
+      "status": "conflict",
+      "finding": "The noon return is too late for the 13:25 international flight. An earlier confirmed return or authorized early-drop procedure is unresolved."
+    },
+    {
+      "field": "Grindelwald lodging",
+      "authoritativeValue": "Eigerhome - The Cottage mit Wellness - GRIWA RENT AG; check in 2026-07-22 16:00–17:00; check out 2026-07-25 08:00–10:00",
+      "source": "Approved Booking.com source document",
+      "status": "corrected",
+      "finding": "Tracked placeholders incorrectly put Zürich first and assigned only one Grindelwald night."
+    },
+    {
+      "field": "Au lodging",
+      "authoritativeValue": "No1 Art B&B; check in 2026-07-25 14:00–19:00; check out 2026-07-29 08:00–12:00",
+      "source": "Approved Booking.com source document",
+      "status": "corrected",
+      "finding": "OCR read July 25 as July 4. The source visibly states Saturday July 25, four nights, checkout Wednesday July 29. The recorded 14:00–15:00 arrival estimate should be updated because of the Lucerne stop."
+    },
+    {
+      "field": "Lodging addresses",
+      "authoritativeValue": "10 Unter Eigerweg, 3818 Grindelwald, Switzerland; Seestrasse 319B, 8804 Au, Switzerland",
+      "source": "Approved lodging source documents",
+      "status": "verified",
+      "finding": "Both addresses are present in tracked operational data and private reservation details."
+    },
+    {
+      "field": "Phone numbers",
+      "authoritativeValue": "Both lodging numbers and the Budget desk number were verified from source documents and retained only in private approved records",
+      "source": "Approved lodging and rental source documents",
+      "status": "corrected-private",
+      "finding": "The parser originally stored OCR garbage for both lodging contacts and the rental supplier."
+    },
+    {
+      "field": "Itinerary day numbering",
+      "authoritativeValue": "Days 1–8 map consecutively to 2026-07-22 through 2026-07-29",
+      "source": "Tracked itinerary",
+      "status": "corrected",
+      "finding": "Only Days 1–4 existed before BT-026."
+    },
+    {
+      "field": "Timezone handling",
+      "authoritativeValue": "Europe/Zurich for trip-day grouping; each flight time retains its airport-local timezone before projection",
+      "source": "Tracked trip metadata and airport-local reservation facts",
+      "status": "verified",
+      "finding": "RDU uses America/New_York, YYZ uses America/Toronto, and ZRH uses Europe/Zurich."
+    }
+  ],
+  "unresolvedFields": [
+    {
+      "field": "Earlier rental-car return",
+      "status": "Needs confirmation",
+      "action": "Change the Budget return from 12:00 to approximately 09:45–10:00 or obtain explicit authorized early-drop instructions."
+    },
+    {
+      "field": "Assigned rental vehicle and energy type",
+      "status": "Needs confirmation",
+      "action": "At pickup, record the exact model, fuel type, starting level, and applicable fuel or EV return rule."
+    },
+    {
+      "field": "AC 881 Zürich terminal",
+      "status": "Needs confirmation",
+      "action": "Check Air Canada and Zürich Airport on July 28 and departure morning."
+    },
+    {
+      "field": "No1 Art B&B arrival estimate",
+      "status": "Needs confirmation",
+      "action": "Notify the property that the Lucerne transfer stop makes the saved 14:00–15:00 estimate unlikely."
+    },
+    {
+      "field": "Optional attraction and transport tickets",
+      "status": "Not booked",
+      "action": "Use live weather, operating status, and availability before buying Jungfraujoch, Mürren, Rhine Falls boat, Lake Zürich boat, or Lindt tickets."
+    },
+    {
+      "field": "Travel-insurance operational details",
+      "status": "Needs confirmation",
+      "action": "Store policy number, assistance phone, coverage dates, and claim instructions offline; do not commit them."
+    }
+  ]
+}

@@ -66,6 +66,27 @@ export default async function ReservationDetailPage({ params }: ReservationDetai
             ))}
           </dl>
         </section>
+
+        <section className="mt-8 rounded-3xl border border-amber-300/20 bg-amber-300/[0.05] p-6 sm:p-8">
+          <h2 className="text-2xl font-bold">Evidence and reconciliation</h2>
+          <p className="mt-3 text-sm leading-6 text-neutral-300">
+            OCR values remain reviewable evidence, not unquestioned facts. Fields marked
+            user-edited were reconciled against the source document.
+          </p>
+          <div className="mt-6 grid gap-3 sm:grid-cols-2">
+            {Object.entries(reservation.evidence).map(([field, evidence]) => (
+              <div key={field} className="rounded-2xl bg-black/20 p-4">
+                <p className="break-words text-xs font-bold text-neutral-400">{field}</p>
+                <p className="mt-2 text-sm font-semibold capitalize">{evidence.confidence} confidence · {evidence.source.replaceAll("-", " ")}</p>
+              </div>
+            ))}
+          </div>
+          {reservation.notes.length ? (
+            <ul className="mt-6 space-y-2 text-sm leading-6 text-amber-50/80">
+              {reservation.notes.map((note) => <li key={note}>• {note}</li>)}
+            </ul>
+          ) : null}
+        </section>
       </div>
     </main>
   );

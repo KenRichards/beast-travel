@@ -54,6 +54,8 @@ export interface Accommodation {
   status: LogisticsStatus;
   checkInDate: string;
   checkOutDate: string;
+  checkInTime?: string;
+  checkOutTime?: string;
   address?: string;
   confirmationReference?: string;
   bookingUrl?: string;

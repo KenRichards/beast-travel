@@ -198,6 +198,7 @@ function accommodationEvents(
       reservationType: "hotel",
       title: `Check in · ${accommodation.name}`,
       date: accommodation.checkInDate,
+      rawTime: accommodation.checkInTime,
       location: accommodation.address ?? accommodation.city,
       confirmationReference: accommodation.confirmationReference,
       source,
@@ -210,6 +211,7 @@ function accommodationEvents(
       reservationType: "hotel",
       title: `Check out · ${accommodation.name}`,
       date: accommodation.checkOutDate,
+      rawTime: accommodation.checkOutTime,
       location: accommodation.address ?? accommodation.city,
       confirmationReference: accommodation.confirmationReference,
       source,
@@ -452,7 +454,14 @@ export function normalizeTimeline(
   approvedReservations: ApprovedReservation[] = [],
 ): TimelineEvent[] {
   const events = normalizeItineraryEvents(itinerary);
-  itinerary.logistics.accommodations.forEach((accommodation) => {
+  const importedHotelIds = new Set(
+    approvedReservations
+      .filter((reservation) => reservation.type === "hotel")
+      .map((reservation) => reservation.id),
+  );
+  itinerary.logistics.accommodations
+    .filter((accommodation) => !importedHotelIds.has(accommodation.id))
+    .forEach((accommodation) => {
     events.push(...accommodationEvents(itinerary, accommodation));
   });
   itinerary.logistics.reservations.forEach((reservation) => {
@@ -529,7 +538,11 @@ export function normalizeLodgings(
     )
     .map(importedLodging)
     .filter((lodging): lodging is TimelineLodging => lodging !== null);
-  return [...manual, ...imported];
+  const byId = new Map<string, TimelineLodging>(
+    manual.map((lodging) => [lodging.id, lodging]),
+  );
+  imported.forEach((lodging) => byId.set(lodging.id, lodging));
+  return [...byId.values()];
 }
 
 export function selectCurrentLodging(

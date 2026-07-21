@@ -7,9 +7,55 @@ day routes, logistics panels, a unified timeline, a timezone-aware Today
 dashboard, and interactive Leaflet maps. Approved reservation records are read
 from a separate private runtime-data boundary.
 
-BT-025 adds a browser-managed offline boundary. It does not change either
-canonical data source: the service worker stores replaceable read snapshots in
-Cache Storage, and the Travel Pack is a generated projection.
+BT-025 adds a browser-managed offline boundary. BT-026 adds a typed trip-data
+quality boundary and a source-backed reconciliation record. Neither changes
+the private-document boundary: the service worker stores replaceable read
+snapshots in Cache Storage, and the Travel Pack is a generated projection.
+
+## Trip-data authority and reconciliation
+
+Booked facts follow a strict hierarchy:
+
+1. A human-reviewed approved reservation and its local source document.
+2. A documented correction when OCR is demonstrably damaged or low confidence.
+3. The tracked authored itinerary for sequencing, estimates, fallbacks, and
+   recommendations.
+4. Current operator guidance for access, ticketing, parking, and weather rules.
+
+The approved JSON and source documents remain ignored private runtime data.
+Tracked `itinerary.json` may repeat non-secret operational facts needed for an
+offline plan, but it does not copy confirmation codes, PINs, tickets, or full
+private contacts. `audit.json` records the compared field, authority, status,
+finding, and unresolved action. A missing value is never silently inferred;
+the data and UI use `Needs confirmation`.
+
+Each day owns an ordered schedule, start/end location, realistic departure
+window, travel estimates, parking, meals, recovery, weather sensitivity,
+ticket/reservation needs, physical effort, fallback, notes, and budget
+categories. Every location, schedule item, and travel segment has a provenance
+label: `Confirmed reservation`, `Authored itinerary`, `Recommended`,
+`Weather dependent`, `Needs confirmation`, or `Optional`.
+
+`validateTripData()` is the reusable quality gate and
+`npm run validate:trip-data` is its CLI. It emits actionable codes, paths,
+messages, and remediation for missing/duplicate days, date gaps, lodging gaps
+or overlaps, reversed stays or rentals, out-of-range events/flights, malformed
+times, missing operational links, false confirmation claims, traveler/trip
+inconsistency, orphaned reservation references, and contradictory manual and
+imported projections. Tests exercise both the complete trip and deliberately
+damaged fixtures.
+
+To correct future itinerary data:
+
+1. Inspect the private approved record and source evidence.
+2. Reapprove or explicitly reconcile only proven OCR damage.
+3. Update the tracked itinerary and `audit.json` without copying secrets.
+4. Update every Timeline, Today, and Travel Pack projection affected.
+5. Add a regression fixture and run the full validation suite.
+
+The Travel Pack includes all lodging transitions, all eight itinerary-day
+summaries and fallbacks, and unresolved operational actions in addition to its
+reservation-backed detail. It remains a generated view.
 
 ## System context
 
@@ -123,7 +169,7 @@ the deployment identifier:
 | assets | Cache first | Versioned Next.js JS/CSS/font files and core brand assets |
 | images | Cache first after first view | Same-origin images and external image responses such as viewed map tiles |
 
-The install phase fetches the home page, Today, Timeline, all four day pages,
+The install phase fetches the home page, Today, Timeline, all eight day pages,
 Logistics, Reservations, Travel Pack, and the offline fallback. It extracts
 same-origin asset references from those HTML responses so JavaScript bundles,
 CSS, and fonts are ready for offline startup; declared core trip images are
